@@ -1,0 +1,428 @@
+.header-image {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #FFFFFF;
+}
+
+.container {
+    max-width: 1136px;
+}
+
+.body {
+    position: relative;
+}
+
+.padd-text-h2 {
+    padding: 40px 0; 
+}
+
+.padd-style-h2 {
+    padding: 30px 0;
+}
+
+.h2-text {
+    font-family: "Cabin", serif;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 38px;
+    text-align: center;
+}
+
+.flex-cardsone {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+}
+
+.card-new {
+    backdrop-filter: blur(6.746665954589844px);
+    background-color: rgba(217, 217, 217, 0.149);
+    box-shadow: -25.33px 25.33px 25.33px 0px rgba(255, 255, 255, 0.15) inset;
+    box-shadow: 25.33px -25.33px 25.33px 0px rgba(165, 165, 165, 0.15) inset;
+    width: 450px;
+    height: 280px;
+    margin-bottom: 30px;
+    border-radius: 22px;
+}
+
+.sec-2 {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+.card-body {
+    padding: 40px 0;
+    cursor: pointer;
+}
+
+.card-title {
+    font-family: "Cabin", serif;
+    text-align: center;
+    margin-top: 50px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+    font-size: 38px;
+}
+
+.card-2 {
+    background-color: rgba(255, 255, 255, 1);
+    width: 90%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.card-3 {
+    background-color: rgba(255, 255, 255, 1);
+    width: 100%;
+    border-radius: 8px;
+    position: relative;
+    bottom: 30px;
+    margin: auto;
+}
+
+.card-body-2 {
+    padding: 22px 38px 38px; 
+}
+
+.card-body-3 {
+    padding: 22px 38px 80px; 
+}
+
+.card-body-3-final {
+    padding: 60px 38px; 
+}
+
+.card-body-4 {
+    padding: 22px 38px 30px; 
+}
+
+.card-body-check-2 {
+    padding: 22px 38px 18px;
+}
+
+.text-h3 {
+    font-family: "Cabin", serif;
+    color: rgba(254, 0, 11, 1);
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.steps {
+    color: rgba(10, 103, 109, 1);
+}
+
+.ul-text {
+    list-style-type: none;
+    margin-left: -30px;
+    position: relative;
+    top: 7px;
+}
+
+.li-text {
+    font-family: "Cabin", serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.img-vect {
+    display: flex;
+    justify-content: center;
+}
+
+.vect-img {
+    width: 75px;
+    height: 90px;
+}
+
+.card-staff {
+    backdrop-filter: blur(6.746665954589844px);
+    background-color: rgba(217, 217, 217, 0.149);
+    box-shadow: -25.33px 25.33px 25.33px 0px rgba(255, 255, 255, 0.15) inset;
+    box-shadow: 25.33px -25.33px 25.33px 0px rgba(165, 165, 165, 0.15) inset;
+    width: 90%;
+    height: 380px;
+    margin-bottom: 30px;
+    border-radius: 22px;
+}
+
+.background-textbox {
+    background-color: rgba(255, 255, 255, 0.3);
+    height: 65px;
+    text-align: center;
+    color: #FFFFFF; 
+    border: 1px solid transparent;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    outline: none;
+}
+
+.background-textbox:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #FFFFFF; 
+    outline: none;
+}
+
+.background-textbox::placeholder {
+    color: white;
+    text-align: center;
+    outline: none;
+}
+
+.background-textbox:focus {
+    background-color: rgba(255, 255, 255, 0.3); 
+    color: #FFFFFF; 
+    border-color: rgba(254, 0, 11, 1); 
+    outline: none;
+}
+
+.background-textbox:not(:focus) {
+    background-color: rgba(255, 255, 255, 0.3); 
+    color: #FFFFFF; 
+    outline: none;
+}
+.btn-color-new {
+    background-color: rgba(254, 0, 11, 1);
+    color: #FFFFFF;
+    font-family: "Cabin", serif;
+    border-radius: 8px;
+    outline: none;
+}
+.btn-color-new:hover {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(254, 0, 11, 0.5); 
+    color: #FFFFFF;
+}
+.btn-color-new:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(254, 0, 11, 0.5);
+    color: #FFFFFF;
+}
+
+.btn-color-new:active {
+    background-color: rgba(200, 0, 8, 1); 
+    outline: none; 
+    box-shadow: none; 
+    color: #FFFFFF;
+}
+
+.btn-center {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.btn-center-final {
+    text-align: center;
+}
+
+.btn-center-scan {
+    text-align: center;
+    padding-top: 90px;
+}
+
+.card-border {
+    border-color: rgba(254, 0, 11, 1);
+}
+
+.content-flex {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.text-content {
+    font-family: "Cabin", serif;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 400;
+    font-size: 16px;
+}
+.flex-checkout {
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+.card-chekout {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.final-text {
+    font-family: "Cabin", serif;
+    font-weight: 700;
+    font-size: 38px;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+}
+.img-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.arrow-img {
+    width: 36px;
+    height: 36px;
+    margin-top: 28px;
+}
+
+.margin-index {
+    margin-top: 50px;
+}
+
+/* 
+.scrollable-card-body {
+    height: 200px; 
+    overflow-y: auto; 
+  } */
+
+.home-style {
+    position: relative;
+    margin: 0 auto;
+}
+
+.button-icon {
+    background-color: rgba(254, 0, 11, 1);
+    width: 83px;
+    height: 83px;
+    border-radius: 100%;
+    position: absolute;
+    right: -4%;
+    bottom: 35px;
+}
+
+.img-center {
+    text-align: center;
+    position: relative;
+    top: 13%;
+}
+
+.img-user {
+    width: 35px;
+    height: 35px;
+}
+
+.login-h4 {
+    color: #FFFFFF;
+    font-family: "Cabin", serif;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.flex-cont {
+    display: flex;
+    align-items: end;
+}
+
+.home-2 {
+    position: relative;
+}
+
+/* re-work */
+
+.banner-img-check {
+    background-image: url('../images/home/banner.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+    /* aspect-ratio: 1600 / 789;  */
+}
+
+.padd-text-h1 {
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.h2-check-text {
+    font-family: "Cabin", serif;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 30px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(1, 7, 7, 0.6);
+     /* background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 100%, rgba(1, 7, 7, 0.6) 100%);   */
+     /* backdrop-filter: blur(10px);     */
+    /* border-radius: 100%; */
+    text-align: center;
+    width: max-content;
+}
+
+.card-staff-check {
+    backdrop-filter: blur(6.746665954589844px);
+    background-color: rgba(217, 217, 217, 0.149);
+    box-shadow: -25.33px 25.33px 25.33px 0px rgba(255, 255, 255, 0.15) inset;
+    box-shadow: 25.33px -25.33px 25.33px 0px rgba(165, 165, 165, 0.15) inset;
+    width: 90%;
+    /* height: 360px; */
+    margin-bottom: 30px;
+    border-radius: 22px;
+    margin: 0 auto;
+}
+.padd-style-checkout-h2 {
+    padding: 18px 0;
+}
+
+.padd-style-final-h2 {
+    padding: 23px 0; 
+}
+
+.padding-btn{
+    padding: 0.5rem 1.5rem;
+}
+
+.like-img{
+    width: 53px;
+    height: 59px;
+   
+}
+.thumbs-up{
+    display: flex;
+    justify-content: center;
+}
+.btn-parent{
+    display: flex;
+    justify-content: center;
+}
+
+/* responsive */
+
+@media (max-width: 992px) {
+    .flex-cardsone {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .card-new {
+        backdrop-filter: blur(18.746665954589844px);
+        box-shadow: -25.33px 25.33px 25.33px 0px rgba(255, 255, 255, 0.15) inset;
+        box-shadow: 25.33px -25.33px 25.33px 0px rgba(165, 165, 165, 0.15) inset;
+        width: 300px;
+        height: 280px;
+        margin-bottom: 30px;
+        border-radius: 22px;
+    }
+    .content-flex {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+ @media (max-width: 1240px) {
+    .button-icon {
+        background-color: rgba(254, 0, 11, 1);
+        width: 83px;
+        height: 83px;
+        border-radius: 100%;
+        position: relative;
+        top: -7px;
+        bottom: 35px;
+        right: 0%;
+    } 
+} 

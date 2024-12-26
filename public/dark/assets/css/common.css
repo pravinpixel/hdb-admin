@@ -1,0 +1,110 @@
+.search-table-outter {border:2px solid red;}
+.search-table{table-layout: fixed; margin:40px auto 0px auto; }
+.search-table, td, th{border-collapse:collapse; border:1px solid #777;}
+th{padding:20px 7px; font-size:15px; color:#444; background:#eaeaea; border: 1px solid #bdbdbd;}
+td{padding:5px 10px; height:35px;}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #ffffff;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+	vertical-align: middle;
+    color: #383a45;
+}
+
+.dataTables_length {
+    float: left;
+}
+.is-invalid{
+    border-color: red;
+}
+.invalid-feedback {
+    color:red
+}
+
+.sub-active {
+    color: aliceblue !important;
+}
+.model-info {
+    padding: 10px;
+    background-color: #29b6f6;
+    color: black;
+}
+.model-danger {
+    padding: 10px;
+    background-color: #ef5e5c;
+    color: black;
+}
+
+.form-check.sub-function-single{
+    display: contents;
+}
+
+.filepond--credits {
+    display: none;
+}
+
+.action-link > a{
+    margin: 2px;
+}
+.filepond--drop-label {
+    background-color: white;
+}
+
+.field-icon {
+  float: right;
+  margin-right: 5px;
+  margin-top: -29px;
+  position: relative;
+  z-index: 2;
+} 
+
+.load-bg {
+    position: fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(255,255,255,0.7);
+    z-index:9999;
+}
+ 
+.loader {
+    border: 16px solid #076291;
+    border-top-color: #f89737;
+    border-top-style: solid;
+    border-top-width: 16px;
+    border-radius: 50%;
+    border-top: 16px solid #f89737;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    position: relative;
+    margin: 0 auto; 
+    top: 350px;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.alert {
+    min-width: 250px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    box-shadow: 2px 2px 3px;
+    z-index: 111111111 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    font-weight: bold;
+    font-weight: bold;
+    opacity: 1;
+}

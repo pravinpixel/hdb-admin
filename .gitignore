@@ -1,0 +1,21 @@
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+public/uploads/item-images
+storage/*.key
+.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+.csv
+.zip
+*.csv
