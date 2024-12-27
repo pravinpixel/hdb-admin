@@ -4,7 +4,7 @@
                 <div class="sidebar-inner slimscrollleft">
                     <div class="user-details">
                         <div class="pull-left">
-                            <img src="{{ asset('dark/assets/images/users/avatar-1.jpg')}} " alt="" class="thumb-md img-circle" style="pointer-events: none;">
+                            <img src="{{ asset('dark/assets/images/profile.png')}} " alt="" class="thumb-md img-circle" style="pointer-events: none;">
                         </div>
                         <div class="user-info">
                             <div class="dropdown">
@@ -45,6 +45,11 @@
                                     </ul>
                                 </li>
                              @endif
+                              @if(Sentinel::inRole('admin') || Sentinel::hasAccess('notification.index'))
+                                <li>
+                                    <a href="{{ route('notification.index') }}" class="waves-effect waves-light {{request()->is('admin/notification*') ? 'active' : ''}}"><i class="fa fa-history" aria-hidden="true"></i><span> Over Due list </span></a>
+                                </li>
+                            @endif
                             @if(Sentinel::inRole('admin') || Sentinel::hasAccess('notification.index'))
                                 <li>
                                     <a href="{{ route('notification.index') }}" class="waves-effect waves-light {{request()->is('admin/notification*') ? 'active' : ''}}"><i class="fa fa-bell"></i><span> Notifications </span></a>

@@ -166,7 +166,7 @@
                 data: 'item_name', name: 'item_name'
             },
             {
-                data: 'date_of_return', name: 'date_of_return'
+                data: 'item_name', name: 'item_name'
             },
             {
                 data: 'status', name: 'status'

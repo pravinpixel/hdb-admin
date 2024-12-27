@@ -39,7 +39,7 @@
    <script src="{{ asset('assets/pages/item.js') }}"></script>
 <script>
 $(document).ready(function(){
-   $("#langugae").select2({
+   $("#language_id").select2({
       ajax: {
          url : '{!! route('language.get-dropdown') !!}',
          data: function (params) {
@@ -50,9 +50,15 @@ $(document).ready(function(){
          }
       }
    });
-let type = {!! json_encode($result->type->toArray()) !!}
-var typeOption = new Option(type.type_name, type.id, true, true);
-$('#item_type').append(typeOption).trigger('change'); 
+let status = {!!  $result->status !!};
+if(status) {
+   $("#status").prop('checked', true);
+} else {
+   $("#status").prop('checked', false);
+}
+let type = {!! json_encode($result->language->toArray()) !!}
+var typeOption = new Option(type.language, type.id, true, true);
+$('#language_id').append(typeOption).trigger('change'); 
 
 });
 </script>

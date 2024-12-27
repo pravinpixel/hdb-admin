@@ -147,7 +147,7 @@ class ItemController extends Controller
             $item->cover_image = $path;
         }
         $item->title = $request->title;
-        $item->item_ref = $config->item_prefix.'-'.$config->item_number;
+        $item->item_ref = $request->item_ref;
         $item->barcode = $request->barcode;
         $item->rfid = $request->rfid;
         $item->language_id = $request->language_id;
@@ -210,8 +210,11 @@ class ItemController extends Controller
             })
 
           ->addColumn('status', function ($dataDb) {
-              
-               return '<a href="#" data-message="' . trans('global.activate_subheading', ['name' => $dataDb->item_name]) . '" data-href="' . route('item.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('global.activate_subheading') . '" data-title-modal="' . trans('global.activate_subheading') . '" data-toggle="modal" data-target="#delete" title="' . trans('global.activate') . '"><span class="label label-danger label-sm">' . trans('auth.index_inactive_link') . '</span></a>';
+            if ($dataDb->status == 1) {
+                $message =trans('global.deactivate_subheading', ['name' => $dataDb->item_name]);
+                return '<a href="#" data-message="' .  $message . '" data-href="' . route('item.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('global.activate_subheading') . '" data-title-modal="' . trans('global.activate_subheading') . '" data-toggle="modal" data-target="#delete" title="' . trans('global.deactivate') . '"><span class="label label-success label-sm">' . trans('auth.index_active_link') . '</span></a>';
+           }
+           return '<a href="#" data-message="' . trans('global.activate_subheading', ['name' => $dataDb->item_name]) . '" data-href="' . route('item.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('global.activate_subheading') . '" data-title-modal="' . trans('global.activate_subheading') . '" data-toggle="modal" data-target="#delete" title="' . trans('global.activate') . '"><span class="label label-danger label-sm">' . trans('auth.index_inactive_link') . '</span></a>';
           })
           ->addColumn('action', function ($dataDb) {
                return '<a href="' . route('item.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>

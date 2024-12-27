@@ -25,9 +25,12 @@ class DashboardController extends Controller
         $end_week = $current->endOfWeek()->format('d-m-Y');
         $data['total_item'] = Item::get()->count();
         $data['total_issued'] = Checkout::get()->count();
-        $data['total_item_to_be_returned_today'] = Item::whereBetween('date_of_return', array($today, $today))->get()->count();
-        $data['total_item_to_be_returned_tomorrow'] = Item::whereBetween('date_of_return', array($tomorrow, $tomorrow))->get()->count();
-        $data['total_item_to_be_returned_week'] = Item::whereBetween('date_of_return', array($start_week, $end_week))->get()->count();
+        $data['total_item_to_be_returned_today'] = 0;
+        $data['total_item_to_be_returned_tomorrow'] = 0;
+        $data['total_item_to_be_returned_week']=0;
+        // $data['total_item_to_be_returned_today'] = Item::whereBetween('date_of_return', array($today, $today))->get()->count();
+        // $data['total_item_to_be_returned_tomorrow'] = Item::whereBetween('date_of_return', array($tomorrow, $tomorrow))->get()->count();
+        // $data['total_item_to_be_returned_week'] = Item::whereBetween('date_of_return', array($start_week, $end_week))->get()->count();
         return view('admin.dashboard.index', compact('data'));
     }
     

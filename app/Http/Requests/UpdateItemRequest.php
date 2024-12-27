@@ -25,7 +25,6 @@ class UpdateItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'item_id'          => ['required',Rule::unique('items')->ignore($this->item, 'id')->whereNull('deleted_at')],
             'item_ref'         => ['required',Rule::unique('items')->ignore($this->item, 'id')],
             'title'        => ['required',Rule::unique('items')->ignore($this->item, 'id')->whereNull('deleted_at')],
             'author'         => 'required',

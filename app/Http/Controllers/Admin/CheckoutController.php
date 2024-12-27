@@ -17,6 +17,16 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CheckoutController extends Controller
 {
+/*************  ✨ Codeium Command ⭐  *************/
+    /**
+     * Processes the checkout of items for a user.
+     *
+     * This method handles the checkout of items by verifying user identity,
+     * checking for item approval requirements, and updating the checkout
+     * records. It ensures that items needing approval have been approved before
+     * proceeding with the checkout process. If successful, it updates the item
+/******  cea1213d-234e-470e-be9d-adcebc3aae44  *******/
+
     public function CheckOut(Request $request)
     {
         $user_id = $request->user_id;
