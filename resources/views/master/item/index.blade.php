@@ -61,10 +61,10 @@ $(function () {
          columns       : [
             {data: 'id', name: 'id', visible: false},
             {data: 'title', name: 'title'},
-            {data: 'item_ref', name: 'item_ref'},
+            {data: 'item_ref', name: 'rfid'},
             {data: 'author', name: 'item_ref'},
             {data: 'barcode', name: 'barcode'},
-            {data: 'rfid', name: 'rfid'},
+            {data: 'language.language', name: 'language.language'},
             {data: 'isbn', name: 'isbn'},
             {data: 'created_at', name: 'created_at'},
             {data: 'updated_at', name: 'updated_at'},

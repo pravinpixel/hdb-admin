@@ -28,7 +28,6 @@ class CreateItemRequest extends FormRequest
             'item_ref'         => 'required|unique:items',
             'title'        => ['required',Rule::unique('items')->whereNull('deleted_at')],
             'author'         => 'required',
-            'rfid'      => 'required',
             'location'            => 'required',
             'isbn'        => 'required',
             'subject'        => 'required',

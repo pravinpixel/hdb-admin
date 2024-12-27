@@ -59,7 +59,7 @@ class ItemController extends Controller
         $item->subject = $request->subject;
         $item->item_ref = $config->item_prefix.'-'.$config->item_number;
         $item->barcode = $request->barcode;
-        $item->rfid = $request->rfid;
+        $item->rfid = $config->item_prefix.'-'.$config->item_number;
         $item->language_id = $request->language_id;
         $item->author = $request->author;
         $item->location = $request->location;
@@ -149,7 +149,7 @@ class ItemController extends Controller
         $item->title = $request->title;
         $item->item_ref = $request->item_ref;
         $item->barcode = $request->barcode;
-        $item->rfid = $request->rfid;
+        $item->rfid = $request->item_ref;
         $item->language_id = $request->language_id;
         $item->subject = $request->subject;
         $item->location = $request->location;
@@ -191,7 +191,7 @@ class ItemController extends Controller
     public function datatable(Request $request) 
     {
       if ($request->ajax() == true) {
-          $dataDb =  Item::with('user');
+          $dataDb =  Item::with('user','language');
           return DataTables::eloquent($dataDb)
           ->editColumn('created_at', function($dataDb){
                return Carbon::parse($dataDb->created_at)->format('d-m-Y');

@@ -45,9 +45,9 @@
                                     </ul>
                                 </li>
                              @endif
-                              @if(Sentinel::inRole('admin') || Sentinel::hasAccess('notification.index'))
+                              @if(Sentinel::inRole('admin') || Sentinel::hasAccess('over-due.index'))
                                 <li>
-                                    <a href="{{ route('notification.index') }}" class="waves-effect waves-light {{request()->is('admin/notification*') ? 'active' : ''}}"><i class="fa fa-history" aria-hidden="true"></i><span> Over Due list </span></a>
+                                    <a href="{{ route('over-due.index') }}" class="waves-effect waves-light {{request()->is('admin/over-due*') ? 'active' : ''}}"><i class="fa fa-history" aria-hidden="true"></i><span> Over Due list </span></a>
                                 </li>
                             @endif
                             @if(Sentinel::inRole('admin') || Sentinel::hasAccess('notification.index'))

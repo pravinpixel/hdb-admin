@@ -28,7 +28,6 @@ class UpdateItemRequest extends FormRequest
             'item_ref'         => ['required',Rule::unique('items')->ignore($this->item, 'id')],
             'title'        => ['required',Rule::unique('items')->ignore($this->item, 'id')->whereNull('deleted_at')],
             'author'         => 'required',
-            'rfid'      => 'required',
             'location'            => 'required',
             'isbn'        => 'required',
             'subject'        => 'required',

@@ -27,6 +27,7 @@ use App\Http\Controllers\Reports\OverdueHistoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ManagerDashboard;
 use App\Http\Controllers\Admin\ApprovalController;
+use App\Http\Controllers\Admin\OverDueController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +65,9 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
     Route::post('notification/{id}/resend', [NotificationController::class,'resend'])->name('notification.resend');
     Route::get('notification/datatable', [NotificationController::class,'datatable'])->name('notification.datatable');
     Route::resource('admin/notification', NotificationController::class);
+
+    Route::get('over-due/datatable', [OverDueController::class,'datatable'])->name('over-due.datatable');
+    Route::get('over-due', [OverDueController::class,'index'])->name('over-due.index');
 
     Route::get('issue/index',  [IssueController::class,'index'])->name('issue.index');
     Route::get('issue/get-item',[IssueController::class, 'getItemApproval'])->name('issue.get-item');

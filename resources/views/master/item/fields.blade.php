@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label for="rfid">RFID:<span style="color: red">*</span></label>
-            {!! Form::text('rfid', null, ['class' => 'form-control']) !!}
+             {!! Form::text('item_ref', $item_ref , ['class' => 'form-control', 'readonly' => 'readonly']) !!}
         </div>
         
           <div class="form-group">
@@ -48,11 +48,6 @@
   <div class="form-group">
             <label for="location">Location:<span style="color: red">*</span></label>
            {!! Form::text('location', null, ['class' => 'form-control']) !!}
-        </div>
-      
-         <div class="form-group">
-            <label for="item">Item Ref:</label>
-            {!! Form::text('item_ref', $item_ref , ['class' => 'form-control', 'readonly' => 'readonly']) !!}
         </div>
         
     </div>
