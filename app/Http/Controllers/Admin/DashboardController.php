@@ -25,19 +25,16 @@ class DashboardController extends Controller
         $end_week = $current->endOfWeek()->format('d-m-Y');
         $data['total_item'] = Item::get()->count();
         $data['total_issued'] = Checkout::get()->count();
-        $data['total_item_to_be_returned_today'] = 0;
-        $data['total_item_to_be_returned_tomorrow'] = 0;
-        $data['total_item_to_be_returned_week']=0;
-        // $data['total_item_to_be_returned_today'] = Item::whereBetween('date_of_return', array($today, $today))->get()->count();
-        // $data['total_item_to_be_returned_tomorrow'] = Item::whereBetween('date_of_return', array($tomorrow, $tomorrow))->get()->count();
-        // $data['total_item_to_be_returned_week'] = Item::whereBetween('date_of_return', array($start_week, $end_week))->get()->count();
+        $data['total_item_to_be_returned_today'] = Checkout::whereBetween('date_of_return', array($today, $today))->get()->count();
+        $data['total_item_to_be_returned_tomorrow'] = Checkout::whereBetween('date_of_return', array($tomorrow, $tomorrow))->get()->count();
+        $data['total_item_to_be_returned_week'] = Checkout::whereBetween('date_of_return', array($start_week, $end_week))->get()->count();
         return view('admin.dashboard.index', compact('data'));
     }
     
     public function datatable(Request $request)
     {
         if ($request->ajax() == true) {
-            $dataDb =  Item::query();
+            $dataDb =  Item::with()->query();
             if($request->search_item_name) {
                 $dataDb->where('item_id', 'like', '%'.$request->search_item_name.'%');
                 $dataDb->orWhere('item_name', 'like', '%'.$request->search_item_name.'%');

@@ -2,7 +2,7 @@
 <div class="form-group">
     {!! Form::label('member_id', 'Member ID*', ['class' => 'control-label col-lg-2']) !!}
     <div class="col-lg-10">
-        {!! Form::text('member_id', null, ['class' => 'form-control', 'id' => 'member_id']) !!}
+        {!! Form::text('member_id', $member_id , ['class' => 'form-control', 'readonly' => 'readonly']) !!}
     </div>
 </div>
 <div class="form-group">

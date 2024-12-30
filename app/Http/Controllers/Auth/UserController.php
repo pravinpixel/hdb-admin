@@ -18,7 +18,7 @@ use App\Mail\ResetPassword;
 use App\Mail\UserRegistration;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use App\Models\Config;
 class UserController extends Controller {
 
      /**
@@ -32,10 +32,12 @@ class UserController extends Controller {
     }
 
     public function create()
-    {
+    {   
+        $config = Config::where('type', 'staff')->get()->first();
+        $member_id = $config->item_prefix.''.$config->item_number;
         $roleDb = Role::whereNotIn('slug',['admin','superadmin'])->pluck('name','id');
         $userRole = null;
-        return view('auth.user.create', compact('roleDb','userRole'));
+        return view('auth.user.create', compact('roleDb','userRole','member_id'));
     }
 
     /**
@@ -51,11 +53,11 @@ class UserController extends Controller {
     {
         $email = $request->email;
         $user  = Sentinel::getUser()->first_name;
-
+        $config = Config::where('type', 'staff')->get()->first();
         //DB::beginTransaction();
         try {
             $data = [
-                'member_id'  => $request->member_id,
+                'member_id'  => $config->item_prefix.''.$config->item_number,
                 'first_name' => $request->first_name,
                 'last_name'  => $request->last_name,
                 'email'      => strtolower($email),
@@ -67,40 +69,40 @@ class UserController extends Controller {
             ];
            
             //Create a new user
-            $user = Sentinel::registerAndActivate($data);
+            $user = User::Create($data);
 
             //Attach the user to the role
             $role = Sentinel::findRoleById($request->role);
             $role->users()
                 ->attach($user);
 
-           // DB::commit();
-            $details = [
-                'title'    => 'User Registration',
-                'user'     => $user,
-                'password' => $request->password,
-                'role'     => $role,
-                'url'      => route('login')
-            ];
+        //    // DB::commit();
+        //     $details = [
+        //         'title'    => 'User Registration',
+        //         'user'     => $user,
+        //         'password' => $request->password,
+        //         'role'     => $role,
+        //         'url'      => route('login')
+        //     ];
 
             Flash::success( __('auth.account_creation_successful'));
 
-            Mail::to($request->email)->send(new UserRegistration( $details));
-            if(count(Mail::failures()) > 0){
-                event(new Notification("User registration email sent failure [to - {$user->email}]", "user_registration_failure", $user->id,null,null,null,0));
-                Log::error('User registration email sent failure.');
-            }else {
-                event(new Notification("User registration email sent successfully [to - {$user->email}]", "user_registration_success", $user->id,null,null,null,0));
-                Log::info('User registration email sent successfully');
-            }
+            // Mail::to($request->email)->send(new UserRegistration( $details));
+            // if(count(Mail::failures()) > 0){
+            //     event(new Notification("User registration email sent failure [to - {$user->email}]", "user_registration_failure", $user->id,null,null,null,0));
+            //     Log::error('User registration email sent failure.');
+            // }else {
+            //     event(new Notification("User registration email sent successfully [to - {$user->email}]", "user_registration_success", $user->id,null,null,null,0));
+            //     Log::info('User registration email sent successfully');
+            // }
            
-
+            $this->updateConfigStaffNumber();
             return redirect()->route('user.index');
 
         } catch (\Exception $exception) {
 
-            event(new Notification("User registration email sent failure [to - {$user->email}]", "user_registration_failure", $user->id));
-            Log::error('User registration email sent failure.');
+            // event(new Notification("User registration email sent failure [to - {$user->email}]", "user_registration_failure", $user->id));
+            // Log::error('User registration email sent failure.');
             return redirect()->route('user.index');
             // DB::rollBack();
 
@@ -122,6 +124,13 @@ class UserController extends Controller {
     public function show($id)
     {
         //
+    }
+    public function updateConfigStaffNumber()
+    {
+        $config = Config::where('type', 'staff')->get()->first();
+        $config->item_number =  $config->item_number + 1;
+        Log::info('Increment Staff number');
+        return $config->save();
     }
 
     /**
@@ -224,14 +233,14 @@ class UserController extends Controller {
             Flash::success( __('auth.update_successful'));
            // DB::commit();
         if ($request->password) { 
-            Mail::to($user->email)->send(new ResetPassword($details));
-            if(count(Mail::failures()) > 0){
-                event(new Notification("Reset password email sent failure [to - {$user->email}]", "update_user_password_failure", $user->id,null,null,null,0));
-                Log::error('Reset password email  email sent failure.');
-            }else {
-                event(new Notification("Reset password email sent successfully [to - {$user->email}]", "update_user_password_success", $user->id));
-                Log::info('Reset password email sent successfully');
-            }
+            // Mail::to($user->email)->send(new ResetPassword($details));
+            // if(count(Mail::failures()) > 0){
+            //     event(new Notification("Reset password email sent failure [to - {$user->email}]", "update_user_password_failure", $user->id,null,null,null,0));
+            //     Log::error('Reset password email  email sent failure.');
+            // }else {
+            //     event(new Notification("Reset password email sent successfully [to - {$user->email}]", "update_user_password_success", $user->id));
+            //     Log::info('Reset password email sent successfully');
+            // }
         }
     
             return redirect()->route('user.index');
@@ -242,7 +251,7 @@ class UserController extends Controller {
     
            //Flash::error( $exception->getMessage() . ' ' . $exception->getLine());
 
-            event(new Notification("Reset password email sent failure [to - {$user->email}]", "user_update_password_failure", $user->id,null,null,null,0));
+            //event(new Notification("Reset password email sent failure [to - {$user->email}]", "user_update_password_failure", $user->id,null,null,null,0));
             Log::error('Reset password email  email sent failure.');
             return redirect()->route('user.index');
             // return redirect()

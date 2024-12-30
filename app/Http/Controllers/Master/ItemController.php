@@ -35,7 +35,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $config = Config::get()->first();
+        $config = Config::where('type', 'item')->get()->first();
         $item_ref = $config->item_prefix.'-'.$config->item_number;
         return view('master.item.create', compact('item_ref'));
     }
@@ -49,7 +49,7 @@ class ItemController extends Controller
     public function store(CreateItemRequest $request)
     {
 
-        $config = Config::get()->first();
+        $config = Config::where('type', 'item')->get()->first();
         $item = new Item();
         if(isset($request->cover_image)){
              $path = $this->storeImage($request);
@@ -116,7 +116,7 @@ class ItemController extends Controller
     {
         $result = Item::find($id);
         if( !empty( $result ) ) {
-            $config = Config::get()->first();
+            $config = Config::where('type', 'item')->get()->first();
             $item_ref = $result->item_ref;
             return view('master.item.edit', compact('result','item_ref'));
         } 
@@ -158,7 +158,6 @@ class ItemController extends Controller
         $item->author = $request->author;
         $item->status = ($request->status=='on') ? 1 : 0;
         if($item->save()) {
-             $this->updateConfigItemNumber();
              Flash::success(__('global.updated'));
              return redirect()->route('item.index');
         }
@@ -240,7 +239,7 @@ class ItemController extends Controller
 
     public function updateConfigItemNumber()
     {
-        $config = Config::get()->first();
+        $config = Config::where('type', 'item')->get()->first();
         $config->item_number =  $config->item_number + 1;
         Log::info('Increment item number');
         return $config->save();
