@@ -21,7 +21,6 @@ class ApproveRequestHistoryController extends Controller
         $status = Config::get('report.status');
         return view('admin.reports.approve-history.index', compact('status'));
     }
-
     public function datatable(Request $request)
     {
         if ($request->ajax() == true) {
@@ -72,13 +71,10 @@ class ApproveRequestHistoryController extends Controller
                     ->make(true);
         }
     }
-
     public function export(Request $request) 
     {
         return Excel::download(new ApproveHistoryExport($request), 'approve-request-history.xlsx');
     }
-
-
     public function getMemberDropdown(Request $request)
     {
         $query = $request->input('q');
@@ -92,7 +88,6 @@ class ApproveRequestHistoryController extends Controller
                             return  ["id" => $row->id, "text" => $row->first_name.' '.$row->last_name ];
                         });
     }
-
     public function getItemDropdown(Request $request)
     {
         $query = $request->input('q');

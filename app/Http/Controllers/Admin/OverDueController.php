@@ -16,14 +16,8 @@ use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
-
 class OverDueController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('admin.over-due.index');
@@ -62,6 +56,4 @@ class OverDueController extends Controller
            
         }
     }
-
-
 }
