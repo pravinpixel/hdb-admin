@@ -23,6 +23,10 @@ class Item extends Model
     {
         return $this->hasOne(User::class, 'id', 'created_by');
     }
+    public function checkout()
+    {
+        return $this->hasOne(Checkout::class, 'item_id', 'id');
+    }
 
 
 
