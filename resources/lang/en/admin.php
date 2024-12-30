@@ -2,7 +2,7 @@
 
 return [
     'requested_on'            => 'Requested on',
-    'item_name'               => 'Item Name',
+    'title'               => 'Item Name',
     'item_image'              => 'Item Image',
     'requested_by'            => 'Requested By',
     'item_id'                 => 'Item Id',

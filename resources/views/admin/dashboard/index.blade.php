@@ -160,13 +160,13 @@
         columns       : [
             {data: 'id', name: 'id', visible: false},
             {
-                data: 'item_id', name: 'item_id'
+                data: 'item_ref', name: 'item_id'
             },
             {
-                data: 'item_name', name: 'item_name'
+                data: 'title', name: 'item_name'
             },
             {
-                data: 'item_name', name: 'item_name'
+                data: 'date_of_return', name: 'date_of_return'
             },
             {
                 data: 'status', name: 'status'

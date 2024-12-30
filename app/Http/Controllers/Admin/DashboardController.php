@@ -34,16 +34,16 @@ class DashboardController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax() == true) {
-            $dataDb =  Item::with()->query();
+            $dataDb =  Item::query();
             if($request->search_item_name) {
-                $dataDb->where('item_id', 'like', '%'.$request->search_item_name.'%');
-                $dataDb->orWhere('item_name', 'like', '%'.$request->search_item_name.'%');
+                $dataDb->where('id', 'like', '%'.$request->search_item_name.'%');
+                $dataDb->orWhere('title', 'like', '%'.$request->search_item_name.'%');
             }
             $dataDb->with('user');
             return DataTables::eloquent($dataDb) 
                 ->addColumn('status', function ($dataDb) {
                     $status = '';
-                    if($dataDb->is_issued) {
+                    if($dataDb->is_active==1) {
                         $status = '<div class="text-left"><div class="badge badge-danger"> Issued </div> <div class="badge badge-danger"> '. $dataDb->user->full_name.' </div>   </div>';
                     } else {
                         $status = '<div class="text-left"><div class="badge badge-info"> Available </div></div>';
