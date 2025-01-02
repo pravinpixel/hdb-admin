@@ -268,7 +268,7 @@ body.fixed-left .side-menu.left {
     padding: 10px 25px 10px 65px;
 }
 #sidebar-menu ul ul a.sub-active{
-    background: #043552;
+    background:#ff1818 !important;
 }
 #sidebar-menu ul ul a:hover {
     color: #ffffff;

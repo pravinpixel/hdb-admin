@@ -19,12 +19,12 @@ class DashboardController extends Controller
     public function index()
     {
         $current = Carbon::now();
-        $today = $current->format('d-m-Y');
-        $tomorrow = $current->addDays(1)->format('d-m-Y');
-        $start_week = $current->startOfWeek()->format('d-m-Y');
-        $end_week = $current->endOfWeek()->format('d-m-Y');
+        $today = $current->format('Y-m-d');
+        $tomorrow = $current->addDays(1)->format('Y-m-d');
+        $start_week = $current->startOfWeek()->format('Y-m-d');
+        $end_week = $current->endOfWeek()->format('Y-m-d');
         $data['total_item'] = Item::get()->count();
-        $data['total_issued'] = Checkout::get()->count();
+        $data['total_issued'] = Checkout::where('status','taken')->get()->count();
         $data['total_item_to_be_returned_today'] = Checkout::whereBetween('date_of_return', array($today, $today))->get()->count();
         $data['total_item_to_be_returned_tomorrow'] = Checkout::whereBetween('date_of_return', array($tomorrow, $tomorrow))->get()->count();
         $data['total_item_to_be_returned_week'] = Checkout::whereBetween('date_of_return', array($start_week, $end_week))->get()->count();
@@ -52,12 +52,12 @@ class DashboardController extends Controller
                 }) 
                 ->addColumn('date_of_return', function ($dataDb) {
                     $day_diff = 0;
-                    if($dataDb->date_of_return) {
+                    if(isset($dataDb->checkout) && isset($dataDb->checkout->date_of_return) && $dataDb->is_active==1) {
                         $current_date = strtotime(Date('Y-m-d'));
-                        $checkout_date = strtotime($dataDb->date_of_return);
+                        $checkout_date = strtotime($dataDb->checkout->date_of_return);
                         $day_diff = ( $checkout_date - $current_date ) / 86400 ;
                         $no_of_days = ($day_diff > 0) ? "<div><div class='label label-success'>{$day_diff} days</div></div>" : "<div><div class='label label-danger'>{$day_diff} days</div></div>";
-                        return Carbon::parse($dataDb->date_of_return)->format('d-m-Y').'  '. $no_of_days;
+                        return Carbon::parse($dataDb->checkout->date_of_return)->format('d-m-Y').'  '. $no_of_days;
                     }
                     return '-';
                 }) 

@@ -25,7 +25,7 @@ class Item extends Model
     }
     public function checkout()
     {
-        return $this->hasOne(Checkout::class, 'item_id', 'id');
+        return $this->hasOne(Checkout::class, 'item_id', 'id')->orderby('id', 'desc');
     }
 
 

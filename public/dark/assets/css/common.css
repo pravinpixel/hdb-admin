@@ -67,12 +67,12 @@ td{padding:5px 10px; height:35px;}
 }
  
 .loader {
-    border: 16px solid #076291;
-    border-top-color: #f89737;
+    border: 16px solid #fe000b;
+    border-top-color: #000000;
     border-top-style: solid;
     border-top-width: 16px;
     border-radius: 50%;
-    border-top: 16px solid #f89737;
+    border-top: 16px solid #000000;
     width: 120px;
     height: 120px;
     -webkit-animation: spin 2s linear infinite;

@@ -5,7 +5,7 @@
    @include('flash')
    <div class="row">
       <div class="col-sm-12 col-md-6">         
-         <h2 class="text-dark"> Over Due List </h2>
+         <h2 class="text-dark">Book Track List </h2>
       </div>
       <div class="col-sm-12 col-md-6">         
          <nav aria-label="breadcrumb">
@@ -17,7 +17,7 @@
                @elseif(Sentinel::inRole('employee'))
                <li class="breadcrumb-item"><a href="{{route('employee.dashboard')}}">Dashboard</a></li>
                @endif
-               <li class="breadcrumb-item active" aria-current="page">Over Due List</li>
+               <li class="breadcrumb-item active" aria-current="page">Book Track List</li>
             </ol>
          </nav>
       </div>
@@ -59,7 +59,7 @@
         </div>
       <div class="row">
          <div class="col-sm-12 col-md-12"> 
-            @include('admin.over-due.table')
+            @include('admin.book-track.table')
          </div>    
       </div>
    </div>
@@ -85,7 +85,7 @@ $(function () {
          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
          serverSide: true,
          ajax          : {
-            url     : '{!! route('over-due.datatable') !!}',
+            url     : '{!! route('book-track.datatable') !!}',
             data: function(d) {
                 d.start_date = $("#start_date").val();
                 d.end_date = $("#end_date").val();
@@ -98,6 +98,7 @@ $(function () {
             {data: 'title', name: 'title'},
             {data: 'user.first_name', name: 'user.first_name'},
             {data: 'date', name: 'date'},
+             {data: 'checkout_date', name: 'checkout_date'},
             {data: 'date_of_return', name: 'date_of_return'},
             {
                data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {

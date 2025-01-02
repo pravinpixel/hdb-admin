@@ -32,22 +32,22 @@
                                 <a href="{{ route('employee.dashboard') }}" class="waves-effect waves-light {{request()->is('manager/dashboard*') ? 'active' : ''}}"><i class="fa fa-dashboard"></i><span> Dashboard </span></a>
                             @endif
                             </li>
-                            @if(Sentinel::inRole('admin')  || Sentinel::hasAccess('language.index') ||Sentinel::hasAccess('subcategory.index') || Sentinel::hasAccess('genre.index') || Sentinel::hasAccess('type.index') || Sentinel::hasAccess('item.index'))
+                            @if(Sentinel::inRole('admin')  || Sentinel::hasAccess('language.index') ||Sentinel::hasAccess('item.index'))
                                 <li class="has_sub">
-                                    <a href="" class="waves-effect waves-light {{request()->is('master*') ? 'active' : ''}}"><i class="fa fa-list"></i><span> Masters </span></a>
+                                    <a href="" class="waves-effect waves-light {{request()->is('admin/master*') ? 'active' : ''}}"><i class="fa fa-list"></i><span> Masters </span></a>
                                     <ul class="list-unstyled">
                                     @if(Sentinel::inRole('admin') || Sentinel::hasAccess('language.index'))
-                                        <li><a href="{{ route('language.index') }}" class =" {{request()->is('master/language*') ? 'sub-active' : ''}}"> @lang('menu.languages') </a></li>
+                                        <li><a href="{{ route('language.index') }}" class =" {{request()->is('admin/master/language*') ? 'sub-active' : ''}}"> @lang('menu.languages') </a></li>
                                     @endif
                                     @if(Sentinel::inRole('admin') || Sentinel::hasAccess('item.index'))
-                                        <li><a href="{{ route('item.index') }}" class =" {{request()->is('master/item*') ? 'sub-active' : ''}}"> @lang('menu.items') </a></li>
+                                        <li><a href="{{ route('item.index') }}" class =" {{request()->is('admin/master/item*') ? 'sub-active' : ''}}"> @lang('menu.items') </a></li>
                                     @endif
                                     </ul>
                                 </li>
                              @endif
-                              @if(Sentinel::inRole('admin') || Sentinel::hasAccess('over-due.index'))
+                              @if(Sentinel::inRole('admin') || Sentinel::hasAccess('book-track.index'))
                                 <li>
-                                    <a href="{{ route('over-due.index') }}" class="waves-effect waves-light {{request()->is('admin/over-due*') ? 'active' : ''}}"><i class="fa fa-history" aria-hidden="true"></i><span> Over Due list </span></a>
+                                    <a href="{{ route('book-track.index') }}" class="waves-effect waves-light {{request()->is('admin/book-track*') ? 'active' : ''}}"><i class="fa fa-bookmark" aria-hidden="true"></i><span> Book Tracker List </span></a>
                                 </li>
                             @endif
                             @if(Sentinel::inRole('admin') || Sentinel::hasAccess('notification.index'))

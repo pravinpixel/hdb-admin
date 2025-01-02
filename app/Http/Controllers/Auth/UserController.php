@@ -352,7 +352,8 @@ class UserController extends Controller {
     {
 
         $user = Sentinel::findById($id);
-
+      
+    
         $activation = Activation::completed($user);
 
         #Remove activation code
@@ -360,6 +361,8 @@ class UserController extends Controller {
 
         if ($activation !== false) {
             #Deactivated This Activation
+            $user->is_active=0;
+            $user->save();
             if ($user->id === Sentinel::getUser()->id) {
                Flash::error( __('auth.deactivate_current_user_unsuccessful'));
 
@@ -373,6 +376,8 @@ class UserController extends Controller {
 
         #Own User Cannot Change The User Status
         if ($user->id === Sentinel::getUser()->id) {
+            $user->is_active=1;
+            $user->save();
            Flash::error( __('auth.active_current_user_unsuccessful'));
 
             return redirect()->back();

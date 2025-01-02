@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
-class OverDueController extends Controller
+class BookTrackController extends Controller
 {
     public function index()
     {
-        return view('admin.over-due.index');
+        return view('admin.book-track.index');
     }
     public function datatable( Request $request)
     {
@@ -35,6 +35,9 @@ class OverDueController extends Controller
             return DataTables::eloquent($dataDb)
             ->editColumn('date', function($dataDb) {
                 return Carbon::parse($dataDb->date)->format('d-m-Y');
+            })
+            ->editColumn('checkout_date', function($dataDb) {
+                return isset($dataDb->checkout_date)? Carbon::parse($dataDb->date)->format('d-m-Y') : '';
             })
             ->editColumn('date_of_return', function($dataDb) {
                 return Carbon::parse($dataDb->date_of_return)->format('d-m-Y');
