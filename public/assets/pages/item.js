@@ -6,57 +6,27 @@ $(function(){
             error.insertAfter(element);
         },
         rules: {
-            item_id: "required",
-            item_name: "required",
-            category: {
+            title: "required",
+            author: "required",
+            isbn: "required",
+            subject: "required",
+            location: "required",
+            language_id: {
                 required: true,
             },
-            subcategory: {
-                required: true,
-            },
-            genre: {
-                required: true,
-            },
-            item_type: {
-                required: true,
-            },
-            loan_days: {
-                required: true,
-            },
-            item_description: {
-                required: true,
-            },
-            no_of_page: {
-                required: true
-            }
         },
     });
 
     $("#itemEditForm").validate({
         rules: {
-            item_id: "required",
-            item_name: "required",
-            category: {
+            title: "required",
+            author: "required",
+            isbn: "required",
+            subject: "required",
+            location: "required",
+            language_id: {
                 required: true,
             },
-            subcategory: {
-                required: true,
-            },
-            genre: {
-                required: true,
-            },
-            item_type: {
-                required: true,
-            },
-            loan_days: {
-                required: true,
-            },
-            item_description: {
-                required: true,
-            },
-            no_of_page: {
-                required: true
-            }
         },
     });
 })

@@ -5,6 +5,12 @@
         {!! Form::text('member_id', $member_id , ['class' => 'form-control', 'readonly' => 'readonly']) !!}
     </div>
 </div>
+ <div class="form-group @if($errors->has('role')) has-error @endif">
+    {!! Form::label('role', 'Role *', ['class' => 'control-label col-lg-2']) !!}
+     <div class="col-lg-10">
+        {!! Form::select('role',$roleDb , $userRole, ['class' =>'form-control', 'placeholder' => 'select role'])  !!}
+    </div>
+</div>
 <div class="form-group">
     {!! Form::label('first_name', 'Firstname *', ['class' => 'control-label col-lg-2']) !!}
     <div class="col-lg-10">
@@ -49,12 +55,7 @@
         {!! Form::password('password_confirmation',  ['class' => 'form-control', 'id' => 'password_confirmation']) !!}
     </div>
 </div>
- <div class="form-group @if($errors->has('role')) has-error @endif">
-    {!! Form::label('role', 'Role *', ['class' => 'control-label col-lg-2']) !!}
-     <div class="col-lg-10">
-        {!! Form::select('role',$roleDb , $userRole, ['class' =>'form-control', 'placeholder' => 'select role'])  !!}
-    </div>
-</div>
+
 
 <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

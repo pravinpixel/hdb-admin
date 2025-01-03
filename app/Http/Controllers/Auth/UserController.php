@@ -388,6 +388,8 @@ class UserController extends Controller {
 
         #Activate this account
         Activation::complete($user, $activationCreate->code);
+        $user->is_active=1;
+        $user->save();
 
        Flash::success( __('auth.activate_successful'));
 
