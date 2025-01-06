@@ -44,13 +44,13 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('password', 'Password *', ['class' => 'control-label col-lg-2']) !!}
+    {!! Form::label('password', 'Password', ['class' => 'control-label col-lg-2']) !!}
     <div class="col-lg-10">
         {!! Form::password('password', ['class' => 'form-control', 'id' => 'password']) !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('password_confirmation', 'Confirm Password *', ['class' => 'control-label col-lg-2']) !!}
+    {!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label col-lg-2']) !!}
     <div class="col-lg-10">
         {!! Form::password('password_confirmation',  ['class' => 'form-control', 'id' => 'password_confirmation']) !!}
     </div>

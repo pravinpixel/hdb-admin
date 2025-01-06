@@ -31,7 +31,6 @@ class UserUpdateRequest extends FormRequest
             'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'role'       => 'required',
-            'password'   => 'confirmed',
         ];
 		
 		if ( $this->get( 'password' ) !== null ) {

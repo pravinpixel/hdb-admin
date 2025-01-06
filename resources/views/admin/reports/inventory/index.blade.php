@@ -148,61 +148,38 @@
 
 $(function () {
 
-    $("#category").select2({
-        ajax: {
-            url : '{!! route('category.get-dropdown') !!}',
-            data: function (params) {
-                return { q: params.term }
-            },
-            processResults: function (data) {
-                $('#subcategory').val('').trigger('change');
-                return { results: data };
-            }
-        }
-    });
+  
 
-    $("#subcategory").select2({
-        ajax: {
-            url : '{!! route('subcategory.get-dropdown') !!}',
-            data: function (params) {
-                return { q: params.term,  category:  $("#category").val() }
-            },
-            processResults: function (data) {
-                return { results: data };
-            }
-        }
-    });
-
-   var table = $('#inventoryTable').DataTable({
-         aaSorting     : [[0, 'desc']],
-         responsive: true,
-         processing: true,    
-         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-         serverSide: true,
-         pageLength: 50,
-        searching: false, paging: true, info: true,    
-        bSort: false,
-         ajax          : {
-            url     : '{!! route('inventory.datatable') !!}',
-            dataType: 'json',
-            data: function(d) {
-                d.search_item_name = $("#search_item_name").val();
-                d.category = $("#category").val();
-                d.subcategory = $("#subcategory").val();
-            }
-         },
-         columns       : [
-            {data: 'id', name: 'id', visible: false},
-            {data: 'item_id', name: 'item_id'},
-            {data: 'item_name', name: 'item_name'},
-            {data: 'category.category_name', name: 'category_name'},
-            {data: 'subcategory.subcategory_name', name: 'subcategory_name'},
-            {data: 'type.type_name', name: 'type_name'},
-            {data: 'genre.genre_name', name: 'genre_name'},
-            {data: 'status', name: 'status'},
-            {data: 'issued_to', name: 'issued_to'}
-         ],
-   });
+  //  var table = $('#inventoryTable').DataTable({
+//          aaSorting     : [[0, 'desc']],
+//          responsive: true,
+//          processing: true,    
+//          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+//          serverSide: true,
+//          pageLength: 50,
+//         searching: false, paging: true, info: true,    
+//         bSort: false,
+//          ajax          : {
+//             url     : '',
+//             dataType: 'json',
+//             data: function(d) {
+//                 d.search_item_name = $("#search_item_name").val();
+//                 d.category = $("#category").val();
+//                 d.subcategory = $("#subcategory").val();
+//             }
+//          },
+//          columns       : [
+//             {data: 'id', name: 'id', visible: false},
+//             {data: 'item_id', name: 'item_id'},
+//             {data: 'item_name', name: 'item_name'},
+//             {data: 'category.category_name', name: 'category_name'},
+//             {data: 'subcategory.subcategory_name', name: 'subcategory_name'},
+//             {data: 'type.type_name', name: 'type_name'},
+//             {data: 'genre.genre_name', name: 'genre_name'},
+//             {data: 'status', name: 'status'},
+//             {data: 'issued_to', name: 'issued_to'}
+//          ],
+//    });
 
 
    table.on( 'xhr', function () {

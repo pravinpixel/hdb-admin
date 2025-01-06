@@ -68,6 +68,8 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
 
     Route::get('book-track/datatable', [BookTrackController::class,'datatable'])->name('book-track.datatable');
     Route::get('book-track', [BookTrackController::class,'index'])->name('book-track.index');
+    Route::get('book-track/{id}', [BookTrackController::class,'edit'])->name('book-track.edit');
+    Route::post('book-track/{id}', [BookTrackController::class,'update'])->name('book-track.update');
 
     Route::get('issue/index',  [IssueController::class,'index'])->name('issue.index');
     Route::get('issue/get-item',[IssueController::class, 'getItemApproval'])->name('issue.get-item');

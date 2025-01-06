@@ -7,6 +7,7 @@ use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Models\Checkout;
 use App\Models\User;
+use App\Models\Issue;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
+use Auth;
 class BookTrackController extends Controller
 {
     public function index()
@@ -52,11 +54,32 @@ class BookTrackController extends Controller
                }
             })
             ->addColumn('action', function ($dataDb) {
-                  return '<a href="' . route('item.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>';
+                  return '<a href="' . route('book-track.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>';
             })
             ->rawColumns(['status','action'])
             ->make(true);
            
         }
+    }
+    public function edit($id)
+    {
+        $item = Checkout::find($id);
+        return view('admin.book-track.edit', compact('item'));
+    }
+    public function update(Request $request, $id)
+    {
+        $item = Checkout::find($id);
+        $item->date_of_return = $request->date_of_return;
+        $item->save();
+        $issue = new Issue();
+        $issue->item_id =  $item->item_id;
+        $issue->issue_date = Carbon::now();
+        $issue->approve_request_id =1;
+        $issue->approved_by = 1;
+        $issue->received_by =1;
+        $issue->date_of_return = $request->date_of_return;
+        $issue->issue_status =1;
+        $issue->save();
+        return view('admin.book-track.index', compact('item'));
     }
 }

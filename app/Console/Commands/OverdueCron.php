@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Events\Notification;
+use App\Models\Notification;
 use App\Mail\SendReminder;
 use App\Models\Checkout;
 use App\Models\Config;
@@ -48,32 +48,22 @@ class OverdueCron extends Command
             $config = Config::find(1);
             Log::info('overdue cron start');
             $checkouts = Checkout::with(['item','user'])
-                                ->where('return_status',0)
+            ->where('status','taken')
                                 ->get();
             foreach($checkouts as $checkout) {
+                Log::info($checkout->item->id);
                 $checkout_date = strtotime($checkout->date_of_return);
                 $current_date = strtotime(Date('Y-m-d'));
                 $day_diff =  ( $checkout_date - $current_date ) / 86400 ;
-                if($day_diff < 0 && $day_diff <= -3) {
-                    $email = $checkout->user->email;
-                    $details = [
-                        'title' => 'Overdue Email',
-                        'user'  => $checkout->user,
-                        'item'  => $checkout->item,
-                        'overdue' => $day_diff
-                    ];
-                    if( $config->enable_email == 1) {
-                        Mail::to($email)->send(new SendReminder($details));
-                        if(count(Mail::failures()) > 0){
-                            event(new Notification("Overdue email sent failure to [{$checkout->user->first_name}] [item name : {$checkout->item->item_name}]", "overdue_cron", null, null, null, $checkout->user->id, $checkout->item->id,0));
-                            Log::info('Overdue email sent failure');
-                        }else {
-                            $config->last_cron_updated = now();
-                            $config->save();
-                            event(new Notification("Overdue email sent successfully to [{$checkout->user->first_name}] [item name : {$checkout->item->item_name}]", "overdue_cron", null, null, null, $checkout->user->id, $checkout->item->id));
-                            Log::info('Overdue email sent successfully');
-                        }
-                    }
+                if($day_diff>0) {
+             Log::info('overdue');
+                $notify=new Notification();
+                $notify->message="Overdue Notify to ".$checkout->user->first_name. ' and item is '.$checkout->item->title;
+                $notify->created_by=1;
+                $notify->item_id=$checkout->item_id;
+                $notify->type="overdue";
+                $notify->type_id=$checkout->id;
+                $notify->save();     
                 }
             }
             Log::info('overdue cron stop');

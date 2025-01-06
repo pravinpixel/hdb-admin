@@ -66,6 +66,7 @@ class UserController extends Controller {
                 'address'    => $request->address,
                 'created_by' => $user,
                 'updated_by' => $user,
+                'is_active'=>1
             ];
            
             //Create a new user
@@ -154,8 +155,8 @@ class UserController extends Controller {
         $roleDb = Role::whereNotIn('slug',['admin','superadmin'])->pluck('name','id');
 
         $userRole = $user->roles[0]->id ?? null;
-
-        return view('auth.user.edit', compact('user','roleDb','userRole'));
+        $member_id=$user->member_id;
+        return view('auth.user.edit', compact('user','roleDb','userRole','member_id'));
     }
 
     /**

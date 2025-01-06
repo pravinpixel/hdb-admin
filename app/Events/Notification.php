@@ -38,7 +38,7 @@ class Notification
         $notify->to = $to;
         $notify->item_id = $item_id;
         $notify->status = $status;
-        $this->notify =  $notify;
+        //$this->notify =  $notify;
     }
 
     /**

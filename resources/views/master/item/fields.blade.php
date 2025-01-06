@@ -49,6 +49,10 @@
             <label for="location">Location:<span style="color: red">*</span></label>
            {!! Form::text('location', null, ['class' => 'form-control']) !!}
         </div>
+         <div class="form-group">
+            <label for="location">Due Period:<span style="color: red"></span></label>
+           {!! Form::text('due_period', null, ['class' => 'form-control']) !!}
+        </div>
         
     </div>
 </div>

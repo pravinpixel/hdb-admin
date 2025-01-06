@@ -159,32 +159,32 @@ $(function () {
     });
 
    var table = $('#approveHistoryTable').DataTable({
-         aaSorting     : [[0, 'desc']],
-         responsive: true,
-         processing: true,    
-        pageLength: 50,
-         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-         serverSide: true,
-        searching: false, paging: true, info: true,    
-        bSort: false,
-         ajax          : {
-            url     : '{!! route('approve-request.datatable') !!}',
-            dataType: 'json',
-            data: function(d) {
-                d.member = $('#member').val();
-                d.item = $('#item').val();
-                d.status = $('#status').val();
-            }
-         },
-         columns       : [
-            {data: 'id', name: 'id', visible: false},
-            {data: 'created_at', name: 'created_at'},
-            {data: 'item.item_id', name: 'item_id'},
-            {data: 'item.item_name', name: 'item_name'},
-            {data: 'requested_user', name: 'requested_by'},
-            {data: 'approved_rejected_user', name: 'approved_rejected_user'}
-         ],
-   });
+//          aaSorting     : [[0, 'desc']],
+//          responsive: true,
+//          processing: true,    
+//         pageLength: 50,
+//          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+//          serverSide: true,
+//         searching: false, paging: true, info: true,    
+//         bSort: false,
+//          ajax          : {
+//             url     : '{!! route('approve-request.datatable') !!}',
+//             dataType: 'json',
+//             data: function(d) {
+//                 d.member = $('#member').val();
+//                 d.item = $('#item').val();
+//                 d.status = $('#status').val();
+//             }
+//          },
+//          columns       : [
+//             {data: 'id', name: 'id', visible: false},
+//             {data: 'created_at', name: 'created_at'},
+//             {data: 'item.item_id', name: 'item_id'},
+//             {data: 'item.item_name', name: 'item_name'},
+//             {data: 'requested_user', name: 'requested_by'},
+//             {data: 'approved_rejected_user', name: 'approved_rejected_user'}
+//          ],
+//    });
 
    table.on( 'xhr', function () {
     var json = table.ajax.json();

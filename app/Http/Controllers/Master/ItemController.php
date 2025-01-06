@@ -67,6 +67,7 @@ class ItemController extends Controller
         $item->call_number = $request->call_number;
         $item->status = ($request->status=='on') ? 1 : 0;
         $item->created_by = Auth::id();
+        $item->due_period = $request->due_period;
         if($item->save()) {
             $this->updateConfigItemNumber();
             Flash::success(__('global.inserted'));
@@ -157,6 +158,7 @@ class ItemController extends Controller
         $item->call_number = $request->call_number;
         $item->author = $request->author;
         $item->status = ($request->status=='on') ? 1 : 0;
+        $item->due_period = $request->due_period;
         if($item->save()) {
              Flash::success(__('global.updated'));
              return redirect()->route('item.index');
@@ -227,7 +229,7 @@ class ItemController extends Controller
     public function status($id)
     {
         $result = Item::find($id);
-        $result->status = ($result->is_active == 1) ? 0 : 1;
+        $result->status = ($result->status == 1) ? 0 : 1;
         $result->update();
         if( $result ) {
             Flash::success(__('global.status_updated'));

@@ -25,9 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('overdue:cron');
-        $schedule->command('userregister:cron')
-        ->yearly();
+        $schedule->command('overdue:cron')->everyMinute();
+       
     }
 
     /**

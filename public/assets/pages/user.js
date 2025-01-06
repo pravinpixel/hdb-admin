@@ -12,11 +12,15 @@ $(function(){
                 minlength: 2
             },
             password: {
-                required: true,
+                required: function() {
+                    return $('#role').val() != '7';
+                },
                 minlength: 5
             },
             password_confirmation: {
-                required: true,
+                required: function() {
+                    return $('#role').val() != '7';
+                },
                 minlength: 5,
                 equalTo: "#password"
             },
@@ -118,4 +122,5 @@ $(function(){
             }
         }
     });
+    
 })

@@ -30,7 +30,6 @@ class UserCreateRequest extends FormRequest
             'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'email'      => 'required|unique:users|email',
             'role'       => 'required',
-            'password'   => 'required|confirmed|min:5',
         ];
     }
 }
