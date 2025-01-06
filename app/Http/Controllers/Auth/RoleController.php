@@ -160,7 +160,7 @@ class RoleController extends Controller {
             'name',
             'created_at',
             'updated_at',
-        ])->whereNotIn('slug',['admin','superadmin']);
+        ])->whereNotIn('slug',['admin','superadmin','staff']);
         return DataTables::eloquent($dataDb)
             ->addColumn('action', function ($dataDb) {
                 return '<a href="' . route('role.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
