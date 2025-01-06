@@ -14,7 +14,7 @@
                @elseif(Sentinel::inRole('manager')) 
                <li class="breadcrumb-item"><a href="{{route('manager.dashboard')}}">Dashboard</a></li>
                @endif
-               <li class="breadcrumb-item"><a href="{{ route('item.index') }}">Items</a></li>
+               <li class="breadcrumb-item"><a href="{{ route('item.index') }}">Books</a></li>
                <li class="breadcrumb-item active" aria-current="page">Create</li>
             </ol>
          </nav>

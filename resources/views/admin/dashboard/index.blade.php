@@ -17,7 +17,7 @@
                             <i class="fa fa-cart-plus f-left"></i>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
-                                    <h4 class="m-b-20 text-white"> Total Items</h4>
+                                    <h4 class="m-b-20 text-white"> Total Books</h4>
                                 </div>
                                 <div class="col-md-12 col-sm-12">
                                     <h5 class="m-b-20 text-white text-center">&nbsp;</h5>
@@ -51,7 +51,7 @@
                             <i class="fa fa-refresh f-left"></i>                        
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
-                                    <h4 class="m-b-20 text-white">Total Item to be Returned</h4>
+                                    <h4 class="m-b-20 text-white">Total Book to be Returned</h4>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <h5 class="m-b-20 text-white text-center">Today</h5>
@@ -72,7 +72,7 @@
             </div>
              <div class="row">
                 <div class="col-sm-12 col-md-6">         
-                    <h3 class="text-inverse">Items</h3>
+                    <h3 class="text-inverse">Books</h3>
                 </div>
             </div>
             <div class="row">
@@ -82,7 +82,7 @@
                             <div class="col-lg-6">
                                 <div class="row">
                                     <div class="form-group">
-                                        <label for="type">Item Name / Item ID:</label>
+                                        <label for="type">Book Name / Book ID:</label>
                                         {!! Form::text('search_item_name', null, ['class' => 'form-control', 'id' => 'search_item_name']) !!}
                                     </div>
                                 </div>
