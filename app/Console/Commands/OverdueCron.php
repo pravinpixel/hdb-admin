@@ -58,7 +58,7 @@ class OverdueCron extends Command
                 if($day_diff>0) {
              Log::info('overdue');
                 $notify=new Notification();
-                $notify->message="Overdue Notify to ".$checkout->user->first_name. ' and item is '.$checkout->item->title;
+                $notify->message="The ".$checkout->item->item_ref." is overdue. Kindly return it at your earliest convenience";
                 $notify->created_by=1;
                 $notify->item_id=$checkout->item_id;
                 $notify->type="overdue";
