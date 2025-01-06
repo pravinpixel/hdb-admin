@@ -47,7 +47,7 @@
 
     // Add 21 days to the return date to get the max date
     const maxDate = new Date(returnDate);
-    maxDate.setDate(returnDate.getDate() + 7);  // Adding 21 days
+    maxDate.setDate(returnDate.getDate() + 21);  // Adding 21 days
 
     // Format the dates to YYYY-MM-DD format (this is required by the input[type="date"])
     const formattedReturnDate = returnDate.toISOString().split('T')[0];
