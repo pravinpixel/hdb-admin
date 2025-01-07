@@ -28,6 +28,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ManagerDashboard;
 use App\Http\Controllers\Admin\ApprovalController;
 use App\Http\Controllers\Admin\BookTrackController;
+use App\Http\Controllers\Auth\StaffController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -86,7 +88,9 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
         Route::put('user/{id}/updateUser', [UserController::class,'updateUser'] )->name('user.update-profile');
         Route::put('user/{id}/status', [UserController::class,'status'])->name('user.status');
         Route::get('user/get-user-details', [UserController::class, 'getUserDetails'])->name('user.get-user-details');
+        Route::resource('staff', StaffController::class);
         Route::resource('user', UserController::class);
+        Route::get('staff/datatable', [StaffController::class,'datatable'] )->name('staff.datatable');
         Route::get('permission', [ PermissionController::class,'index'])->name('permission.index');
         Route::get('permission/get-permission', [PermissionController::class,'getPermission'])->name('permission.get-permission');
         Route::post('permission/store', [PermissionController::class,'store'])->name('permission.store');

@@ -18,7 +18,7 @@
                @elseif(Sentinel::inRole('manager')) 
                <li class="breadcrumb-item"><a href="{{route('manager.dashboard')}}">Dashboard</a></li>
                @endif
-               <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('item.index') }}">Items</a></li>
+               <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('item.index') }}">Books</a></li>
             </ol>
          </nav>
       </div>
@@ -60,12 +60,14 @@ $(function () {
          },
          columns       : [
             {data: 'id', name: 'id', visible: false},
-            {data: 'title', name: 'title'},
             {data: 'item_ref', name: 'rfid'},
-            {data: 'author', name: 'item_ref'},
-            {data: 'barcode', name: 'barcode'},
-            {data: 'language.language', name: 'language.language'},
+            {data: 'title', name: 'title'},
+            {data: 'author', name: 'author'},
             {data: 'isbn', name: 'isbn'},
+            {data: 'call_number', name: 'call_number'},
+            {data: 'barcode', name: 'barcode'},
+            {data: 'subject', name: 'subject'},
+            {data: 'language.language', name: 'language.language'},
             {data: 'created_at', name: 'created_at'},
             {data: 'updated_at', name: 'updated_at'},
             {

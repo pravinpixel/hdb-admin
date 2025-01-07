@@ -20,7 +20,10 @@ class User extends EloquentUser
         'mobile',
         'address',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'role',
+        'designation',
+        'group'
     ];
 
     /**

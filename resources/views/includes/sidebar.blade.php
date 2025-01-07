@@ -87,6 +87,9 @@
                                 <li class="has_sub">
                                     <a href="" class="waves-effect waves-light {{request()->is('admin/setting/*') ? 'active' : ''}}"><i class="fa fa-cogs"></i><span> Settings </span></a>
                                     <ul class="list-unstyled">
+                                      @if(Sentinel::inRole('admin') || Sentinel::hasAccess('staff.index'))
+                                            <li><a href="{{ route('staff.index') }}" class =" {{request()->is('admin/setting/staff*') ? 'sub-active' : ''}}"> @lang('menu.staffs') </a></li>
+                                        @endif
                                         @if(Sentinel::inRole('admin') || Sentinel::hasAccess('user.index'))
                                             <li><a href="{{ route('user.index') }}" class =" {{request()->is('admin/setting/user*') ? 'sub-active' : ''}}"> @lang('menu.users') </a></li>
                                         @endif

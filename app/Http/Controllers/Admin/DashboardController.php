@@ -38,6 +38,8 @@ class DashboardController extends Controller
             if($request->search_item_name) {
                 $dataDb->where('id', 'like', '%'.$request->search_item_name.'%');
                 $dataDb->orWhere('title', 'like', '%'.$request->search_item_name.'%');
+                $dataDb->orWhere('item_ref', 'like', '%'.$request->search_item_name.'%');
+                
             }
             $dataDb->with('user','checkout');
             return DataTables::eloquent($dataDb) 

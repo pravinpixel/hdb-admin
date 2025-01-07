@@ -10,7 +10,7 @@
 @include('flash')
     <div class="row">
         <div class="col-sm-12 col-md-6">         
-            <h2 class="text-dark"> Admins </h2>
+            <h2 class="text-dark"> Staffs </h2>
         </div>
         <div class="col-sm-12 col-md-6">         
             <nav aria-label="breadcrumb">
@@ -20,7 +20,7 @@
                 @elseif(Sentinel::inRole('manager')) 
                 <li class="breadcrumb-item"><a href="{{route('manager.dashboard')}}">Dashboard</a></li>
                 @endif
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('user.index')}}">Admins </a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('staff.index')}}">Staffs </a></li>
             </ol>
             </nav>
         </div>
@@ -28,10 +28,10 @@
    <div class="card">
       <div class="row">
          <div class="col-sm-12 col-md-12 pb-20 text-right">               
-          <a href="{{ route('user.create') }}" class="btn btn-info"> Add Admin</a>        
+          <a href="{{ route('staff.create') }}" class="btn btn-info"> Add Staff</a>        
          </div>  
          <div class="col-sm-12 col-md-12"> 
-               @include('auth.user.table')
+               @include('auth.staff.table')
          </div>    
       </div>
    </div>
@@ -42,7 +42,7 @@
 <script>
  $(function () {
 
-            var table = $('#users-table').DataTable({
+            var table = $('#staffs-table').DataTable({
                 aaSorting     : [[0, 'desc']],
                 responsive: true,
                 processing: true,
@@ -50,7 +50,7 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 serverSide: true,
                 ajax          : {
-                    url     : '{!! route('user.datatable') !!}',
+                    url     : '{!! route('staff.datatable') !!}',
                     dataType: 'json'
                 },
                 columns       : [
@@ -65,8 +65,8 @@
                         data: 'last_name', name: 'last_name'
                     },
                     {data: 'email', name: 'email'},
-                    {data: 'role', name: 'roles.name', defaultContent: ''},
-                    {data: 'last_login', name: 'last_login'},
+                    {data: 'designation', name: 'designation'},
+                    {data: 'group', name: 'Orgn/Group'},
                     {
                         data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                             //  console.log( nTd );
@@ -84,7 +84,7 @@
                     }
                 ],
             });
-        });
+});
 </script>
 @endpush
 

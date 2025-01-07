@@ -296,6 +296,7 @@ class UserController extends Controller {
      */
     public function datatable(Request $request)
     {
+        
         if ($request->ajax() == true) {
             $dataDb = User::select([
                 'users.id',

@@ -1,8 +1,9 @@
 <?php
 return  [
-    "items"                    => "Items",
-    "languages"               => "Languages",
-    "users"                    => "Users",
+    "items"                    => "Book Listing",
+    "languages"                =>"Languages",
+    "staffs"                   => "Staffs",
+    "users"                    => "Admins",
     "roles"                    => "Roles",
     "permissions"              => "Permissions",
     "borrow"                   => "Borrow",

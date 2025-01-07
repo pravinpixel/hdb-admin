@@ -2,9 +2,9 @@
    <thead>
          <tr>
             <th>#</th>
-            <th>Rfid</th>
-            <th>Title</th>
-            <th>Staff</th>
+            <th>RFID</th>
+            <th>Book Name</th>
+            <th>Staff Name</th>
             <th>CheckIn Date</th>
             <th>CheckOut Date</th>
             <th>Due Date</th>

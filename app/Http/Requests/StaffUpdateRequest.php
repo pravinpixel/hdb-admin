@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UserCreateRequest extends FormRequest
+class StaffUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +24,15 @@ class UserCreateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'member_id'  => 'required|unique:users',
-            'mobile'     => 'unique:users',
+        $rules = [
+            'member_id'  => ['required', Rule::unique('users')->ignore($this->user, 'id')],
+            'email'      => ['required', Rule::unique('users')->ignore($this->user, 'id')],
             'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
-            'email'      => 'required|unique:users|email',
             'role'       => 'required',
-            'password'       => 'required',
+            'designation'       => 'required',
+            'group'       => 'required',
         ];
+		return $rules;
     }
 }
