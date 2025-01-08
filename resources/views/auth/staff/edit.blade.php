@@ -30,7 +30,7 @@
       <div class="row">
          <div class="col-sm-12 col-md-12"> 
                <div class="form">
-                    {!! Form::model($user,['route' => ['staff.update', $user->id],"id" => "userFormEdit", "method" => "put", "class" => "cmxform form-horizontal tasi-form"]) !!}
+                    {!! Form::model($user,['route' => ['staff.update', $user->id],"id" => "staffFormEdit", "method" => "put", "class" => "cmxform form-horizontal tasi-form"]) !!}
                         @include('auth.staff.fields')
                     {!! Form::close() !!}
                 </div> <!-- .form -->

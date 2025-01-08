@@ -19,6 +19,9 @@ use App\Mail\UserRegistration;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Config;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller {
 
      /**
@@ -35,7 +38,7 @@ class UserController extends Controller {
     {   
         $config = Config::where('type', 'staff')->get()->first();
         $member_id = $config->item_prefix.''.$config->item_number;
-        $roleDb = Role::whereNotIn('slug',['admin','superadmin'])->pluck('name','id');
+        $roleDb = Role::whereNotIn('slug',['staff'])->pluck('name','id');
         $userRole = null;
         return view('auth.user.create', compact('roleDb','userRole','member_id'));
     }
@@ -61,12 +64,12 @@ class UserController extends Controller {
                 'first_name' => $request->first_name,
                 'last_name'  => $request->last_name,
                 'email'      => strtolower($email),
-                'password'   => $request->password,
+                'password'   => Hash::make($request->password),
                 'mobile'     => $request->mobile,
                 'address'    => $request->address,
                 'created_by' => $user,
                 'updated_by' => $user,
-                'is_active'=>1
+                'is_active'  => 1
             ];
            
             //Create a new user
@@ -152,7 +155,7 @@ class UserController extends Controller {
             return redirect()->route('user.index');
         }
 
-        $roleDb = Role::whereNotIn('slug',['admin','superadmin'])->pluck('name','id');
+        $roleDb = Role::whereNotIn('slug',['staff'])->pluck('name','id');
 
         $userRole = $user->roles[0]->id ?? null;
         $member_id=$user->member_id;
@@ -213,6 +216,7 @@ class UserController extends Controller {
                     'user' => $user
                 ];
                
+                // $credentials['password'] = Hash::make($request->password);
                 $credentials['password'] = $request->password;
             }
 
@@ -234,7 +238,7 @@ class UserController extends Controller {
             Flash::success( __('auth.update_successful'));
            // DB::commit();
         if ($request->password) { 
-            // Mail::to($user->email)->send(new ResetPassword($details));
+            Mail::to($user->email)->send(new ResetPassword($details));
             // if(count(Mail::failures()) > 0){
             //     event(new Notification("Reset password email sent failure [to - {$user->email}]", "update_user_password_failure", $user->id,null,null,null,0));
             //     Log::error('Reset password email  email sent failure.');
@@ -296,8 +300,8 @@ class UserController extends Controller {
      */
     public function datatable(Request $request)
     {
-        
         if ($request->ajax() == true) {
+            $loginUser = Sentinel::getUser()->id;
             $dataDb = User::select([
                 'users.id',
                 'member_id',
@@ -308,10 +312,10 @@ class UserController extends Controller {
                 'users.created_at',
                 'users.updated_at',
             ])
-              
+                ->where('id', '!=', $loginUser)
                 ->with('roles', 'activations')
                 ->whereHas('roles',function($q){
-                    $q->whereNotIn('slug',['admin','superadmin']);
+                    $q->whereIn('slug',['admin','superadmin']);
                 });
 
             return DataTables::eloquent($dataDb)

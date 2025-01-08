@@ -55,9 +55,9 @@
                 },
                 columns       : [
                     {data: 'id', name: 'users.id', visible: false},
-                    {
-                        data:'member_id', name: 'member_id',
-                    },
+                    // {
+                    //     data:'member_id', name: 'member_id',
+                    // },
                     {
                         data: 'first_name', name: 'first_name'
                     },
@@ -69,7 +69,7 @@
                     {data: 'group', name: 'Orgn/Group'},
                     {
                         data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                            //  console.log( nTd );
+                            //  console.log( 'checl',nTd );
                             $("a", nTd).tooltip({container: 'body'});
                         }
                     },

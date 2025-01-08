@@ -23,7 +23,8 @@ class User extends EloquentUser
         'updated_by',
         'role',
         'designation',
-        'group'
+        'group',
+        'is_active'
     ];
 
     /**

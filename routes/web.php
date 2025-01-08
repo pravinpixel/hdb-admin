@@ -80,6 +80,7 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
     Route::post('issue/send-approval-request', [CheckoutController::class,'sendApprovalRequest'])->name('issue.send-approval-request');
    
     Route::group(['prefix' => 'setting', 'middleware'=> 'admin'], function(){ 
+        Route::get('staff/datatable', [StaffController::class,'datatable'] )->name('staff.datatable');
         Route::get('role/datatable', [RoleController::class,'datatable'] )->name('role.datatable');
         Route::put('role/{id}/status', [RoleController::class,'status'])->name('role.status');
         Route::resource('role', RoleController::class);
@@ -90,7 +91,6 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
         Route::get('user/get-user-details', [UserController::class, 'getUserDetails'])->name('user.get-user-details');
         Route::resource('staff', StaffController::class);
         Route::resource('user', UserController::class);
-        Route::get('staff/datatable', [StaffController::class,'datatable'] )->name('staff.datatable');
         Route::get('permission', [ PermissionController::class,'index'])->name('permission.index');
         Route::get('permission/get-permission', [PermissionController::class,'getPermission'])->name('permission.get-permission');
         Route::post('permission/store', [PermissionController::class,'store'])->name('permission.store');

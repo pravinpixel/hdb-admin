@@ -1,4 +1,4 @@
- <table class="table table-bordered table-hover" id="users-table" width="100%">
+ <table class="table table-bordered table-hover" id="staffs-table" width="100%">
     <thead>
     <tr>
         <th>@lang('auth.index_staff_no')</th>

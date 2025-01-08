@@ -1,5 +1,5 @@
 $(function(){
-    $('#userForm').validate({
+    $('#staffForm').validate({
         rules: {
             member_id:{
                 required: true,
@@ -16,7 +16,7 @@ $(function(){
         },
     });
 
-    $("#userFormEdit").validate({
+    $("#staffFormEdit").validate({
         rules: {
             member_id:{
                 required: true,

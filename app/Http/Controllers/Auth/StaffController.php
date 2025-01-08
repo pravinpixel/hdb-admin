@@ -223,9 +223,9 @@ class StaffController extends Controller {
                     'users.created_at',
                     'users.updated_at',
                 ])
-                ->with('roles')
+                ->with('roles', 'activations')
                 ->whereHas('roles', function ($q) {
-                    $q->where('slug', ['staff']);
+                    $q->whereIn('slug', ['staff']);
                 });
 
             return DataTables::eloquent($dataDb)

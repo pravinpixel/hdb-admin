@@ -30,7 +30,7 @@
       <div class="row">
          <div class="col-sm-12 col-md-12"> 
               <div class="form">
-                    {!! Form::open(['route' => 'staff.store',"id" => "userForm", "Method" => "POST", "class" => "cmxform form-horizontal tasi-form"]) !!}
+                    {!! Form::open(['route' => 'staff.store',"id" => "staffForm", "Method" => "POST", "class" => "cmxform form-horizontal tasi-form"]) !!}
                         @include('auth.staff.fields')
                     {!! Form::close() !!}
                 </div> <!-- .form -->
