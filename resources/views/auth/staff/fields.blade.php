@@ -1,29 +1,22 @@
 
 <div class="form-group">
-    {!! Form::label('member_id', 'Member ID*', ['class' => 'control-label col-lg-2']) !!}
+    {!! Form::label('member_id', 'Staff NO *', ['class' => 'control-label col-lg-2']) !!}
     <div class="col-lg-10">
         {!! Form::text('member_id',null, ['class' => 'form-control','id' => 'member_id']) !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('first_name', 'Firstname *', ['class' => 'control-label col-lg-2']) !!}
+    {!! Form::label('first_name', 'Name *', ['class' => 'control-label col-lg-2']) !!}
     <div class="col-lg-10">
         {!! Form::text('first_name', null, ['class' => 'form-control', 'id' => 'first_name']) !!}
     </div>
 </div>
-<div class="form-group">
+<!--div class="form-group">
     {!! Form::label('last_name', 'Lastname *', ['class' => 'control-label col-lg-2']) !!}
     <div class="col-lg-10">
         {!! Form::text('last_name', null, ['class' => 'form-control', 'id' => 'last_name']) !!}
     </div>
-</div>
-<div class="form-group">
-    {!! Form::label('email', 'Email *', ['class' => 'control-label col-lg-2']) !!}
-    <div class="col-lg-10">
-        {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
-    </div>
-</div>
-
+</div-->
 <div class="form-group">
     {!! Form::label('designation', 'Designation *', ['class' => 'control-label col-lg-2']) !!}
     <div class="col-lg-10">
@@ -36,6 +29,13 @@
         {!! Form::text('group', null, ['class' => 'form-control', 'id' => 'group']) !!}
     </div>
 </div>
+<div class="form-group">
+    {!! Form::label('email', 'Email Address *', ['class' => 'control-label col-lg-2']) !!}
+    <div class="col-lg-10">
+        {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
+    </div>
+</div>
+
 <input type="hidden" name="role" value="7">
 <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

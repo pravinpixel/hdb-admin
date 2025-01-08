@@ -26,7 +26,7 @@ class StaffCreateRequest extends FormRequest
         return [
             'member_id'  => 'required|unique:users',
             'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
-            'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
+            // 'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'email'      => 'required|unique:users|email',
             'role'       => 'required',
             'designation'       => 'required',

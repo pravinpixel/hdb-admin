@@ -55,18 +55,18 @@
                 },
                 columns       : [
                     {data: 'id', name: 'users.id', visible: false},
-                    // {
-                    //     data:'member_id', name: 'member_id',
-                    // },
+                    {
+                        data:'member_id', name: 'member_id',
+                    },
                     {
                         data: 'first_name', name: 'first_name'
                     },
-                    {
-                        data: 'last_name', name: 'last_name'
-                    },
-                    {data: 'email', name: 'email'},
+                    // {
+                    //     data: 'last_name', name: 'last_name'
+                    // },
                     {data: 'designation', name: 'designation'},
                     {data: 'group', name: 'group'},
+                    {data: 'email', name: 'email'},
                     {
                         data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                             //  console.log( 'checl',nTd );

@@ -55,7 +55,7 @@ class StaffController extends Controller {
             $data = [
                 'member_id'  => $request->member_id,
                 'first_name' => $request->first_name,
-                'last_name'  => $request->last_name,
+                // 'last_name'  => $request->last_name,
                 'email'      => strtolower($email),
                 'group'   => $request->group,
                 'designation'   => $request->designation,
@@ -101,7 +101,7 @@ class StaffController extends Controller {
      */
     public function edit($id)
     {
-
+        
         $user = Sentinel::findUserById($id);
 
         if (empty($user)) {
