@@ -110,7 +110,7 @@ class StaffController extends Controller {
             return redirect()->route('staff.index');
         }
 
-        $roleDb = Role::whereNotIn('slug',['admin','superadmin'])->pluck('name','id');
+        $roleDb = Role::whereNotIn('slug', ['admin','superadmin'])->pluck('name','id');
 
         $userRole = $user->roles[0]->id ?? null;
         return view('auth.staff.edit', compact('user','roleDb','userRole'));
