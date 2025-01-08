@@ -230,8 +230,8 @@ class StaffController extends Controller {
 
             return DataTables::eloquent($dataDb)
                 ->addColumn('action', function ($dataDb) {
-                    return '<a href="' . route('user.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
-                            <a href="#" data-message="' . trans('auth.delete_confirmation', ['name' => $dataDb->email]) . '" data-href="' . route('user.destroy', $dataDb->id) . '" id="tooltip" data-method="DELETE" data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
+                    return '<a href="' . route('staff.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                            <a href="#" data-message="' . trans('auth.delete_confirmation', ['name' => $dataDb->email]) . '" data-href="' . route('staff.destroy', $dataDb->id) . '" id="tooltip" data-method="DELETE" data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
                 })
                 ->addColumn('role', function ($dataDb) {
                     if ($dataDb->roles->isNotEmpty()) {

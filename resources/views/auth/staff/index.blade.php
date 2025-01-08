@@ -66,7 +66,7 @@
                     },
                     {data: 'email', name: 'email'},
                     {data: 'designation', name: 'designation'},
-                    {data: 'group', name: 'Orgn/Group'},
+                    {data: 'group', name: 'group'},
                     {
                         data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                             //  console.log( 'checl',nTd );
