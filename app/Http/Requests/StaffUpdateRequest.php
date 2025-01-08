@@ -24,7 +24,7 @@ class StaffUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        dd($this->user);
+        // dd($this->user);
         $rules = [
             // 'member_id'  => ['required', Rule::unique('users')->ignore($this->user, 'id')],
             // 'email'      => ['required', Rule::unique('users')->ignore($this->user, 'id')],
