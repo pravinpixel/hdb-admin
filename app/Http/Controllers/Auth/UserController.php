@@ -238,7 +238,7 @@ class UserController extends Controller {
             Flash::success( __('auth.update_successful'));
            // DB::commit();
         if ($request->password) { 
-            Mail::to($user->email)->send(new ResetPassword($details));
+            // Mail::to($user->email)->send(new ResetPassword($details));
             // if(count(Mail::failures()) > 0){
             //     event(new Notification("Reset password email sent failure [to - {$user->email}]", "update_user_password_failure", $user->id,null,null,null,0));
             //     Log::error('Reset password email  email sent failure.');
