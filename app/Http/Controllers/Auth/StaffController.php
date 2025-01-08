@@ -101,9 +101,9 @@ class StaffController extends Controller {
      */
     public function edit($id)
     {
-        
-        $user = Sentinel::findUserById($id);
+        $user = User::find($id);
 
+        // dd($user);
         if (empty($user)) {
            Flash::error( __('global.not_found'));
 
@@ -143,7 +143,7 @@ class StaffController extends Controller {
 
             $credentials = [
                 'first_name' => $request->first_name,
-                'last_name'  => $request->last_name,
+                // 'last_name'  => $request->last_name,
                 'email'      => $request->email,
                 'group'   => $request->group,
                 'designation'   => $request->designation,
