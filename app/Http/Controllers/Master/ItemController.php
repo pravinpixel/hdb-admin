@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Laracasts\Flash\Flash;
 use Yajra\DataTables\Facades\DataTables;
 use Auth;
-
+use Illuminate\Support\Facades\Response;
 class ItemController extends Controller
 {
     /**
@@ -312,4 +312,107 @@ class ItemController extends Controller
                             return  ["id" => $row->id, "text" => "$row->item_name [{$row->item_id}]"];
                         });
     }
+
+    public function Stocksearch(Request $request)
+    {
+        try {
+            $search = $request->input('searchKey');
+            $perPage = $request->input('pageSize', 1);
+            $itemsQuery = Item::query();
+            if ($search) {
+                $itemsQuery->where(function ($query) use ($search) {
+                    $query->where('title', 'like', '%' . $search . '%')
+                        ->orWhere('subject', 'like', '%' . $search . '%')
+                        ->orWhere('item_ref', 'like', '%' . $search . '%')
+                        ->orWhere('barcode', 'like', '%' . $search . '%')
+                        ->orWhere('rfid', 'like', '%' . $search . '%')
+                        ->orWhere('author', 'like', '%' . $search . '%')
+                        ->orWhere('location', 'like', '%' . $search . '%')
+                        ->orWhere('isbn', 'like', '%' . $search . '%')
+                        ->orWhere('call_number', 'like', '%' . $search . '%')
+                        ->orWhereHas('language', function ($query) use ($search) {
+                            $query->where('language', 'like', '%' . $search . '%');
+                        });
+                });
+            }
+
+            $items = $itemsQuery->with('language')->where('status', 1)->paginate($perPage);
+            return Response::json([
+                'success' => true,
+                'message' => 'Stock fetched successfully.',
+                'data' => $items->items(),
+                'pagination' => [
+                'pageNumber' => $items->currentPage() - 1,
+                'pageSize' => $items->perPage(),
+                'totalElements' => $items->total(),
+                'totalPages' => $items->lastPage(),
+                'numberOfElements' => count($items->items()),
+                'offset' => $items->firstItem() - 1
+                ],
+                'time'=>date('Y-m-d h:i:s')
+            ], 200);
+        } catch (\Exception $e) {
+            return Response::json([
+                'success' => false,
+                'message' => 'An error occurred while fetching data: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Searches and retrieves a paginated list of items based on specified search criteria.
+ *
+ * This function accepts a search key and pagination parameter from the request,
+ * performs a search on the Item model by matching various fields such as title,
+ * subject, item reference, barcode, RFID, author, location, ISBN, and call number.
+ * It also supports searching within the related 'language' model. The search results
+ * are filtered to include only active items (status = 1) and are paginated based on
+ * the 'per_page' parameter.
+ *
+ * @param \Illuminate\Http\Request $request The HTTP request object containing
+ *        the searchKey and per_page parameters.
+ * 
+ * @return \Illuminate\Http\JsonResponse A JSON response containing the search status,
+ *         a success message, the paginated list of items, and pagination details. 
+ *         In case of an error, it returns an error message with a 500 status code.
+ */
+
+/******  6155a85f-1da4-41b1-8c7a-ae011f0165bb  *******/
+public function StockUpdate(Request $request)
+{
+    try {
+        $scannedRfids = $request->input('scannedRfids');
+        
+        if (!is_array($scannedRfids) || empty($scannedRfids)) {
+            return Response::json([
+                'success' => false,
+                'message' => 'No scanned RFIDs provided or invalid data.',
+            ], 400);
+        }        
+        $items = Item::whereIn('rfid', $scannedRfids)->get(); 
+        $totalStock = count($scannedRfids); 
+        $availableStock = $items->count();
+        $missingStock = $totalStock - $availableStock;
+        $availableItemIds = $items->pluck('rfid')->toArray();
+        $missingRfids = array_diff($scannedRfids, $availableItemIds);
+        return Response::json([
+            'success' => true,
+            'message' => 'Stock update processed successfully.',
+            'data' => [
+                'totalStock' => $totalStock,
+                'availableStock' => $availableStock,
+                'missingStock' => $missingStock,
+                'missingStockData' => array_values($missingRfids),
+            ]
+        ], 200);
+
+    } catch (\Exception $e) {
+        return Response::json([
+            'success' => false,
+            'message' => 'An error occurred while updating stock: ' . $e->getMessage(),
+        ], 500);
+    }
+}
+
+    
 }

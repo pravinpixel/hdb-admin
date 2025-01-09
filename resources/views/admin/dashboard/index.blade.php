@@ -82,7 +82,7 @@
                             <div class="col-lg-6">
                                 <div class="row">
                                     <div class="form-group">
-                                        <label for="type">Book Name / Book ID:</label>
+                                        <label for="type">Book Name / RFID:</label>
                                         {!! Form::text('search_item_name', null, ['class' => 'form-control', 'id' => 'search_item_name']) !!}
                                     </div>
                                 </div>
