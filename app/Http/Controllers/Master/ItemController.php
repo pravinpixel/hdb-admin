@@ -317,7 +317,7 @@ class ItemController extends Controller
     {
         try {
             $search = $request->input('searchKey');
-            $perPage = $request->input('pageSize', 1);
+            $perPage = $request->input('pageSize', 10);
             $itemsQuery = Item::query();
             if ($search) {
                 $itemsQuery->where(function ($query) use ($search) {
