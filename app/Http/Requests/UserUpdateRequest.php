@@ -26,7 +26,7 @@ class UserUpdateRequest extends FormRequest
     {
         $rules = [
             'member_id'  => ['required', Rule::unique('users')->ignore($this->user, 'id')],
-            'email'      => ['required', Rule::unique('users')->ignore($this->user, 'id')],
+            'email'      => ['required', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', Rule::unique('users')->ignore($this->user, 'id')],
             'mobile'     => Rule::unique('users')->ignore($this->user, 'id'),
             'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',

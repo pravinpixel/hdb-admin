@@ -243,6 +243,11 @@ class UserController extends Controller {
 
             #Update User
             Sentinel::update($user, $credentials);
+
+            $user->mobile = $request->mobile;
+            $user->address = $request->address;
+            $user->save();
+
             Flash::success( __('auth.update_successful'));
            // DB::commit();
         if ($request->password) { 
