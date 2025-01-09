@@ -36,4 +36,12 @@ class CreateItemRequest extends FormRequest
             'due_period'=>'nullable|integer',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'item_ref.required' => 'The item ref field is required.',
+            'item_ref.unique' => 'The RFID has already been taken.',
+        ];
+    }
 }

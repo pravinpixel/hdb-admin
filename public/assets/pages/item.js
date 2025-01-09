@@ -6,6 +6,7 @@ $(function(){
             error.insertAfter(element);
         },
         rules: {
+            item_ref: "required",
             title: "required",
             author: "required",
             isbn: "required",
@@ -19,6 +20,7 @@ $(function(){
 
     $("#itemEditForm").validate({
         rules: {
+            item_ref: "required",
             title: "required",
             author: "required",
             isbn: "required",
