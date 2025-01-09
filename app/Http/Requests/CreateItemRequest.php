@@ -33,6 +33,7 @@ class CreateItemRequest extends FormRequest
             'subject'        => 'required',
             'location'       => 'required',
             'language_id'=>'required',
+            'due_period'=>'nullable|integer',
         ];
     }
 }

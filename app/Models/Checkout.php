@@ -24,6 +24,10 @@ class Checkout extends Model
     {
         return $this->hasOne(ReturnItem::class,'checkout_id', 'id');
     }
+    public function due()
+    {
+        return $this->hasMany(Issue::class,'checkout_id', 'id');
+    }
 
 
 }

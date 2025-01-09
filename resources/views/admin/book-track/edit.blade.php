@@ -26,7 +26,7 @@
          @csrf
          <div class="form-group col-md-6">
                         <label for="end">Due Date :</label>
-                            <input type="date" name="date_of_return" class="form-control" id="date_of_return" value="{{$item->date_of_return}}">
+                            <input type="date" name="date_of_return" class="form-control" id="date_of_return" value="{{$item->date_of_return}}" required>
                             
                </div>
           </div>
@@ -53,9 +53,26 @@
     const formattedReturnDate = returnDate.toISOString().split('T')[0];
     const formattedMaxDate = maxDate.toISOString().split('T')[0];
 
+    // Define the disabled date range (5th to 8th January 2025)
+    const disabledStartDate = new Date(dateOfReturn);
+    const disabledEndDate = new Date();
+    const formattedDisabledStartDate = disabledStartDate.toISOString().split('T')[0];
+    const formattedDisabledEndDate = disabledEndDate.toISOString().split('T')[0];
+
     // Set the min and max attributes of the input field
     const dateInput = document.getElementById('date_of_return');
     dateInput.setAttribute('min', formattedReturnDate); // Disable all previous dates
     dateInput.setAttribute('max', formattedMaxDate);   // Disable dates beyond 21 days after the date of return
+
+    // Disable the date range from 5th to 8th January 2025
+    dateInput.addEventListener('input', function () {
+        const selectedDate = new Date(dateInput.value);
+        if (selectedDate >= disabledStartDate && selectedDate <= disabledEndDate) {
+            // If the selected date is between 5th and 8th January 2025, reset the input
+            dateInput.value = ''; // Reset the date input
+        }
+    });
+
 </script>
+
  @endpush

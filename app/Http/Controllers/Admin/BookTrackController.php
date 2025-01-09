@@ -31,7 +31,7 @@ class BookTrackController extends Controller
             $end_date = $request->end_date ?? now();
             $start_date = Carbon::parse($start_date)->startOfDay();
             $end_date = Carbon::parse($end_date)->endOfDay();
-            $dataDb = Checkout::query()->with('item','user');
+            $dataDb = Checkout::query()->with('item','user','due');
             $dataDb->whereBetween('date', [$start_date, $end_date]);
             $dataDb->orderBy('date', 'desc');
             return DataTables::eloquent($dataDb)
@@ -45,8 +45,11 @@ class BookTrackController extends Controller
                 return Carbon::parse($dataDb->date_of_return)->format('d-m-Y');
             })
             ->editColumn('status', function($dataDb) {
+              if(isset($dataDb->due) && $dataDb->due->count() >0){
+                 $count =$dataDb->due->count();
+                }
                if($dataDb->status=='taken'){
-                return '<span class="label label-warning label-sm">Taken</span>';
+                return '<span class="label label-warning label-sm">Taken - '.$count.'</span>';
                }elseif($dataDb->status=='returned'){
                 return '<span class="label label-success label-sm">Returned</span>';
                }else{
@@ -54,7 +57,11 @@ class BookTrackController extends Controller
                }
             })
             ->addColumn('action', function ($dataDb) {
+                if($dataDb->status=='taken'){
                   return '<a href="' . route('book-track.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>';
+                }else{
+                    return '<a href="#" id="tooltip" title="Edit" diabled><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>'; 
+                }
             })
             ->rawColumns(['status','action'])
             ->make(true);
@@ -72,6 +79,7 @@ class BookTrackController extends Controller
         $item->date_of_return = $request->date_of_return;
         $item->save();
         $issue = new Issue();
+        $issue->checkout_id = $item->id;
         $issue->item_id =  $item->item_id;
         $issue->issue_date = Carbon::now();
         $issue->approve_request_id =1;
