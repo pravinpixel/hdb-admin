@@ -49,7 +49,7 @@ class BookTrackController extends Controller
                  $count =$dataDb->due->count();
                 }
                if($dataDb->status=='taken'){
-                return '<span class="label label-warning label-sm">Taken - '.$count.'</span>';
+                return '<span class="label label-warning label-sm">Taken  '.(isset($count)?$count:'').'</span>';
                }elseif($dataDb->status=='returned'){
                 return '<span class="label label-success label-sm">Returned</span>';
                }else{
