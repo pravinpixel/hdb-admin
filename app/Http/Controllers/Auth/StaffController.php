@@ -19,6 +19,7 @@ use App\Mail\UserRegistration;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Config;
+use Illuminate\Validation\Rule;
 class StaffController extends Controller {
 
      /**
@@ -62,11 +63,18 @@ class StaffController extends Controller {
                 'role'   => $request->role,
                 'created_by' => $user,
                 'updated_by' => $user,
-                'is_active'=>1
+                'is_active' => 1
             ];
            
             //Create a new user
             $user = User::Create($data);
+
+            #Get Activation Code
+            $activationCreate = Activation::create($user);
+
+            #Activate this account
+            Activation::complete($user, $activationCreate->code);
+
             //Attach the user to the role
             $role = Sentinel::findRoleById($request->role);
             $role->users()
@@ -101,7 +109,7 @@ class StaffController extends Controller {
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = Sentinel::findUserById($id);
 
         // dd($user);
         if (empty($user)) {
@@ -125,9 +133,20 @@ class StaffController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function update(StaffUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-
+        $request->validate([
+            'member_id'  => ['required', 'regex:/^[A-Za-z][0-9]{5}$/', Rule::unique('users')->ignore($id)],
+            'email'      => ['required', 'email', Rule::unique('users')->ignore($id)],
+            'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
+            // 'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
+            'role'       => 'required',
+            'designation'       => 'required',
+            'group'       => 'required',
+        ], [
+            'member_id.regex' => 'Staff No must be 1 alphabet followed by 5 numbers',
+        ]);
+    
         $user = Sentinel::findById($id);
 
         if (empty($user)) {
@@ -153,7 +172,7 @@ class StaffController extends Controller {
 
 
             #Valid User For Update
-            $role = Sentinel::findRoleById($request->role);
+            $role = Sentinel::findRoleById($request->role ?? 7);
 
             if ($oldRole) {
                 #Remove a user from a role.

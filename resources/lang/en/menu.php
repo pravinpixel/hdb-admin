@@ -2,8 +2,8 @@
 return  [
     "items"                    => "Book Listing",
     "languages"                =>"Languages",
-    "staffs"                   => "Staffs",
-    "users"                    => "Admins",
+    "staffs"                   => "Staff",
+    "users"                    => "Admin",
     "roles"                    => "Roles",
     "permissions"              => "Permissions",
     "borrow"                   => "Borrow",

@@ -1,30 +1,30 @@
 
 <div class="form-group">
-    {!! Form::label('member_id', 'Member ID*', ['class' => 'control-label col-lg-2']) !!}
+    {!! Form::label('member_id', 'Member ID <span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
     <div class="col-lg-10">
         {!! Form::text('member_id', $member_id , ['class' => 'form-control', 'readonly' => 'readonly']) !!}
     </div>
 </div>
  <div class="form-group @if($errors->has('role')) has-error @endif">
-    {!! Form::label('role', 'Role *', ['class' => 'control-label col-lg-2']) !!}
+    {!! Form::label('role', 'Role <span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
      <div class="col-lg-10">
         {!! Form::select('role',$roleDb , $userRole, ['class' =>'form-control', 'placeholder' => 'select role'])  !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('first_name', 'Firstname *', ['class' => 'control-label col-lg-2']) !!}
+    {!! Form::label('first_name', 'Firstname <span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
     <div class="col-lg-10">
         {!! Form::text('first_name', null, ['class' => 'form-control', 'id' => 'first_name']) !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('last_name', 'Lastname *', ['class' => 'control-label col-lg-2']) !!}
+    {!! Form::label('last_name', 'Lastname <span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
     <div class="col-lg-10">
         {!! Form::text('last_name', null, ['class' => 'form-control', 'id' => 'last_name']) !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('email', 'Email *', ['class' => 'control-label col-lg-2']) !!}
+    {!! Form::label('email', 'Email <span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
     <div class="col-lg-10">
         {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
     </div>

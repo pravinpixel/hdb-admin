@@ -24,13 +24,30 @@ class StaffCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'member_id'  => 'required|unique:users',
+            'member_id'  => 'required|regex:/^[A-Za-z][0-9]{5}$/|unique:users',
             'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             // 'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'email'      => 'required|unique:users|email',
             'role'       => 'required',
             'designation'       => 'required',
             'group'       => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            // 'member_id.required' => 'Staff No is required',
+            'member_id.regex' => 'Staff No must be 1 alphabet followed by 5 numbers',
+            // 'member_id.unique' => 'Staff No already exists',
+            // 'first_name.required' => 'First Name is required',
+            // 'first_name.regex' => 'First Name must contain only letters, numbers, spaces, underscores, and hyphens',
+            // 'email.required' => 'Email is required',
+            // 'email.unique' => 'Email already exists',
+            // 'email.email' => 'Invalid email format',
+            // 'role.required' => 'Role is required',
+            // 'designation.required' => 'Designation is required',
+            // 'group.required' => 'Group is required',
         ];
     }
 }

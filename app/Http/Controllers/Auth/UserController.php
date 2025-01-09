@@ -74,6 +74,12 @@ class UserController extends Controller {
            
             //Create a new user
             $user = User::Create($data);
+            
+            #Get Activation Code
+            $activationCreate = Activation::create($user);
+
+            #Activate this account
+            Activation::complete($user, $activationCreate->code);
 
             //Attach the user to the role
             $role = Sentinel::findRoleById($request->role);
@@ -158,7 +164,9 @@ class UserController extends Controller {
         $roleDb = Role::whereNotIn('slug',['staff'])->pluck('name','id');
 
         $userRole = $user->roles[0]->id ?? null;
-        $member_id=$user->member_id;
+
+        $member_id = $user->member_id;
+
         return view('auth.user.edit', compact('user','roleDb','userRole','member_id'));
     }
 
