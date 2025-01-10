@@ -8,6 +8,7 @@ return [
     'activate_subheading'               => 'Are you sure you want to activate \':name\' ?',
     'deactivate_subheading'             => 'Are you sure you want to deactivate \':name\' ,',
     'deactivate_subheading_master'      => 'This item is mapped with other several action, Do you want to still inactivate the item \':name\'',
+    'created'                           => 'Created successfully',
     'inserted'                          => 'Inserted successfully',
     'updated'                           => 'Updated successfully',
     'deleted'                           => 'Deleted Successfully',

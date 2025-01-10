@@ -8,7 +8,7 @@
    @include('flash')
    <div class="row">
       <div class="col-sm-12 col-md-6">         
-         <h2 class="text-dark"> Locations </h2>
+         <h2 class="text-dark"> Language </h2>
       </div>
       <div class="col-sm-12 col-md-6">         
          <nav aria-label="breadcrumb">

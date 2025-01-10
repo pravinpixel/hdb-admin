@@ -44,7 +44,7 @@ class LanguageController extends Controller
         $type = new Language();
         $type->language = $request->language;
         if($type->save()) {
-            Flash::success(__('global.inserted'));
+            Flash::success(__('global.created'));
             return redirect()->route('language.index');
         }
         Flash::error(__('global.something'));
