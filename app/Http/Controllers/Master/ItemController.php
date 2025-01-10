@@ -57,9 +57,11 @@ class ItemController extends Controller
         }
         $item->title = $request->title;
         $item->subject = $request->subject;
-        $item->item_ref = $config->item_prefix.'-'.$config->item_number;
+        // $item->item_ref = $config->item_prefix.'-'.$config->item_number;
+        $item->item_ref = $request->item_ref;
         $item->barcode = $request->barcode;
-        $item->rfid = $config->item_prefix.'-'.$config->item_number;
+        // $item->rfid = $config->item_prefix.'-'.$config->item_number;
+        $item->rfid = $request->item_ref;
         $item->language_id = $request->language_id;
         $item->author = $request->author;
         $item->location = $request->location;
