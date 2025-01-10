@@ -25,7 +25,7 @@ class StaffCreateRequest extends FormRequest
     {
         return [
             'member_id'  => 'required|regex:/^[A-Za-z][0-9]{5}$/|unique:users',
-            'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
+            'first_name' => 'required|regex:/(^[A-Za-z ]+$)+/',
             // 'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'email'      => 'required|unique:users|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             'role'       => 'required',
@@ -39,6 +39,7 @@ class StaffCreateRequest extends FormRequest
         return [
             // 'member_id.required' => 'Staff No is required',
             'member_id.regex' => 'Staff No must be 1 alphabet followed by 5 numbers',
+            'first_name.regex' => 'Name should only contain alphabets and spaces.',
             // 'member_id.unique' => 'Staff No already exists',
             // 'first_name.required' => 'First Name is required',
             // 'first_name.regex' => 'First Name must contain only letters, numbers, spaces, underscores, and hyphens',

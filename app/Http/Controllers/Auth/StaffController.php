@@ -138,13 +138,14 @@ class StaffController extends Controller {
         $request->validate([
             'member_id'  => ['required', 'regex:/^[A-Za-z][0-9]{5}$/', Rule::unique('users')->ignore($id)],
             'email'      => ['required', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', Rule::unique('users')->ignore($id)],
-            'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
+            'first_name' => 'required|regex:/(^[A-Za-z ]+$)+/',
             // 'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'role'       => 'required',
             'designation'       => 'required',
             'group'       => 'required',
         ], [
             'member_id.regex' => 'Staff No must be 1 alphabet followed by 5 numbers',
+            'first_name.regex' => 'Name should only contain alphabets and spaces.',
         ]);
     
         $user = Sentinel::findById($id);
