@@ -45,8 +45,8 @@ class DashboardController extends Controller
             return DataTables::eloquent($dataDb) 
                 ->addColumn('status', function ($dataDb) {
                     $status = '';
-                    if($dataDb->is_active==1) {
-                        $status = '<div class="text-left"><div class="badge badge-danger"> Taken </div> <div class="badge badge-danger"> '. $dataDb->checkout->user->full_name.' </div>   </div>';
+                    if($dataDb->is_active==1 && isset($dataDb->checkout)) {
+                        $status = '<div class="text-left"><div class="badge badge-danger"> Taken </div> <div class="badge badge-danger"> '. $dataDb->checkout->user->full_name .' </div>   </div>';
                     } else {
                         $status = '<div class="text-left"><div class="badge badge-info"> Available </div></div>';
                     }
