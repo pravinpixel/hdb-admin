@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('overdue:cron')->everyMinute();
+        $schedule->command('overdue:cron')->dailyAt('01:00');
        
     }
 
