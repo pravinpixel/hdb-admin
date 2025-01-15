@@ -58,9 +58,11 @@ class BookTrackController extends Controller
             })
             ->addColumn('action', function ($dataDb) {
                 if($dataDb->status=='taken'){
-                  return '<a href="' . route('book-track.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>';
+                  return '<a href="' . route('book-track.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                   <a href="#" data-message="' . trans('auth.book_confirmation') . '" data-href="' . route('book-track.destroy', $dataDb->id) . '" id="tooltip"  data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
                 }else{
-                    return '<a href="#" id="tooltip" title="Edit" diabled><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>'; 
+                    return '<a href="#" id="tooltip" title="Edit" diabled><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                     <a href="#" data-message="' . trans('auth.book_confirmation') . '" data-href="' . route('book-track.destroy', $dataDb->id) . '" id="tooltip"  data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>'; 
                 }
             })
             ->rawColumns(['status','action'])
@@ -89,5 +91,23 @@ class BookTrackController extends Controller
         $issue->issue_status =1;
         $issue->save();
         return view('admin.book-track.index', compact('item'));
+    }
+    public function destroy($id)
+    {
+
+        $data = Checkout::find($id);
+
+        if (empty($data)) {
+           Flash::error( __('global.not_found'));
+
+            return redirect()->route('book-track.index');
+        }
+
+        $data->delete();
+
+       Flash::success( __('auth.delete_book'));
+
+       return redirect()->route('book-track.index');
+
     }
 }

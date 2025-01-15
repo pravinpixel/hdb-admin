@@ -204,6 +204,7 @@ return [
 	'update_unsuccessful'                                   => 'Unable to Update Account Information',
 	'delete_successful'                                     => 'User Deleted',
 	'delete_unsuccessful'                                   => 'Unable to Delete User',
+	'book_confirmation'=>'Are you sure you want to delete this record',
 	'delete_confirmation'                                   => 'Are you sure you want to delete user \':name\'?',
 	'role_delete_confirmation'                              => 'Are you sure you want to delete role \':name\'?',
 	'delete_confirmation_heading'                           => 'Delete this entry ?',
@@ -238,6 +239,7 @@ return [
 	// Delete
 	'deactivate_current_user_unsuccessful'                  => 'You cannot De-Activate your self.',
 	'delete_account' => 'Account Successfully Delete',
+	'delete_book' => 'Book track data Successfully Delete',
 
 	//unauthorized
 	'unauthorized_to_access_the_page'						=> 'Unauthorized to access the Page',

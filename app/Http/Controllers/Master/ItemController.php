@@ -94,19 +94,19 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $item = Item::with(['user','language'])
+        $result = Item::with(['user','language'])
                     ->where('id' , $id)
                     ->where('status' , 1)
                     ->first();
-        if( empty( $item ) ) {
+        if( empty( $result ) ) {
             return response(['status' => false, 'msg' => trans('global.not_found')], 404);
         }
-        $data['item'] = $item;
+        $data['item'] = $result;
         $data['approval_request'] =  null;
-        if( !empty( $item ) ) {
-            return view('employee.item-detail', compact('data'));
+        if( !empty( $result ) ) {
+            return view('master.item.view', compact('result'));
         } 
-        return response(['status' => false, 'msg' => trans('global.not_found')]);
+       
     }
 
     /**
@@ -220,7 +220,8 @@ class ItemController extends Controller
            return '<a href="#" data-message="' . trans('global.activate_subheading', ['name' => $dataDb->item_name]) . '" data-href="' . route('item.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('global.activate_subheading') . '" data-title-modal="' . trans('global.activate_subheading') . '" data-toggle="modal" data-target="#delete" title="' . trans('global.activate') . '"><span class="label label-danger label-sm">' . trans('auth.index_inactive_link') . '</span></a>';
           })
           ->addColumn('action', function ($dataDb) {
-               return '<a href="' . route('item.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+               return '<a href="' . route('item.show', $dataDb->id) . '" id="tooltip" title="View"><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
+               <a href="' . route('item.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
                          <a href="#" data-message="' . trans('global.delete_confirmation', ['name' => $dataDb->item_name]) . '" data-href="' . route('item.destroy', $dataDb->id) . '" id="tooltip" data-method="DELETE" data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';     
           })
           ->rawColumns(['status','action','image','approval'])

@@ -97,7 +97,19 @@ class StaffController extends Controller {
      */
     public function show($id)
     {
-        //
+        $user = Sentinel::findUserById($id);
+
+        // dd($user);
+        if (empty($user)) {
+           Flash::error( __('global.not_found'));
+
+            return redirect()->route('staff.index');
+        }
+
+        $roleDb = Role::whereNotIn('slug', ['admin','superadmin'])->pluck('name','id');
+
+        $userRole = $user->roles[0]->id ?? null;
+        return view('auth.staff.view', compact('user','roleDb','userRole'));
     }
 
     /**
@@ -256,7 +268,8 @@ class StaffController extends Controller {
 
             return DataTables::eloquent($dataDb)
                 ->addColumn('action', function ($dataDb) {
-                    return '<a href="' . route('staff.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                    return '<a href="' . route('staff.show', $dataDb->id) . '" id="tooltip" title="View"><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
+                    <a href="' . route('staff.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
                             <a href="#" data-message="' . trans('auth.delete_confirmation', ['name' => $dataDb->email]) . '" data-href="' . route('staff.destroy', $dataDb->id) . '" id="tooltip" data-method="DELETE" data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
                 })
                 ->addColumn('role', function ($dataDb) {

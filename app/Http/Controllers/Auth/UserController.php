@@ -38,7 +38,7 @@ class UserController extends Controller {
     {   
         $config = Config::where('type', 'staff')->get()->first();
         $member_id = $config->item_prefix.''.$config->item_number;
-        $roleDb = Role::whereNotIn('slug',['staff'])->pluck('name','id');
+        $roleDb = Role::whereNotIn('slug',['admin','superadmin','staff'])->pluck('name','id');
         $userRole = null;
         return view('auth.user.create', compact('roleDb','userRole','member_id'));
     }
@@ -133,7 +133,21 @@ class UserController extends Controller {
      */
     public function show($id)
     {
-        //
+        $user = Sentinel::findUserById($id);
+
+        if (empty($user)) {
+           Flash::error( __('global.not_found'));
+
+            return redirect()->route('user.index');
+        }
+
+        $roleDb = Role::whereNotIn('slug',['admin','superadmin','staff'])->pluck('name','id');
+
+        $userRole = $user->roles[0]->id ?? null;
+
+        $member_id = $user->member_id;
+
+        return view('auth.user.view', compact('user','roleDb','userRole','member_id'));
     }
     public function updateConfigStaffNumber()
     {
@@ -161,7 +175,7 @@ class UserController extends Controller {
             return redirect()->route('user.index');
         }
 
-        $roleDb = Role::whereNotIn('slug',['staff'])->pluck('name','id');
+        $roleDb = Role::whereNotIn('slug',['admin','superadmin','staff'])->pluck('name','id');
 
         $userRole = $user->roles[0]->id ?? null;
 
@@ -333,7 +347,8 @@ class UserController extends Controller {
 
             return DataTables::eloquent($dataDb)
                 ->addColumn('action', function ($dataDb) {
-                    return '<a href="' . route('user.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                    return '<a href="' . route('user.show', $dataDb->id) . '" id="tooltip" title="View"><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
+                    <a href="' . route('user.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
                             <a href="#" data-message="' . trans('auth.delete_confirmation', ['name' => $dataDb->email]) . '" data-href="' . route('user.destroy', $dataDb->id) . '" id="tooltip" data-method="DELETE" data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
                        
                 })
