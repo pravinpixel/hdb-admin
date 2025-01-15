@@ -37,7 +37,7 @@ class StaffCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            // 'member_id.required' => 'Staff No is required',
+            'first_name.required' => 'Name No is required',
             'member_id.regex' => 'Staff No must be 1 alphabet followed by 5 numbers',
             'first_name.regex' => 'Name should only contain alphabets and spaces.',
             // 'member_id.unique' => 'Staff No already exists',
