@@ -216,6 +216,8 @@ class UserController extends Controller {
                 'email'      => $request->email,
                 'mobile'     => $request->mobile,
                 'member_id'  => $request->member_id,
+                'is_active'  => $user->is_active,
+                'role'=>$request->role
             ];
 
             #If User Input Password
@@ -260,6 +262,8 @@ class UserController extends Controller {
 
             $user->mobile = $request->mobile;
             $user->address = $request->address;
+            $user->is_active  = $user->is_active;
+            $user->role=$request->role;
             $user->save();
 
             Flash::success( __('auth.update_successful'));
@@ -340,9 +344,8 @@ class UserController extends Controller {
                 'users.updated_at',
             ])
                 ->where('id', '!=', $loginUser)
-                ->with('roles', 'activations')
                 ->whereHas('roles',function($q){
-                    $q->whereIn('slug',['admin','superadmin']);
+                    $q->whereNotIn('slug',['admin','superadmin','staff']);
                 });
 
             return DataTables::eloquent($dataDb)
