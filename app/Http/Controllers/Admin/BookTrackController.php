@@ -58,10 +58,14 @@ class BookTrackController extends Controller
             })
             ->addColumn('action', function ($dataDb) {
                 if($dataDb->status=='taken'){
-                  return '<a href="' . route('book-track.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                  return '
+                  <a href="' . route('item.show', $dataDb->id) . '" id="tooltip" title="View" disaled><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
+                  <a href="' . route('book-track.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
                    <a href="#" data-message="' . trans('auth.book_confirmation') . '" data-href="' . route('book-track.destroy', $dataDb->id) . '" id="tooltip"  data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
                 }else{
-                    return '<a href="#" id="tooltip" title="Edit" diabled><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                    return '
+                    <a href="' . route('item.show', $dataDb->id) . '" id="tooltip" title="View" disaled><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
+                    <a href="#" id="tooltip" title="Edit" diabled><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
                      <a href="#" data-message="' . trans('auth.book_confirmation') . '" data-href="' . route('book-track.destroy', $dataDb->id) . '" id="tooltip"  data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>'; 
                 }
             })
