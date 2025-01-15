@@ -23,7 +23,7 @@
          </nav>
       </div>
    </div>
-   <div class="card">
+   <div class="card" style="overflow-x: auto;">
       <div class="row">
          <div class="col-sm-12 col-md-12 pb-20 text-right"> 
             <a href="{{ route('item.create') }}" class="btn btn-success" > <i class="fa fa-plus"></i> &nbsp; Add Book </a>              

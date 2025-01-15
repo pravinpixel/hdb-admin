@@ -22,7 +22,7 @@
          </nav>
       </div>
    </div>
-   <div class="card">
+   <div class="card" style="overflow-x: auto;">
       <div class="row">
             <div class="col-sm-12 col-md-12">
                 <div class="col-md-3">
