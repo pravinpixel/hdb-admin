@@ -166,7 +166,7 @@ return [
 	'reset_password_change_unsuccessful_old'                => 'Old Password does not match',
  
 	// Account Creation
-	'account_creation_successful'                           => 'Account Successfully Created',
+	'account_creation_successful'                           => 'Account has been successfully created.',
 	'account_creation_unsuccessful'                         => 'Unable to Create Account',
 	'account_creation_duplicate_email'                      => 'Email Already Used or Invalid',
 	'account_creation_duplicate_identity'                   => 'Identity Already Used or Invalid',
@@ -181,10 +181,10 @@ return [
 	'forgot_password_unsuccessful'                          => 'Unable to email the Reset Password link',
 	
 	// Activation
-	'activate_successful'                                   => 'Account Activated',
+	'activate_successful'                                   => 'Account has been activated.',
 	'activate_unsuccessful'                                 => 'Unable to Activate Account',
 	'active_current_user_unsuccessful'                      => 'You cannot Activate your self.',
-	'deactivate_successful'                                 => 'Account De-Activated',
+	'deactivate_successful'                                 => 'Account has been deactivated.',
 	'deactivate_unsuccessful'                               => 'Unable to De-Activate Account',
 	'activation_email_successful'                           => 'Activation Email Sent. Please check your inbox or spam',
 	'activation_email_unsuccessful'                         => 'Unable to Send Activation Email',
@@ -200,10 +200,10 @@ return [
 	
 	
 	// Account Changes
-	'update_successful'                                     => 'Account Information Successfully Updated',
+	'update_successful'                                     => 'Account information has been successfully updated',
 	'update_unsuccessful'                                   => 'Unable to Update Account Information',
-	'delete_successful'                                     => 'User Deleted',
-	'delete_unsuccessful'                                   => 'Unable to Delete User',
+	'delete_successful'                                     => 'Account has been deleted successfully',
+	'delete_unsuccessful'                                   => 'The Account is currently active and cannot be deleted.',
 	'book_confirmation'=>'Are you sure you want to delete this record',
 	'delete_confirmation'                                   => 'Are you sure you want to delete user \':name\'?',
 	'role_delete_confirmation'                              => 'Are you sure you want to delete role \':name\'?',
@@ -212,10 +212,10 @@ return [
 	// Role
 	'role_creation_successful'                              => 'Role Successfully Created',
 	'role_already_exists'                                   => 'Role name already taken',
-	'role_update_successful'                                => 'Role details updated',
-	'role_delete_successful'                                => 'Role deleted',
+	'role_update_successful'                                => 'Role details have been updated.',
+	'role_delete_successful'                                => 'Role has been deleted.',
 	'role_delete_unsuccessful'                              => 'Unable to delete role',
-	'role_delete_notallowed'                                => 'Can\'t delete the root\' role',
+	'role_delete_notallowed'                                => 'The role is currently active and cannot be deleted.',
 	'role_name_required'                                    => 'Group name is a required field',
 	'role_name_admin_not_alter'                             => 'Admin group name can not be changed',
 	
@@ -238,10 +238,11 @@ return [
 	
 	// Delete
 	'deactivate_current_user_unsuccessful'                  => 'You cannot De-Activate your self.',
-	'delete_account' => 'Account Successfully Delete',
-	'delete_book' => 'Book track data Successfully Delete',
+	'delete_account' => 'Account has been deleted successfully',
+	'delete_book' => 'Book track data has been deleted successfully',
 
 	//unauthorized
 	'unauthorized_to_access_the_page'						=> 'Unauthorized to access the Page',
-	'update_book'=>'Book track data Successfully update',
+	'update_book'=>'Book track data has been updated successfully',
+	'checkouts' => 'The user cannot be deleted because they have checkouts with a "taken" status.'
 ];

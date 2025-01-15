@@ -225,14 +225,19 @@ class StaffController extends Controller {
     public function destroy($id)
     {
 
-        $data = Sentinel::findById($id);
+        $data = User::find($id);
 
         if (empty($data)) {
            Flash::error( __('global.not_found'));
 
             return redirect()->route('staff.index');
         }
+        $hasTakenCheckouts = $data->checkouts()->where('status', 'taken')->exists();
+        if ($hasTakenCheckouts) {
+            Flash::error( __('auth.checkouts'));
 
+            return redirect()->route('staff.index');
+        }
         $data->delete();
 
        Flash::success( __('auth.delete_account'));

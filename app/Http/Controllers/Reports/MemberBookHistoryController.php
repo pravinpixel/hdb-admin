@@ -94,9 +94,9 @@ class MemberBookHistoryController extends Controller
     public function getItemDropdown(Request $request)
     {
         $query = $request->input('q');
-        return Item::where('item_name','like', '%' .  $query. '%') 
-                        ->orWhere('item_id', 'like', '%' .  $query. '%')
-                        ->where('is_active', 1)
+        return Item::where('title','like', '%' .  $query. '%') 
+                        ->orWhere('item_ref', 'like', '%' .  $query. '%')
+                        ->where('status', 1)
                         ->limit(25)
                         ->get()
                         ->map(function($row) {
