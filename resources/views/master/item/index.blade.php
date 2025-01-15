@@ -78,6 +78,7 @@ $(function () {
             {
                data         : 'action', name: 'action', orderable: false, searchable: false,
                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('min-width', '100px');
                      $("a", nTd).tooltip({container: 'body'});
                }
             }

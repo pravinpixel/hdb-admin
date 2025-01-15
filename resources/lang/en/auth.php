@@ -243,4 +243,5 @@ return [
 
 	//unauthorized
 	'unauthorized_to_access_the_page'						=> 'Unauthorized to access the Page',
+	'update_book'=>'Book track data Successfully update',
 ];

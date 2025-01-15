@@ -4,7 +4,7 @@
    @include('flash')
     <div class="row">
       <div class="col-sm-12 col-md-6">         
-         <h2 class="text-dark">Edit Book Track </h2>
+         <h2 class="text-dark">Edit</h2>
       </div>
       <div class="col-sm-12 col-md-6">         
          <nav aria-label="breadcrumb">
@@ -21,18 +21,73 @@
       </div>
    </div>
    <div class="card">
-         <div class="form row">
-         <form action="{{ route('book-track.update', $item->id) }}" method="post">
+         <div class="row">
+         <div class="col-sm-12 col-md-12"> 
+          <div class="form">
+         <form action="{{ route('book-track.update', $item->id) }}" method="post" class="cmxform form-horizontal tasi-form">
          @csrf
-         <div class="form-group col-md-6">
-                        <label for="end">Due Date :</label>
-                            <input type="date" name="date_of_return" class="form-control" id="date_of_return" value="{{$item->date_of_return}}" required>
-                            
-               </div>
+           <div class="form-group">
+            {!! Form::label('first_name', 'RFID', ['class' => 'control-label col-lg-2'], false) !!}
+            <div class="col-lg-10">
+               <input type="text" class="form-control" id="date_of_return" value="{{$item->item->item_ref}}" readonly>              
+            </div>
+         </div>
+         <div class="form-group">
+            {!! Form::label('first_name', 'Book Name', ['class' => 'control-label col-lg-2'], false) !!}
+            <div class="col-lg-10">
+               <input type="text" class="form-control" id="date_of_return" value="{{$item->title}}" readonly>              
+            </div>
+         </div>
+          <div class="form-group">
+            {!! Form::label('first_name', 'Staff Name', ['class' => 'control-label col-lg-2'], false) !!}
+            <div class="col-lg-10">
+               <input type="text" class="form-control" id="date_of_return" value="{{$item->user->first_name}}" readonly>              
+            </div>
+         </div>
+          <div class="form-group">
+            {!! Form::label('first_name', 'CheckIn Date', ['class' => 'control-label col-lg-2'], false) !!}
+            <div class="col-lg-10">
+               <input type="date" name="checkin_date" class="form-control" value="{{$item->date}}" >   
+         @error('checkin_date')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror           
+            </div>
+         </div>
+          <div class="form-group" >
+            {!! Form::label('first_name', 'CheckOut Date', ['class' => 'control-label col-lg-2'], false) !!}
+            <div class="col-lg-10" >
+               <input type="date" name="checkout_date" class="form-control" value="{{$item->checkout_date}}">
+               @error('checkout_date')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror                
+            </div>
+         </div>
+           <div class="form-group" >
+            {!! Form::label('first_name', 'Due Date', ['class' => 'control-label col-lg-2'], false) !!}
+            <div class="col-lg-10" >
+            <input type="date" name="due_date" class="form-control" id="date_of_return" value="{{$item->date_of_return}}" required>  
+             @error('due_date')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror            
+            </div>
+         </div>
+         <input type="hidden" name="status" class="form-control" value="{{$item->status}}">  
+         <div  class="form-group" >
+         <div class="col-lg-offset-2 col-lg-10" style="margin-top: 20px !important; ">
+            <button class="btn btn-success waves-effect waves-light" type="submit">Save</button>
+            <a  href="{{url()->previous()}}" class="btn btn-default waves-effect" type="button">Cancel</a>
           </div>
-          <button type="submit" class="btn btn-primary" >Submit</button>
-          </form>
-         
+          </div>
+        </form>
+          </div>
+         </div>
+         </div>
          </div>
    </div>
  

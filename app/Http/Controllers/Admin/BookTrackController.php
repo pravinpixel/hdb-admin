@@ -57,22 +57,27 @@ class BookTrackController extends Controller
                }
             })
             ->addColumn('action', function ($dataDb) {
-                if($dataDb->status=='taken'){
+                // if($dataDb->status=='taken'){
                   return '
-                  <a href="' . route('item.show', $dataDb->id) . '" id="tooltip" title="View" disaled><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
+                  <a href="' . route('book-track.show', $dataDb->id) . '" id="tooltip" title="View" disaled><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
                   <a href="' . route('book-track.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
                    <a href="#" data-message="' . trans('auth.book_confirmation') . '" data-href="' . route('book-track.destroy', $dataDb->id) . '" id="tooltip"  data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
-                }else{
-                    return '
-                    <a href="' . route('item.show', $dataDb->id) . '" id="tooltip" title="View" disaled><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
-                    <a href="#" id="tooltip" title="Edit" diabled><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
-                     <a href="#" data-message="' . trans('auth.book_confirmation') . '" data-href="' . route('book-track.destroy', $dataDb->id) . '" id="tooltip"  data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>'; 
-                }
+                // }else{
+                //     return '
+                //     <a href="' . route('book-track.show', $dataDb->id) . '" id="tooltip" title="View"><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
+                //     <a href="#" id="tooltip" title="Edit" diabled><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                //      <a href="#" data-message="' . trans('auth.book_confirmation') . '" data-href="' . route('book-track.destroy', $dataDb->id) . '" id="tooltip"  data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>'; 
+                // }
             })
             ->rawColumns(['status','action'])
             ->make(true);
            
         }
+    }
+    public function show($id)
+    {
+        $item = Checkout::find($id);
+        return view('admin.book-track.view', compact('item'));
     }
     public function edit($id)
     {
@@ -81,9 +86,26 @@ class BookTrackController extends Controller
     }
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'checkin_date'  => ['required', 'date'],
+            'due_date'  => ['required','date','after_or_equal:checkout_date'],
+            'checkout_date'      =>  ['nullable','required_if:status,returned', 'date', 'after_or_equal:checkin_date'],
+        ]);
+
         $item = Checkout::find($id);
-        $item->date_of_return = $request->date_of_return;
+        if(isset($request->checkin_date)){
+            $item->date = $request->checkin_date;
+        }
+        if(isset($request->checkout_date) && !empty($request->checkout_date)){
+            $item->checkout_date = $request->checkout_date;
+            $item->status ='returned';
+        }
+        if(isset($request->due_date)){
+            $item->date_of_return = $request->due_date; 
+        }
         $item->save();
+        if(isset($request->due_date) && $item->status !="returned" && $request->due_date !=$item->date_of_return){
         $issue = new Issue();
         $issue->checkout_id = $item->id;
         $issue->item_id =  $item->item_id;
@@ -91,9 +113,11 @@ class BookTrackController extends Controller
         $issue->approve_request_id =1;
         $issue->approved_by = 1;
         $issue->received_by =1;
-        $issue->date_of_return = $request->date_of_return;
+        $issue->date_of_return = $request->due_date;
         $issue->issue_status =1;
         $issue->save();
+        }
+        Flash::success( __('auth.update_book'));
         return view('admin.book-track.index', compact('item'));
     }
     public function destroy($id)

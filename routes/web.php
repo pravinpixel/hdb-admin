@@ -71,7 +71,8 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
     Route::get('book-track/datatable', [BookTrackController::class,'datatable'])->name('book-track.datatable');
     Route::post('delete/book-track/{id}', [BookTrackController::class,'destroy'])->name('book-track.destroy');
     Route::get('book-track', [BookTrackController::class,'index'])->name('book-track.index');
-    Route::get('book-track/{id}', [BookTrackController::class,'edit'])->name('book-track.edit');
+    Route::get('book-track/edit/{id}', [BookTrackController::class,'edit'])->name('book-track.edit');
+    Route::get('book-track/{id}', [BookTrackController::class,'show'])->name('book-track.show');
     Route::post('book-track/{id}', [BookTrackController::class,'update'])->name('book-track.update');
 
     Route::get('issue/index',  [IssueController::class,'index'])->name('issue.index');
