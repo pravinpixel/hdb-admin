@@ -72,8 +72,8 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="type">Member:</label>
-                        {!! Form::select('member',[], null,[ 'placeholder' => 'select member', 'class' => 'form-control', 'id' => 'member']) !!}
+                        <label for="type">Staff:</label>
+                        {!! Form::select('member',[], null,[ 'placeholder' => 'select Staff', 'class' => 'form-control', 'id' => 'member']) !!}
                     </div>
                 </div>
 

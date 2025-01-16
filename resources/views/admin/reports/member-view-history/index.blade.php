@@ -3,7 +3,7 @@
 @section('content')
    <div class="row">
       <div class="col-sm-12 col-md-6">         
-         <h2 class="text-dark"> Member Wise View History Report </h2>
+         <h2 class="text-dark"> Staff Wise View History Report </h2>
       </div>
       <div class="col-sm-12 col-md-6">         
          <nav aria-label="breadcrumb">
@@ -15,7 +15,7 @@
                @elseif(Sentinel::inRole('employee'))
                <li class="breadcrumb-item"><a href="{{route('employee.dashboard')}}">Dashboard</a></li>
                @endif
-               <li class="breadcrumb-item"><a href="#">Member Wise View History</a></li>
+               <li class="breadcrumb-item"><a href="#">Staff Wise View History</a></li>
             </ol>
          </nav>
       </div>
@@ -51,8 +51,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="type">Member:</label>
-                        {!! Form::select('member',[], null,[ 'placeholder' => 'select member', 'class' => 'form-control', 'id' => 'member']) !!}
+                        <label for="type">Staff:</label>
+                        {!! Form::select('member',[], null,[ 'placeholder' => 'select Staff', 'class' => 'form-control', 'id' => 'member']) !!}
                     </div>
                 </div>
                 
