@@ -75,13 +75,11 @@ class OverdueHistoryController extends Controller
     {
         $query = $request->input('q');
         return User::where('first_name','like', '%' .  $query. '%') 
-                        ->when(!Sentinel::inRole('admin'), function($q) {
-                            $q->where('id', Sentinel::getUser()->id);
-                        }) 
+        ->where('role',7) 
                         ->limit(25)
                         ->get()
                         ->map(function($row) {
-                            return  ["id" => $row->id, "text" => $row->first_name.' '.$row->last_name ];
+                            return  ["id" => $row->id, "text" => $row->first_name];
                         });
     }
 }

@@ -144,8 +144,8 @@ $(function () {
          columns       : [
             {data: 'id', name: 'id', visible: false},
             {data: 'created_at', name: 'created_at'},
-            {data: 'item.item_id', name: 'item_id'},
-            {data: 'item.item_name', name: 'item_name'},
+            {data: 'item.item_ref', name: 'item_id'},
+            {data: 'item.title', name: 'item_name'},
             {data: 'user.first_name', name: 'user.first_name'},
             {data: 'overdue_days', name: 'overdue_days'},
             {data: 'date_of_return', name: 'date_of_return'}
