@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\PermissionController;
 use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Master\CategoryController;
 use App\Http\Controllers\Master\GenreController;
 use App\Http\Controllers\Master\ItemController;
@@ -119,7 +120,9 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
     
     
         Route::get('book-view-history', [BookWiseViewHistoryController::class, 'index'])->name('book-view-history.index');
-       
+        Route::get('bulk-upload', [ReportController::class, 'index'])->name('bulk-upload.index');
+        Route::post('staff-bulk-upload', [ReportController::class, 'StaffUpdate'])->name('staff-bulk-upload.update');
+        Route::post('book-bulk-upload', [ReportController::class, 'BookUpdate'])->name('book-bulk-upload.update');
         Route::get('book-view-history/get-item-dropdown', [BookWiseViewHistoryController::class, 'getItemDropdown'])->name('book-view-history.get-item-dropdown');
     
         Route::get('memebr-view-history', [MemberViewHistoryController::class, 'index'])->name('member-history.index');

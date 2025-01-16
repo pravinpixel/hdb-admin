@@ -57,7 +57,7 @@
                             @endif
                             @if(Sentinel::hasAccess('inventory.index') || Sentinel::hasAccess('approve-request.index') || Sentinel::hasAccess('member-view-history.index') ||  Sentinel::hasAccess('book-view-history.index') ||  Sentinel::hasAccess('overdue-history.index') || 
                             Sentinel::hasAccess('member-history.index') ||
-                            Sentinel::inRole('admin') )
+                            Sentinel::inRole('admin') ||  Sentinel::hasAccess('bulk-upload.index') || Sentinel::hasAccess('overdue-history.index'))
                                 <li class="has_sub">
                                     <a href="#" class="waves-effect waves-light {{request()->is('admin/report*') ? 'active' : ''}}"><i class="fa fa-bar-chart"></i><span> Reports </span></a>
                                     <ul class="list-unstyled">
@@ -78,6 +78,9 @@
                                         @endif
                                         @if( Sentinel::inRole('admin') || Sentinel::hasAccess('overdue-history.index') )
                                             <li><a href="{{ route('overdue-history.index') }}" class =" {{request()->is('admin/report/overdue-history*') ? 'sub-active' : ''}}"> @lang('menu.overdue_history') </a></li>
+                                        @endif
+                                         @if( Sentinel::inRole('admin') || Sentinel::hasAccess('bulk-upload.index') )
+                                            <li><a href="{{ route('bulk-upload.index') }}" class =" {{request()->is('admin/report/bulk-upload*') ? 'sub-active' : ''}}"> @lang('menu.bulk_upload') </a></li>
                                         @endif
                                     </ul>
                                 </li>

@@ -4,7 +4,7 @@
             <th>Member ID</th>
             <th>Member Name</th>
             <th>Role Name</th>
-            <th>Total Item Taken</th>
+            <th>Total Book Taken</th>
             <th>Created At</th>
          </tr>
       @forelse($members as $member)
@@ -12,7 +12,7 @@
               <td id="collapseButton" onclick="collapse(this)"><span class="btn shadow btn-primary"  >+</span></td>           
               <td>{{$member->member_id}}</td>
               <td>{{$member->first_name}}  {{$member->first_name}}</td>
-              <td>{{$member->roles->first()->name}}</td>
+              <td>{{$member->roles[0]->name ?? ''}}</td>
               <td>{{$member->checkouts()->count()}}</td>
               <td>{{$member->created_at->format('d-m-Y')}}</td>
          </tr>

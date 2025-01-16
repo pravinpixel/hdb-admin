@@ -17,6 +17,7 @@ return  [
     'overdue_history'          => 'Overdue History',
     'config'                   => 'Config',
     'email-config'             => 'Email Config',
+    'bulk_upload'              => 'Bulk Upload',
 ];
 
 ?>

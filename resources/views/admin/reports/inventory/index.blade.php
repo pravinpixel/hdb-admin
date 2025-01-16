@@ -28,7 +28,7 @@
                     {{-- <i class="fa fa-cart-plus f-left"></i> --}}
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <h4 class="m-b-20 text-white"> Total Items</h4>
+                            <h4 class="m-b-20 text-white"> Total Books</h4>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <h5 class="m-b-20 text-white text-center">&nbsp;</h5>
@@ -45,7 +45,7 @@
                     {{-- <i class="fa fa-rocket f-left"></i> --}}
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <h4 class="m-b-20 text-white">Total Issued Items</h4>
+                            <h4 class="m-b-20 text-white">Total Issued Books</h4>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <h5 class="m-b-20 text-white text-center">&nbsp;</h5>
@@ -62,7 +62,7 @@
                     {{-- <i class="fa fa-rocket f-left"></i> --}}
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <h4 class="m-b-20 text-white">Total Active Items</h4>
+                            <h4 class="m-b-20 text-white">Total Active Books</h4>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <h5 class="m-b-20 text-white text-center">&nbsp;</h5>
@@ -79,7 +79,7 @@
                     {{-- <i class="fa fa-rocket f-left"></i> --}}
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <h4 class="m-b-20 text-white">Total Inactive Items</h4>
+                            <h4 class="m-b-20 text-white">Total Inactive Books</h4>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <h5 class="m-b-20 text-white text-center">&nbsp;</h5>
@@ -98,20 +98,14 @@
             <div class="col-sm-12 col-md-12"> 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="type">Item Name / Item ID:</label>
+                        <label for="type">Book Name / RFID:</label>
                         {!! Form::text('search_item_name', null, ['class' => 'form-control', 'id' => 'search_item_name']) !!}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="type">Category:</label>
-                        {!! Form::select('category',[], null,[ 'placeholder' => 'select category', 'class' => 'form-control', 'id' => 'category']) !!}
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="type">Subcategory:</label>
-                        {!! Form::select('subcategory', [], null , [ 'placeholder' => 'select subcategory', 'class' => 'form-control', 'id' => 'subcategory']) !!}
+                        <label for="type">Language:</label>
+                        {!! Form::select('category',[], null,[ 'placeholder' => 'select language', 'class' => 'form-control', 'id' => 'category']) !!}
                     </div>
                 </div>
                 <div class="col-md-3">

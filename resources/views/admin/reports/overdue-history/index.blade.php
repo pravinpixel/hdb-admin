@@ -29,7 +29,7 @@
                     {{-- <i class="fa fa-rocket f-left"></i> --}}
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <h4 class="m-b-20 text-white"> Overdue Item </h4>
+                            <h4 class="m-b-20 text-white"> Overdue Book </h4>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <h5 class="m-b-20 text-white text-center">&nbsp;</h5>

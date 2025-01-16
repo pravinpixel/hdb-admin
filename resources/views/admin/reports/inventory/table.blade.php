@@ -2,10 +2,8 @@
    <thead>
          <tr>
             <th>#</th>
-            <th>Item ID</th>
-            <th>Item Name</th>
-            <th>Category</th>
-            <th>Subcategory</th>
+            <th>RFID</th>
+            <th>Book Name</th>
             <th>Type</th>
             <th>Genre</th>
             <th>Status</th>

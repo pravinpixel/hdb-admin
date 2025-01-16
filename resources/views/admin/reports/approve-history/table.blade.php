@@ -3,8 +3,8 @@
          <tr>
             <th>#</th>
             <th>created At</th>
-            <th>Item ID</th>
-            <th>Item Name</th>
+            <th>RFID</th>
+            <th>Book Name</th>
             <th>Requested By</th>
             <th>Approved / Rejected By</th>
          </tr>
