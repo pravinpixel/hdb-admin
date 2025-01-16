@@ -35,16 +35,16 @@ class MemberBookHistoryController extends Controller
                     $q->where('checkout_by', Sentinel::getUser()->id);
                 })->when($member_id, function($q) use($member_id){
                     $q->where('checkout_by', $member_id);
-                })->where('return_status', false)
+                })->where('status', 'taken')
                 ->whereBetween('date', [$start_date, $end_date])->get()->count();
 
-            $data['total_taken_item'] = Checkout::when($item_id, function($q) use ($item_id){
+            $data['total_return_item'] = Checkout::when($item_id, function($q) use ($item_id){
                     $q->where('item_id', $item_id);
                 })->when(!Sentinel::inRole('admin'), function($q) {
                     $q->where('checkout_by', Sentinel::getUser()->id);
                 })->when($member_id, function($q) use($member_id){
                     $q->where('checkout_by', $member_id);
-                })->where('return_status', true)
+                })->where('status', 'returned')
                 ->whereBetween('date', [$start_date, $end_date])->get()->count();
             $dataDb = Checkout::query()
                         ->with(['item','user'])
@@ -81,9 +81,7 @@ class MemberBookHistoryController extends Controller
     {
         $query = $request->input('q');
         return User::where('first_name','like', '%' .  $query. '%') 
-                    ->when(!Sentinel::inRole('admin'), function($q) {
-                        $q->where('id', Sentinel::getUser()->id);
-                    })
+        ->where('role',7)
                     ->limit(25)
                     ->get()
                     ->map(function($row) {
@@ -100,7 +98,7 @@ class MemberBookHistoryController extends Controller
                         ->limit(25)
                         ->get()
                         ->map(function($row) {
-                            return  ["id" => $row->id, "text" => $row->item_name];
+                            return  ["id" => $row->id, "text" => $row->title];
                         });
     }
 }

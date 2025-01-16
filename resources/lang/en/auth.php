@@ -244,5 +244,7 @@ return [
 	//unauthorized
 	'unauthorized_to_access_the_page'						=> 'Unauthorized to access the Page',
 	'update_book'=>'Book track data has been updated successfully',
-	'checkouts' => 'The user cannot be deleted because they have checkouts with a "taken" status.'
+	'checkouts' => 'The user cannot be deleted because they have checkouts with a "taken" status.',
+	'import_successful' => 'Imported has been successfully',
+	'import_unsuccessful' => 'Unable to Import',
 ];

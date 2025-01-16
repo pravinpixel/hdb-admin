@@ -265,8 +265,9 @@ class StaffController extends Controller {
                     'designation',
                     'users.created_at',
                     'users.updated_at',
+                    'is_active'
                 ])
-                ->with('roles', 'activations')
+                ->with('roles')
                 ->whereHas('roles', function ($q) {
                     $q->whereIn('slug', ['staff']);
                 });
@@ -283,11 +284,10 @@ class StaffController extends Controller {
                     }
                 })
                 ->addColumn('status', function ($dataDb) {
-                    if ($dataDb->activations->isNotEmpty()) {
-                        if ($dataDb->activations[0]->completed == 1) {
+                        if ($dataDb->is_active == 1) {
                             return '<a href="#" data-message="' . trans('auth.deactivate_subheading', ['name' => $dataDb->email]) . '" data-href="' . route('user.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('auth.deactivate_this_user') . '" data-title-modal="' . trans('auth.deactivate_heading') . '" data-toggle="modal" data-target="#delete" title="' . trans('auth.deactivate_this_user') . '"><span class="label label-success label-sm">' . trans('auth.index_active_link') . '</span></a>';
                         }
-                    }
+                    
                     return '<a href="#" data-message="' . trans('auth.activate_subheading', ['name' => $dataDb->email]) . '" data-href="' . route('user.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('auth.activate_this_user') . '" data-title-modal="' . trans('auth.deactivate_heading') . '" data-toggle="modal" data-target="#delete" title="' . trans('auth.activate_this_user') . '"><span class="label label-danger label-sm">' . trans('auth.index_inactive_link') . '</span></a>';
                 })
                 ->rawColumns(['status', 'action'])

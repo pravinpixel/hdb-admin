@@ -11,7 +11,7 @@
          <tr>
               <td id="collapseButton" onclick="collapse(this)"><span class="btn shadow btn-primary"  >+</span></td>           
               <td>{{$member->member_id}}</td>
-              <td>{{$member->first_name}}  {{$member->first_name}}</td>
+              <td>{{$member->first_name}}</td>
               <td>{{$member->roles[0]->name ?? ''}}</td>
               <td>{{$member->checkouts()->count()}}</td>
               <td>{{$member->created_at->format('d-m-Y')}}</td>
@@ -35,10 +35,10 @@
                            @foreach($member->checkouts as $checkout)
                               <tr>           
                                     <td>{{ $loop->iteration }}</td>               
-                                    <td>{{ date('d-m-Y', strtotime($checkout->created_at)) }} </td>
-                                    <td>{{  $checkout->item->item_name ?? '' }} </td>
-                                    @if(isset($checkout->checkIn->created_at))
-                                       <td>{{  date('d-m-Y', strtotime($checkout->checkIn->created_at)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($checkout->date)) }} </td>
+                                    <td>{{  $checkout->item->title ?? '' }} </td>
+                                    @if(isset($checkout->checkout_date))
+                                       <td>{{  date('d-m-Y', strtotime($checkout->checkout_date)) }}</td>
                                     @else
                                        <td> </td>
                                     @endif

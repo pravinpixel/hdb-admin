@@ -23,10 +23,8 @@ class MemberViewHistoryController extends Controller
                 ->when($request->member , function($q) use($request) {
                     $q->where('id', $request->member );
                 })
-                ->when(!Sentinel::inRole('admin'), function($q) {
-                    $q->where('id', Sentinel::getUser()->id);
-                })
-                ->paginate(10);
+                ->where('role',7)
+                ->paginate(20);
         $member_name = 'Select Member';
         $member_id = $request->member ?? null;
         $user = User::find($member_id);
@@ -37,9 +35,7 @@ class MemberViewHistoryController extends Controller
     {
         $query = $request->input('q');
         return User::where('first_name','like', '%' .  $query. '%')
-                        ->when(!Sentinel::inRole('admin'), function($q) {
-                            $q->where('id', Sentinel::getUser()->id);
-                        })
+                        ->where('role',7)
                         ->limit(25)
                         ->get()
                         ->map(function($row) {

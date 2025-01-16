@@ -21,13 +21,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="form">
-                <form action="{{ route('staff-bulk-upload.update') }}" method="post" class="cmxform form-horizontal tasi-form">
+                <form action="{{ route('staff-bulk-upload.update') }}" method="post" class="cmxform form-horizontal tasi-form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         {!! Form::label('bulkupload', 'Staff Bulk Upload', ['class' => 'control-label col-lg-2'], false) !!}
                         <div class="col-lg-10">
-                            <input type="file" name="staffs" class="form-control" required> 
-                            @error('staffs')
+                            <input type="file" name="file" class="form-control"   accept=".csv,.xlsx,.xls" required> 
+                            @error('file')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -56,12 +56,12 @@
       <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="form">
-                <form action="{{ route('book-bulk-upload.update') }}" method="post" class="cmxform form-horizontal tasi-form">
+                <form action="{{ route('book-bulk-upload.update') }}" method="post" class="cmxform form-horizontal tasi-form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         {!! Form::label('bulkupload', 'Book Bulk Upload', ['class' => 'control-label col-lg-2'], false) !!}
                         <div class="col-lg-10">
-                            <input type="file" name="books" class="form-control" required> 
+                            <input type="file" name="books" class="form-control"   accept=".csv,.xlsx,.xls" required> 
                             @error('books')
                             <div class="invalid-feedback">
                                 {{ $message }}
