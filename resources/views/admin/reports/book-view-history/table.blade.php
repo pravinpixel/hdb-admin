@@ -2,8 +2,8 @@
 <table id="bookViewHistoryTable" class="table table-bordered table-hover" style="width:100%">
       <tr>
          <th></th>
-         <th>Item ID</th>
-         <th>Item Name</th>
+         <th>RFID</th>
+         <th>Book Name</th>
          <th>Category</th>
          <th>Total Member Taken</th>
          <th> Created At </th>

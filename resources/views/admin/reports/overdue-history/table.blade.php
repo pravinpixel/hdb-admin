@@ -5,7 +5,7 @@
             <th>created At</th>
             <th>RFID</th>
             <th>Book Name</th>
-            <th>Member Name</th>
+            <th>Staff Name</th>
             <th>Overdue Days</th>
             <th>Date of Return</th>
          </tr>

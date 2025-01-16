@@ -1,8 +1,8 @@
 <table id="memberViewHistoryTable" class="table table-bordered table-hover" style="width:100%">
          <tr>
             <th>#</th>
-            <th>Member ID</th>
-            <th>Member Name</th>
+            <th>Staff ID</th>
+            <th>Staff Name</th>
             <th>Role Name</th>
             <th>Total Book Taken</th>
             <th>Created At</th>
