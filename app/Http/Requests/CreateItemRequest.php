@@ -25,7 +25,7 @@ class CreateItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'item_ref'         => 'required|min:7|max:7|unique:items',
+            'item_ref'         => 'required|unique:items',
             'title'        => ['required',Rule::unique('items')->whereNull('deleted_at')],
             'author'         => 'required',
             'location'            => 'required',
@@ -42,8 +42,6 @@ class CreateItemRequest extends FormRequest
         return [
             'item_ref.required' => 'The RFID field is required.',
             'item_ref.unique' => 'The RFID has already been taken.',
-            'item_ref.min' => 'The RFID must be at least 7 characters.',
-            'item_ref.max' => 'The RFID must not be greater than 7 characters.',
         ];
     }
 }

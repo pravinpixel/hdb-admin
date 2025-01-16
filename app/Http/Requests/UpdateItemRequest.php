@@ -25,7 +25,7 @@ class UpdateItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'item_ref'         => ['required', 'min:7', 'max:7', Rule::unique('items')->ignore($this->item, 'id')],
+            'item_ref'         => ['required', Rule::unique('items')->ignore($this->item, 'id')],
             'title'        => ['required',Rule::unique('items')->ignore($this->item, 'id')->whereNull('deleted_at')],
             'author'         => 'required',
             'location'            => 'required',
@@ -42,8 +42,6 @@ class UpdateItemRequest extends FormRequest
         return [
             'item_ref.required' => 'The RFID field is required.',
             'item_ref.unique' => 'The RFID has already been taken.',
-            'item_ref.min' => 'The RFID must be at least 7 characters.',
-            'item_ref.max' => 'The RFID must not be greater than 7 characters.',
         ];
     }
 }
