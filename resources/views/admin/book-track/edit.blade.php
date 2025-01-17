@@ -29,19 +29,19 @@
            <div class="form-group">
             {!! Form::label('first_name', 'RFID', ['class' => 'control-label col-lg-2'], false) !!}
             <div class="col-lg-10">
-               <input type="text" class="form-control" id="date_of_return" value="{{$item->item->item_ref}}" readonly>              
+               <input type="text" class="form-control"  value="{{$item->item->item_ref}}" readonly>              
             </div>
          </div>
          <div class="form-group">
             {!! Form::label('first_name', 'Book Name', ['class' => 'control-label col-lg-2'], false) !!}
             <div class="col-lg-10">
-               <input type="text" class="form-control" id="date_of_return" value="{{$item->title}}" readonly>              
+               <input type="text" class="form-control"  value="{{$item->title}}" readonly>              
             </div>
          </div>
           <div class="form-group">
             {!! Form::label('first_name', 'Staff Name', ['class' => 'control-label col-lg-2'], false) !!}
             <div class="col-lg-10">
-               <input type="text" class="form-control" id="date_of_return" value="{{$item->user->first_name}}" readonly>              
+               <input type="text" class="form-control"  value="{{$item->user->first_name}}" readonly>              
             </div>
          </div>
           <div class="form-group">

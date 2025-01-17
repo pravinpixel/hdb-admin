@@ -85,15 +85,6 @@ class BookTrackController extends Controller
         $item = Checkout::find($id);
         return view('admin.book-track.edit', compact('item'));
     }
-/*************  ✨ Codeium Command ⭐  *************/
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-/******  3864da5f-178c-4919-8738-9887fbe7013c  *******/
 
     public function update(Request $request, $id)
     {
