@@ -48,7 +48,7 @@
          @enderror
         </div>
            <div class="form-group">
-            <label class="mr-4" for="status">Status</label>
+            <label class="mr-4" for="status">Status : </label>
 
             <label for="status">Active</label>
             {!! Form::checkbox('active', null, false, ['class' => '', 'id' => 'active'])  !!}
