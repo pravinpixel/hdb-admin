@@ -61,7 +61,7 @@
                         <label style="width:100%;">&nbsp;</label>
                         <button class="btn btn-success" id="search-item"> Search </button>
                         <a href="{{ route('member-history.index') }}" class="btn btn-danger" > Reset </a>
-                        <button class="btn btn-warning" id="export-item"> Export </button>
+                         <!--<button class="btn btn-warning" id="export-item"> Export </button>-->
                     </div>
                 </div>
             </div>

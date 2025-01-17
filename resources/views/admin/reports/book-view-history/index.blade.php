@@ -51,8 +51,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="type">Item:</label>
-                        {!! Form::select('item',[], null,[ 'placeholder' => 'select item', 'class' => 'form-control', 'id' => 'item']) !!}
+                        <label for="type">Book:</label>
+                        {!! Form::select('item',[], null,[ 'placeholder' => 'select book', 'class' => 'form-control', 'id' => 'item']) !!}
                     </div>
                 </div>
                 

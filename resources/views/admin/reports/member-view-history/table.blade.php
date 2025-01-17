@@ -1,6 +1,5 @@
 <table id="memberViewHistoryTable" class="table table-bordered table-hover" style="width:100%">
          <tr>
-            <th>#</th>
             <th>Staff ID</th>
             <th>Staff Name</th>
             <th>Designation</th>
@@ -9,14 +8,15 @@
          </tr>
       @forelse($members as $member)
          <tr>
-              <td id="collapseButton" onclick="collapse(this)"><span class="btn shadow btn-primary"  >+</span></td>           
+              <!-- <td id="collapseButton" onclick="collapse(this)"><span class="btn shadow btn-primary"  >+</span></td>            -->
+
               <td>{{$member->member_id}}</td>
               <td>{{$member->first_name}}</td>
               <td>{{$member->designation ?? ''}}</td>
               <td>{{$member->checkouts()->count()}}</td>
               <td>{{$member->created_at->format('d-m-Y')}}</td>
          </tr>
-         @if($member->has('checkouts'))
+         <!-- @if($member->has('checkouts'))
             <div class="hidden">
                <tr style="display:none">
                   <td></td>
@@ -50,7 +50,7 @@
                   </td>
                </tr>
             <div>
-         @endif
+         @endif -->
       @empty
       <tr> <td colspan=5>No data available in table</td> </tr>
    @endforelse

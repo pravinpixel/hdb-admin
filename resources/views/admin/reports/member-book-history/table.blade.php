@@ -1,12 +1,11 @@
 <table id="memberViewHistoryTable" class="table table-bordered table-hover" style="width:100%">
    <thead>
          <tr>
-            <th>#</th>
-            <th>created At</th>
-            <th>RFID</th>
-            <th>Book Name</th>
+            <th>Staff ID</th>
             <th>Staff Name</th>
-            <th>Date of Return</th>
+            <th>Book Name</th>
+            <th>Date of CheckOut</th>
+            <th>Date of CheckIn</th>
          </tr>
    </thead>
    <tbody>

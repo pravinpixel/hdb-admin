@@ -1,13 +1,16 @@
 <table id="inventoryTable" class="table table-bordered table-hover" style="width:100%">
    <thead>
          <tr>
-            <th>#</th>
-            <th>RFID</th>
             <th>Book Name</th>
-            <th>Type</th>
-            <th>Genre</th>
+            <th>Author</th>
+             <th>ISBN</th>
+            <th>Call Number</th>
+            <th>Accession / Barcode Number</th>
+            <th>Subject</th>
+            <th>RFID</th>
+            <th>Location</th>
+             <th>Issued To</th>
             <th>Status</th>
-            <th>Issued To</th>
          </tr>
    </thead>
    <tbody>

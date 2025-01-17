@@ -3,6 +3,7 @@
 @push('page_css')
 	<link rel="stylesheet" href="{{ asset('dark/assets/plugins/jquery-datatables-editable/datatables.css') }}">
 @endpush
+
 @section('content')
    @include('flash::message')
    @include('flash')
@@ -23,12 +24,12 @@
          </nav>
       </div>
    </div>
-   <div class="card" style="overflow-x: auto;">
+   <div class="card" >
       <div class="row">
          <div class="col-sm-12 col-md-12 pb-20 text-right"> 
             <a href="{{ route('item.create') }}" class="btn btn-success" > <i class="fa fa-plus"></i> &nbsp; Add Book </a>              
          </div>  
-         <div class="col-sm-12 col-md-12"> 
+         <div class="col-sm-12 col-md-12" style="overflow-x: auto;"> 
             @include('master.item.table')
          </div>    
       </div>

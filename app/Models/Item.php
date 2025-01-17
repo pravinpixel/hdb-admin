@@ -25,7 +25,11 @@ class Item extends Model
     }
     public function checkout()
     {
-        return $this->hasOne(Checkout::class, 'item_id', 'id')->orderby('id', 'desc');
+        return $this->hasOne(Checkout::class, 'item_id', 'id')->where('status','taken')->orderby('id', 'desc');
+    }
+    public function checkouts()
+    {
+        return $this->hasMany(Checkout::class, 'item_id', 'id')->orderby('id', 'desc');
     }
 
 

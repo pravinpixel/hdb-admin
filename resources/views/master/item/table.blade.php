@@ -1,4 +1,4 @@
-<table id="itemTable" class="table table-bordered table-hover " style="width:100%">
+<table id="itemTable" class="table table-bordered table-hover " style="width:100%" >
    <thead>
          <tr>
             <th>#</th>

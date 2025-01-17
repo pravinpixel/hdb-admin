@@ -3,7 +3,7 @@
 @section('content')
    <div class="row">
       <div class="col-sm-12 col-md-6">         
-         <h2 class="text-dark"> Member/Book History Report </h2>
+         <h2 class="text-dark"> Staff Book History Report </h2>
       </div>
       <div class="col-sm-12 col-md-6">         
          <nav aria-label="breadcrumb">
@@ -15,7 +15,7 @@
                @elseif(Sentinel::inRole('employee'))
                <li class="breadcrumb-item"><a href="{{route('employee.dashboard')}}">Dashboard</a></li>
                @endif
-               <li class="breadcrumb-item"><a href="#">Member/Book History </a></li>
+               <li class="breadcrumb-item"><a href="#">Staff Book History </a></li>
             </ol>
          </nav>
       </div>
@@ -106,7 +106,7 @@
                         <label style="width:100%;">&nbsp;</label>
                         <button class="btn btn-success" id="search-item"> Search </button>
                         <button class="btn btn-danger" id="reset-item"> Reset </button>
-                        <button class="btn btn-warning" id="export-item"> Export </button>
+                         <!--<button class="btn btn-warning" id="export-item"> Export </button>-->
                     </div>
                 </div>
             </div>
@@ -179,11 +179,10 @@ $(function () {
             },
          },
          columns       : [
-            {data: 'id', name: 'id', visible: false},
-            {data: 'created_at', name: 'created_at'},
-            {data: 'item.item_ref', name: 'item_id'},
-            {data: 'item.title', name: 'item_name'},
-            {data: 'user.first_name', name: 'user.first_name'},
+            {data: 'user.member_id', name: 'staff_id'},
+            {data: 'user.first_name', name: 'staff_name'},
+            {data: 'item.title', name: 'book_name'},
+            {data: 'date', name: 'date'},
             {data: 'date_of_return', name: 'date_of_return'}
          ],
    });

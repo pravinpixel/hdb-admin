@@ -102,25 +102,20 @@
                         {!! Form::text('search_item_name', null, ['class' => 'form-control', 'id' => 'search_item_name']) !!}
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="type">Language:</label>
-                        {!! Form::select('category',[], null,[ 'placeholder' => 'select language', 'class' => 'form-control', 'id' => 'category']) !!}
-                    </div>
-                </div>
+              
                 <div class="col-md-3">
                     <div class="form-group">
                         <label style="width:100%;">&nbsp;</label>
                         <button class="btn btn-success" id="search-item"> Search </button>
                         <button class="btn btn-danger" id="reset-item"> Reset </button>
-                        <button class="btn btn-warning" id="export-item"> Export </button>
+                         <!--<button class="btn btn-warning" id="export-item"> Export </button>-->
                     </div>
                 </div>
             </div>
         </div>
     {!!  Form::close() !!}
         <div class="row">
-            <div class="col-sm-12 col-md-12"> 
+            <div class="col-sm-12 col-md-12" style="overflow-x: auto;"> 
             @include('admin.reports.inventory.table')
             </div>    
         </div>
@@ -142,40 +137,36 @@
 
 $(function () {
 
-  
 
-  //  var table = $('#inventoryTable').DataTable({
-//          aaSorting     : [[0, 'desc']],
-//          responsive: true,
-//          processing: true,    
-//          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-//          serverSide: true,
-//          pageLength: 50,
-//         searching: false, paging: true, info: true,    
-//         bSort: false,
-//          ajax          : {
-//             url     : '',
-//             dataType: 'json',
-//             data: function(d) {
-//                 d.search_item_name = $("#search_item_name").val();
-//                 d.category = $("#category").val();
-//                 d.subcategory = $("#subcategory").val();
-//             }
-//          },
-//          columns       : [
-//             {data: 'id', name: 'id', visible: false},
-//             {data: 'item_id', name: 'item_id'},
-//             {data: 'item_name', name: 'item_name'},
-//             {data: 'category.category_name', name: 'category_name'},
-//             {data: 'subcategory.subcategory_name', name: 'subcategory_name'},
-//             {data: 'type.type_name', name: 'type_name'},
-//             {data: 'genre.genre_name', name: 'genre_name'},
-//             {data: 'status', name: 'status'},
-//             {data: 'issued_to', name: 'issued_to'}
-//          ],
-//    });
-
-
+   var table = $('#inventoryTable').DataTable({
+         aaSorting     : [[0, 'desc']],
+         responsive: true,
+         processing: true,    
+         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+         serverSide: true,
+         pageLength: 50,
+        searching: false, paging: true, info: true,    
+        bSort: false,
+         ajax          : {
+            url     : '{!! route('inventory.datatable') !!}',
+            dataType: 'json',
+            data: function(d) {
+                d.search_item_name = $("#search_item_name").val();
+            }
+         },
+         columns       : [
+            {data: 'title', name: 'book_name'},
+            {data: 'author', name: 'author'},
+            {data: 'isbn', name: 'isbn'},
+            {data: 'call_number', name: 'call_number'},
+            {data: 'barcode', name: 'barcode'},
+            {data: 'subject', name: 'subject'},
+            {data: 'item_ref', name: 'rfid'},
+             {data: 'location', name: 'location'},
+            {data: 'issued_to', name: 'issued_to'},
+            {data: 'status', name: 'status'}
+         ],
+   });
    table.on( 'xhr', function () {
     var json = table.ajax.json();
         let card = json.card

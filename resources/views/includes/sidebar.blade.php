@@ -64,9 +64,6 @@
                                         @if( Sentinel::inRole('admin') || Sentinel::hasAccess('inventory.index') )
                                             <li><a href="{{ route('inventory.index') }}" class =" {{request()->is('admin/report/inventory*') ? 'sub-active' : ''}}"> @lang('menu.​inventory_list') </a></li>
                                         @endif
-                                        @if( Sentinel::inRole('admin') || Sentinel::hasAccess('approve-request.index') )
-                                            <li><a href="{{ route('approve-request.index') }}" class =" {{request()->is('admin/report/approve-request-history*') ? 'sub-active' : ''}}"> @lang('menu.approve_request_history') </a></li>
-                                        @endif
                                         @if( Sentinel::inRole('admin') || Sentinel::hasAccess('member-view-history.index') )
                                             <li><a href="{{ route('member-view-history.index') }}" class =" {{request()->is('admin/report/member-book-history*') ? 'sub-active' : ''}}"> @lang('menu.member_or_book_history') </a></li>
                                         @endif

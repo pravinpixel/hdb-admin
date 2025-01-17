@@ -22,7 +22,7 @@ class BookWiseViewHistoryController extends Controller
         $end_date = $request->end_date ?? now();
         $start_date = Carbon::parse($start_date)->format('Y-m-d');
         $end_date = Carbon::parse($end_date)->format('Y-m-d');
-        $items = Item::with(['category','checkouts'])
+        $items = Item::with(['language','checkouts'])
                 ->when($request->item , function($q) use($request) {
                     $q->where('id', $request->item );
                 })
@@ -99,20 +99,22 @@ class BookWiseViewHistoryController extends Controller
                         ->limit(25)
                         ->get()
                         ->map(function($row) {
-                            return  ["id" => $row->id, "text" => $row->first_name.' '.$row->last_name ];
+                            return  ["id" => $row->id, "text" => $row->first_name ];
                         });
     }
 
     public function getItemDropdown(Request $request)
     {
         $query = $request->input('q');
-        return Item::where('item_name','like', '%' .  $query. '%') 
-                        ->orWhere('item_id', 'like', '%' .  $query. '%')
+        return Item::where('title','like', '%' .  $query. '%') 
+                        ->orWhere('item_ref', 'like', '%' .  $query. '%')
+                        ->orWhere('isbn', 'like', '%' .  $query. '%')
+                        ->orWhere('call_number', 'like', '%' .  $query. '%')
                         ->where('is_active', 1)
                         ->limit(25)
                         ->get()
                         ->map(function($row) {
-                            return  ["id" => $row->id, "text" => $row->item_name];
+                            return  ["id" => $row->id, "text" => $row->title];
                         });
     }
 }
