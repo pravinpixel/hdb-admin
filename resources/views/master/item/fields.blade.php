@@ -73,7 +73,7 @@
         </div>
          <div class="form-group">
             <label for="call_number">Call Number:</label>
-             {!! Form::text('call_number', null, ['class' => 'form-control']) !!}
+             {!! Form::number('call_number', null, ['class' => 'form-control']) !!}
               @error('call_number')
             <div class="invalid-feedback">
                 {{ $message }}
