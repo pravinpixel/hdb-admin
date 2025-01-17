@@ -17,8 +17,11 @@ class MemberViewHistoryController extends Controller
         $start_date = Carbon::parse($start_date)->format('Y-m-d');
         $end_date = Carbon::parse($end_date)->format('Y-m-d');
         $members = User::with(['checkouts','roles'])
-                ->whereHas('checkouts', function($q) use ($start_date, $end_date) {
-                    $q->whereBetween('date', [$start_date, $end_date]);
+                // ->whereHas('checkouts', function($q) use ($start_date, $end_date) {
+                //     $q->whereBetween('created_at', [$start_date, $end_date]);
+                // })
+                ->when($request->start_date , function($q) use ($start_date, $end_date) {
+                    $q->whereBetween('created_at', [$start_date, $end_date]);
                 })
                 ->when($request->member , function($q) use($request) {
                     $q->where('id', $request->member );

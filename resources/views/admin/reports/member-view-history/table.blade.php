@@ -14,7 +14,7 @@
               <td>{{$member->first_name}}</td>
               <td>{{$member->designation ?? ''}}</td>
               <td>{{$member->checkouts()->count()}}</td>
-              <td>{{$member->date->format('d-m-Y')}}</td>
+              <td>{{$member->created_at->format('d-m-Y')}}</td>
          </tr>
          <!-- @if($member->has('checkouts'))
             <div class="hidden">
