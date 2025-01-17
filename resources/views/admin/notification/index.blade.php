@@ -97,14 +97,7 @@ $(function () {
             {data: 'created_at', name: 'created_at'},
             {data: 'message', name: 'message'},
             {data: 'type', name: 'type'},
-            {data: 'user.first_name', name: 'user.first_name'},
-             {
-                data         : 'action', name: 'action', orderable: false, searchable: false,
-                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                    //  console.log( nTd );
-                    $("a", nTd).tooltip({container: 'body'});
-                }
-            } 
+            {data: 'user.first_name', name: 'user.first_name'}
          ],
    });
 

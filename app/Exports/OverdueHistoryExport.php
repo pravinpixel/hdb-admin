@@ -29,10 +29,10 @@ class OverdueHistoryExport implements FromCollection, WithMapping, WithHeadings
        
         $dataDb = Checkout::query();
 
-        $start_date = $this->start_date ?? now();
-        $end_date = $this->end_date ?? now();
-        $start_date = Carbon::parse($start_date)->format('d-m-Y');
-        $end_date = Carbon::parse($end_date)->format('d-m-Y');
+        $starts_date = $this->start_date ?? now();
+        $ends_date = $this->end_date ?? now();
+        $start_date = Carbon::parse($starts_date)->format('Y-m-d');
+        $end_date = Carbon::parse($ends_date)->format('Y-m-d');
 
         if($this->member_id) {
             $dataDb->where('checkout_by', $this->member_id);
@@ -41,29 +41,33 @@ class OverdueHistoryExport implements FromCollection, WithMapping, WithHeadings
                 ->whereBetween('date_of_return', [$start_date, $end_date])
                 ->with(['user','item'])
                 ->get();
+
     }
    public function map($checkout) : array {
         $current_date = strtotime(Date('Y-m-d'));
         $checkout_date = strtotime($checkout->date_of_return);
         $day_diff = ( $checkout_date - $current_date ) / 86400 ;
         return [
-            $checkout->created_at,
-            $checkout->item->item_id,
-            $checkout->item->item_name,
+            $checkout->item->item_ref,
+            $checkout->item->isbn,
             $checkout->user->first_name,
+            $checkout->checkout_date,
+            $checkout->date,
             $day_diff.' days',
-            $checkout->date_of_return
+            Carbon::parse($checkout->created_at)->format('Y-m-d'),
+
         ];
     }
 
     public function headings() : array {
         return [
-           'Created At',
-           'Item ID',
-           'Item Name',
-           'Member Name',
+           'Book Title ID',
+           'ISBN',
+           'Staff Name',
+           'Checkout Date',
+           'Checkin Date',
            'Overdue Days',
-           'Date of Return'
+           'Created At',
         ];
     }
 }

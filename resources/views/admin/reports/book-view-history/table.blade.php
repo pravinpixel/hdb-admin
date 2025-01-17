@@ -2,11 +2,11 @@
 <table id="bookViewHistoryTable" class="table table-bordered table-hover" style="width:100%">
       <tr>
          <th></th>
-         <th>RFID</th>
-         <th>Book Name</th>
-         <th>Category</th>
-         <th>Total Member Taken</th>
-         <th> Created At </th>
+         <th>Staff ID</th>
+         <th>Staff Name</th>
+         <th>Book Title</th>
+         <th>Date of CheckOut</th>
+         <th>Date of CheckIn</th>
       </tr>
    
    @forelse($items as $item)

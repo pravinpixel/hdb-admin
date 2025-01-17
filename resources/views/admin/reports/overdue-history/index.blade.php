@@ -143,12 +143,13 @@ $(function () {
          },
          columns       : [
             {data: 'id', name: 'id', visible: false},
-            {data: 'created_at', name: 'created_at'},
             {data: 'item.item_ref', name: 'item_id'},
-            {data: 'item.title', name: 'item_name'},
+            {data: 'item.isbn', name: 'item.isbn'},
             {data: 'user.first_name', name: 'user.first_name'},
+            {data: 'checkout_date', name: 'checkout_date'},
+            {data: 'date', name: 'date'},
             {data: 'overdue_days', name: 'overdue_days'},
-            {data: 'date_of_return', name: 'date_of_return'}
+            {data: 'created_at', name: 'created_at'},
          ],
    });
     table.on( 'xhr', function () {

@@ -214,10 +214,10 @@ class ItemController extends Controller
 
           ->addColumn('status', function ($dataDb) {
             if ($dataDb->status == 1) {
-                $message =trans('global.deactivate_subheading', ['name' => $dataDb->item_name]);
-                return '<a href="#" data-message="' .  $message . '" data-href="' . route('item.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('global.activate_subheading') . '" data-title-modal="' . trans('global.activate_subheading') . '" data-toggle="modal" data-target="#delete" title="' . trans('global.deactivate') . '"><span class="label label-success label-sm">' . trans('auth.index_active_link') . '</span></a>';
+                $message =trans('global.book_deactivate_subheading', ['name' => $dataDb->item_name]);
+                return '<a href="#" data-message="' .  $message . '" data-href="' . route('item.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('global.book_activate_subheading') . '" data-title-modal="' . trans('global.book_activate_subheading') . '" data-toggle="modal" data-target="#delete" title="' . trans('global.inactivate') . '"><span class="label label-success label-sm">' . trans('auth.index_active_link') . '</span></a>';
            }
-           return '<a href="#" data-message="' . trans('global.activate_subheading', ['name' => $dataDb->item_name]) . '" data-href="' . route('item.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('global.activate_subheading') . '" data-title-modal="' . trans('global.activate_subheading') . '" data-toggle="modal" data-target="#delete" title="' . trans('global.activate') . '"><span class="label label-danger label-sm">' . trans('auth.index_inactive_link') . '</span></a>';
+           return '<a href="#" data-message="' . trans('global.book_activate_subheading', ['name' => $dataDb->item_name]) . '" data-href="' . route('item.status', $dataDb->id) . '" id="tooltip" data-method="PUT" data-title="' . trans('global.book_activate_subheading') . '" data-title-modal="' . trans('global.book_activate_subheading') . '" data-toggle="modal" data-target="#delete" title="' . trans('global.activate') . '"><span class="label label-danger label-sm">' . trans('auth.index_inactive_link') . '</span></a>';
           })
           ->addColumn('action', function ($dataDb) {
                return '<a href="' . route('item.show', $dataDb->id) . '" id="tooltip" title="View"><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>

@@ -2,12 +2,13 @@
    <thead>
          <tr>
             <th>#</th>
-            <th>created At</th>
-            <th>RFID</th>
-            <th>Book Name</th>
+            <th>Book Title ID</th>
+            <th>ISBN</th>
             <th>Staff Name</th>
+            <th>Checkout Date</th>
+            <th>Checkin Date</th>
             <th>Overdue Days</th>
-            <th>Date of Return</th>
+            <th>Created At</th>
          </tr>
    </thead>
    <tbody>

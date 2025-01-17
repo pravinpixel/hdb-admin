@@ -1,7 +1,7 @@
             <!-- ========== Left Sidebar Start ========== -->
 
             <div class="left side-menu">
-                <div class="sidebar-inner slimscrollleft">
+                <div class="sidebar-inner slimscrollleft" >
                     <div class="user-details">
                         <div class="pull-left">
                             <img src="{{ asset('dark/assets/images/profile.png')}} " alt="" class="thumb-md img-circle" style="pointer-events: none;">

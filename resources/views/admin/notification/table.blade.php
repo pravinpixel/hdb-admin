@@ -6,7 +6,6 @@
             <th>Message</th>
             <th>Type</th>
             <th>Created By</th>
-            <th  class="text-left">Action</th>
          </tr>
    </thead>
    <tbody>
