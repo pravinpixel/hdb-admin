@@ -22,8 +22,12 @@ class InventoryReportController extends Controller
         if ($request->ajax() == true) {
             $dataDb =  Item::query();
             if($request->search_item_name) {
-                $dataDb->where('item_title',$request->search_item_name);
-                $dataDb->orWhere('item_nef',$request->search_item_name);
+                $dataDb->where('title','like', '%' . $request->search_item_name. '%');
+                $dataDb->orWhere('item_ref','like', '%' . $request->search_item_name. '%');
+                $dataDb->orWhere('isbn','like', '%' . $request->search_item_name. '%');
+                $dataDb->orWhere('author','like', '%' . $request->search_item_name. '%');
+                $dataDb->orWhere('call_number','like', '%' . $request->search_item_name. '%');
+                $dataDb->orWhere('location','like', '%' . $request->search_item_name. '%');
             } 
             if($request->language) {
                 $dataDb->where('language',$request->language);
