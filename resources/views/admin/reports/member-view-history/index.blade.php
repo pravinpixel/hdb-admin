@@ -93,7 +93,7 @@ $(function () {
       var end_date = '{!! Date("d-m-Y", strtotime($end_date) )!!}';
       if(user) {
         var parse_json = JSON.parse(user);
-        var member_name = `${parse_json.first_name} ${parse_json.last_name}`;
+        var member_name = `${parse_json.first_name}`;
         var member_id = parse_json.id;
         var newOption = new Option(member_name, member_id, true, true);
         $('#member').append(newOption).trigger('change');

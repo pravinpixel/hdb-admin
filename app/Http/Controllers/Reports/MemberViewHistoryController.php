@@ -42,7 +42,7 @@ class MemberViewHistoryController extends Controller
                         ->limit(25)
                         ->get()
                         ->map(function($row) {
-                            return  ["id" => $row->id, "text" => $row->first_name.' '.$row->last_name ];
+                            return  ["id" => $row->id, "text" => $row->first_name];
                         });
     }
 }
