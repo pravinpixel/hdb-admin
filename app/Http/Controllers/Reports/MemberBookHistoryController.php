@@ -64,6 +64,9 @@ class MemberBookHistoryController extends Controller
                     ->editColumn('created_at', function($dataDb){
                         return Carbon::parse($dataDb->created_at)->format('d-m-Y');
                     })
+                    ->editColumn('date', function($dataDb){
+                        return Carbon::parse($dataDb->date)->format('d-m-Y');
+                    })
                     ->editColumn('date_of_return', function($dataDb){
                         return Carbon::parse($dataDb->date_of_return)->format('d-m-Y');
                     })
