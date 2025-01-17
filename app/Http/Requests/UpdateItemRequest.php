@@ -34,7 +34,7 @@ class UpdateItemRequest extends FormRequest
             'location'       => 'required',
             'language_id'=>'required',
             'due_period'=>'nullable|integer',
-            'call_number' => 'nullable|digit:10',
+            'call_number' => 'nullable|integer|digits:10',
         ];
     }
 
