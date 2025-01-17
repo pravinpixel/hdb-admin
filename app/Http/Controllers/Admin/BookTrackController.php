@@ -66,7 +66,7 @@ class BookTrackController extends Controller
                  }else{
                     return '
                     <a href="' . route('book-track.show', $dataDb->id) . '" id="tooltip" title="View" disaled><span class="label label-primary label-sm"><i class="fa fa-eye"></i></span></a>
-                    <a href="' . route('book-track.edit', $dataDb->id) . '" id="tooltip" title="Edit"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                    <a href="#"><i class="fa fa-edit"></i></span></a>
                      <a href="#" data-message="' . trans('auth.book_confirmation') . '" data-href="' . route('book-track.destroy', $dataDb->id) . '" id="tooltip"  data-title="Delete" data-title-modal="' . trans('auth.delete_confirmation_heading') . '" data-toggle="modal" data-target="#delete" ><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
                 }
             })
@@ -85,6 +85,16 @@ class BookTrackController extends Controller
         $item = Checkout::find($id);
         return view('admin.book-track.edit', compact('item'));
     }
+/*************  ✨ Codeium Command ⭐  *************/
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+/******  3864da5f-178c-4919-8738-9887fbe7013c  *******/
+
     public function update(Request $request, $id)
     {
 
@@ -100,6 +110,7 @@ class BookTrackController extends Controller
         }
         if(isset($request->checkout_date) && !empty($request->checkout_date)){
             $item->checkout_date = $request->checkout_date;
+            $item->is_active = 0;
             $item->status ='returned';
         }
         if(isset($request->due_date)){
