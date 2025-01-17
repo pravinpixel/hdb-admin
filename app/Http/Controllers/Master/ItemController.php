@@ -13,6 +13,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Laracasts\Flash\Flash;
+use App\Models\Checkout;
 use Yajra\DataTables\Facades\DataTables;
 use Auth;
 use Illuminate\Support\Facades\Response;
@@ -105,6 +106,7 @@ class ItemController extends Controller
         if( empty( $result ) ) {
             return response(['status' => false, 'msg' => trans('global.not_found')], 404);
         }
+
         $data['item'] = $result;
         $data['approval_request'] =  null;
         if( !empty( $result ) ) {
@@ -190,6 +192,12 @@ class ItemController extends Controller
              Flash::error( __('global.not_found'));
              return redirect()->route('item.index');
         }
+        $book = Checkout::where('item_id', $id)->where('status', 'taken')->first();
+
+        if($book) {
+            Flash::error(__('Book is taken by staff cannot be Delete'));
+            return redirect()->route('item.index');
+        }
         // if( $item->approveRequestByUser()->exists() ) {
         //     Flash::error( __('global.can_not_delete'));
         //     return redirect()->route('item.index');
@@ -240,6 +248,12 @@ class ItemController extends Controller
     public function status($id)
     {
         $result = Item::find($id);
+        $book = Checkout::where('item_id', $id)->where('status', 'taken')->first();
+
+        if($book) {
+            Flash::error(__('Book is taken by staff cannot make InActive'));
+            return redirect()->route('item.index');
+        }
         $result->status = ($result->status == 1) ? 0 : 1;
         $result->update();
         if( $result ) {
