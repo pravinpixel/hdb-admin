@@ -49,7 +49,12 @@
         </div>
          <div class="form-group">
             <label for="status">Status</label>
-        {!! Form::checkbox('status', null, false, ['class' => '', 'id' => 'status','readonly' => 'readonly'])  !!}
+        <!-- {!! Form::checkbox('status', null, false, ['class' => '', 'id' => 'status','readonly' => 'readonly'])  !!} -->
+            {!! Form::radio('status', 'active', false, ['class' => '', 'id' => 'active'])  !!}
+            <label for="status">Active</label>
+
+            {!! Form::radio('status', 'inactive', true, ['class' => '', 'id' => 'inactive'])  !!}
+            <label for="status">Inactive</label>
         </div>
 
     </div>
@@ -74,10 +79,10 @@
             <label for="location">Location:</label>
            {!! Form::text('location', null, ['class' => 'form-control','readonly' => 'readonly']) !!}
         </div>
-         <div class="form-group">
+         <!-- <div class="form-group">
             <label for="location">Due Period:</label>
            {!! Form::text('due_period', null, ['class' => 'form-control','readonly' => 'readonly']) !!}
-        </div>
+        </div> -->
         
     </div>
 </div>

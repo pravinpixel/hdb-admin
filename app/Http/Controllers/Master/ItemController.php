@@ -68,7 +68,8 @@ class ItemController extends Controller
         $item->location = $request->location;
         $item->isbn = $request->isbn;
         $item->call_number = $request->call_number;
-        if($request->active == 'on') {
+        // if($request->active == 'on') {
+        if($request->status == 'active') {
             $item->status = 1;
         }else {
             $item->status = 0;
@@ -165,7 +166,8 @@ class ItemController extends Controller
         $item->isbn = $request->isbn;
         $item->call_number = $request->call_number;
         $item->author = $request->author;
-        if($request->active == 'on') {
+        // if($request->active == 'on') {
+        if($request->status == 'active') {
             $item->status = 1;
         }else {
             $item->status = 0;

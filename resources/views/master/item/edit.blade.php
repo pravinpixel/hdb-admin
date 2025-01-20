@@ -51,11 +51,15 @@ $(document).ready(function(){
       }
    });
 let status = {!!  $result->status !!};
-if(status) {
-   $("#status").prop('checked', true);
-} else {
-   $("#status").prop('checked', false);
-}
+console.log('123 : ',status);
+let statusStr = status ? 'active' : 'inactive';
+$("input[name='status'][value='" + statusStr + "']").prop('checked', true);
+// $("#inactive").prop('checked', false);
+// if(status == 1) {
+//    $("#active").prop('checked', true);
+// } else {
+//    $("#inactive").prop('checked', false);
+// }
 let type = {!! json_encode($result->language->toArray()) !!}
 var typeOption = new Option(type.language, type.id, true, true);
 $('#language_id').append(typeOption).trigger('change'); 

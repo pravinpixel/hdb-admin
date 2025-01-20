@@ -50,11 +50,11 @@
            <div class="form-group">
             <label class="mr-4" for="status">Status : </label>
 
+            {!! Form::radio('status', 'active', false, ['class' => '', 'id' => 'active'])  !!}
             <label for="status">Active</label>
-            {!! Form::checkbox('active', null, false, ['class' => '', 'id' => 'active'])  !!}
 
+            {!! Form::radio('status', 'inactive', true, ['class' => '', 'id' => 'inactive'])  !!}
             <label for="status">Inactive</label>
-            {!! Form::checkbox('inactive', null, true, ['class' => '', 'id' => 'inactive'])  !!}
 
         </div>
 
@@ -100,7 +100,7 @@
             </div>
          @enderror
         </div>
-         <div class="form-group">
+         <!-- <div class="form-group">
             <label for="location">Due Period:<span style="color: red"></span></label>
            {!! Form::text('due_period', null, ['class' => 'form-control']) !!}
             @error('due_period')
@@ -108,7 +108,7 @@
                 {{ $message }}
             </div>
          @enderror
-        </div>
+        </div> -->
         
     </div>
 </div>
