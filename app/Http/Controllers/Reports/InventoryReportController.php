@@ -38,8 +38,16 @@ class InventoryReportController extends Controller
             $data['total_issued_item'] = Item::where('is_active',1)->get()->count();
             $dataDb->with('language','user');
             return DataTables::eloquent($dataDb)
+                    // ->addColumn('status', function($dataDb) {
+                    //     return ($dataDb->status == 1) ? '<div class="text-left"><div class="badge badge-warning"> Taken </div></div>' : '<div class="text-left"><div class="badge badge-success"> Available </div></div>';
+                    // })
                     ->addColumn('status', function($dataDb) {
-                        return ($dataDb->status == 1) ? '<div class="text-left"><div class="badge badge-warning"> Taken </div></div>' : '<div class="text-left"><div class="badge badge-success"> Available </div></div>';
+                        if($dataDb->is_active == 1 && isset($dataDb->checkout) && isset($dataDb->checkout->user) && !empty($dataDb->checkout->user->first_name)) 
+                            return '<div class="text-left"><div class="badge badge-warning"> Taken </div></div>';
+                        else if ($dataDb->status == 1) 
+                            return '<div class="text-left"><div class="badge badge-success"> Available </div></div>';
+                        else
+                            return '<div class="text-left"><div class="badge badge-info"> Un-Available </div></div>';
                     })
                     ->addColumn('issued_to', function($dataDb) {
                         if($dataDb->is_active == 1 && isset($dataDb->checkout) && isset($dataDb->checkout->user) && !empty($dataDb->checkout->user->first_name)) {
