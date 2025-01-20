@@ -148,7 +148,6 @@ class ItemController extends Controller
             'barcode' => ['nullable', Rule::unique('items')->ignore($id)->whereNull('deleted_at')],
             'isbn' => [
                 'required',
-                'integer',
                 'unique:items,isbn,' . $id,
                 'min:1',
                 'max:13'
