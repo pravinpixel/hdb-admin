@@ -29,12 +29,13 @@ class CreateItemRequest extends FormRequest
             'title'        => ['required',Rule::unique('items')->whereNull('deleted_at')],
             'author'         => 'required',
             'location'            => 'required',
-            'isbn'        => 'required',
+            'isbn' => 'required|integer|min:1|max:13|unique:isbn',
             'subject'        => 'required',
             'location'       => 'required',
             'language_id'=>'required',
             'due_period'=>'nullable|integer',
             'call_number' => 'nullable|integer|digits:10',
+            'barcode' => ['nullable',Rule::unique('items')->whereNull('deleted_at')]
         ];
     }
 
