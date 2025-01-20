@@ -29,7 +29,7 @@ class CreateItemRequest extends FormRequest
             'title'        => ['required',Rule::unique('items')->whereNull('deleted_at')],
             'author'         => 'required',
             'location'            => 'required',
-            'isbn' => 'required|min:1|max:13|unique:isbn',
+            'isbn' => ['required','min:1','max:13',Rule::unique('items')->whereNull('deleted_at')],
             'subject'        => 'required',
             'location'       => 'required',
             'language_id'=>'required',
