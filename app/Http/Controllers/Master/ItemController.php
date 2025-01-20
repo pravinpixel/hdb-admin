@@ -10,6 +10,7 @@ use App\Models\Item;
 use App\Models\User;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Laracasts\Flash\Flash;
@@ -143,6 +144,16 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, $id)
     {
+        $request->validate([
+            'barcode' => ['nullable', Rule::unique('items')->ignore($id)->whereNull('deleted_at')],
+            'isbn' => [
+                'required',
+                'integer',
+                'unique:items,isbn,' . $id,
+                'min:1',
+                'max:13'
+            ],
+        ]);
         $item = Item::find($id);
         if( empty( $item ) ) {
             Flash::error(__('global.something'));
