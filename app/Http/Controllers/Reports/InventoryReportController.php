@@ -39,7 +39,7 @@ class InventoryReportController extends Controller
             $dataDb->with('language','user');
             return DataTables::eloquent($dataDb)
                     ->addColumn('status', function($dataDb) {
-                        return ($dataDb->status == 1) ? '<div class="text-left"><div class="badge badge-warning"> N/A </div></div>' : '<div class="text-left"><div class="badge badge-success"> Available </div></div>';
+                        return ($dataDb->status == 1) ? '<div class="text-left"><div class="badge badge-warning"> Taken </div></div>' : '<div class="text-left"><div class="badge badge-success"> Available </div></div>';
                     })
                     ->addColumn('issued_to', function($dataDb) {
                         if($dataDb->is_active == 1 && isset($dataDb->checkout) && isset($dataDb->checkout->user) && !empty($dataDb->checkout->user->first_name)) {
