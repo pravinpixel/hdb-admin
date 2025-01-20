@@ -32,18 +32,32 @@ class ReportController extends Controller
           ] 
            
         ]);  
-          $exampleImport = new StaffBulkImport;
-          $excel_import=Excel::import($exampleImport, $request->file);
-          if($excel_import)
-          {
+        $exampleImport = new StaffBulkImport;
+        $excel_import = Excel::import($exampleImport, $request->file);
+        
+        if ($exampleImport->errors) {
+          // foreach ($exampleImport->errors as $k=> $error) {
+          //     Flash::error( __($error));
+          // }
+          $mm = implode('<br><br>', $exampleImport->errors);
+          Flash::error( __($mm));
+          return redirect()->route('bulk-upload.index');
+        } else {
             Flash::success( __('auth.import_successful'));
             return redirect()->route('bulk-upload.index');
-          }
-          else
-          {
-            Flash::success( __('auth.import_unsuccessful'));
-            return redirect()->route('bulk-upload.index');
-          } 
+        }
+          // if($excel_import)
+          // {
+          //   Flash::success( __('auth.import_successful'));
+          //   dd('hai');
+          //   return redirect()->route('bulk-upload.index');
+          // }
+          // else
+          // {
+          //   Flash::success( __('auth.import_unsuccessful'));
+          //   dd('hai');
+          //   return redirect()->route('bulk-upload.index');
+          // } 
           return redirect()->route('bulk-upload.index');
     }
 
@@ -62,16 +76,24 @@ class ReportController extends Controller
         ]);  
           $exampleImport = new BookBulkImport;
           $excel_import=Excel::import($exampleImport, $request->books);
-          if($excel_import)
-          {
-            Flash::success( __('auth.import_successful'));
+          if ($exampleImport->errors) {
+            $mm = implode('<br><br>', $exampleImport->errors);
+            Flash::error( __($mm));
             return redirect()->route('bulk-upload.index');
+          } else {
+              Flash::success( __('auth.import_successful'));
+              return redirect()->route('bulk-upload.index');
           }
-          else
-          {
-            Flash::success( __('auth.import_unsuccessful'));
-            return redirect()->route('bulk-upload.index');
-          } 
+          // if($excel_import)
+          // {
+          //   Flash::success( __('auth.import_successful'));
+          //   return redirect()->route('bulk-upload.index');
+          // }
+          // else
+          // {
+          //   Flash::success( __('auth.import_unsuccessful'));
+          //   return redirect()->route('bulk-upload.index');
+          // } 
           return redirect()->route('bulk-upload.index');
     }
 

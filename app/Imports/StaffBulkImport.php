@@ -13,9 +13,11 @@ use Maatwebsite\Excel\Events\AfterImport;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Role;
+use Laracasts\Flash\Flash;
 class StaffBulkImport implements ToCollection, WithHeadingRow
 {
     public $collection;
+    public $errors = [];
 
 /*************  ✨ Codeium Command ⭐  *************/
     /**
@@ -26,25 +28,56 @@ class StaffBulkImport implements ToCollection, WithHeadingRow
 /******  22990f5a-01db-4017-8429-abd14be683e9  *******/
     public function collection(Collection $rows)
     {
-        foreach ($rows as $row) {
-            $ins['member_id']=$row['staff_no'];
-            $ins['first_name']=$row['name'];
-            $ins['designation']=$row['designation'] ?? NULL;
-            $ins['group']=$row['orgngroup']?? NULL;
-            $ins['email']=$row['email_address'];
-            $ins['is_active']=1;
-            $ins['role']=7;
-            $ins['created_by']='admin';
-             $exitUser=User::where('member_id' ,$row['staff_no'])->first();
-             $user=User::updateOrCreate(['member_id' => $row['staff_no']], $ins);
-             $role = Role::find(7);
-             if(!$exitUser){
-                $role->users()
-                ->attach($user);
-             }
-
+        $this->validateRow($rows);
+        if (!count($this->errors)) {
+            foreach ($rows as $row) {
+                $ins['member_id']=$row['staff_no'];
+                $ins['first_name']=$row['name'];
+                $ins['designation']=$row['designation'] ?? NULL;
+                $ins['group']=$row['orgngroup']?? NULL;
+                $ins['email']=$row['email_address'];
+                $ins['is_active']=1;
+                $ins['role']=7;
+                $ins['created_by']='admin';
+                $exitUser=User::where('member_id' ,$row['staff_no'])->first();
+                $user=User::updateOrCreate(['member_id' => $row['staff_no']], $ins);
+                $role = Role::find(7);
+                if(!$exitUser){
+                    $role->users()
+                    ->attach($user);
+                }
+            }
         }
     }
 
-
+    private function validateRow($rows)
+    {
+        // dd($rows);
+        foreach ($rows as $row) {
+            // $error = $this->validateRow($row);
+            $validationRules = [
+                'staff_no' => 'required|regex:/^[A-Za-z][0-9]{5}$/|unique:users,member_id',
+                'name' => 'required|regex:/(^[A-Za-z ]+$)+/',
+                'email_address' => 'required|unique:users,email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+                'designation' => 'required',
+                'orgngroup' => 'required',
+            ];
+    
+            $validator = Validator::make($row->toArray(), $validationRules);
+    
+            if ($validator->fails()) {
+                $validatorError = $validator->errors()->messages();
+                if (isset($validatorError['staff_no'])) 
+                    $this->errors[] = $row['staff_no'].' '.$validatorError['staff_no'][0];
+                if (isset($validatorError['name'])) 
+                    $this->errors[] = $row['name'].' '.$validatorError['name'][0];
+                if (isset($validatorError['email_address'])) 
+                    $this->errors[] = $row['email_address'].' '.$validatorError['email_address'][0];
+                if (isset($validatorError['designation'])) 
+                    $this->errors[] = $row['designation'].' '.$validatorError['designation'][0];
+                if (isset($validatorError['orgngroup'])) 
+                    $this->errors[] = $row['orgngroup'].' '.$validatorError['orgngroup'][0];
+            }
+        }
+    }
 }
