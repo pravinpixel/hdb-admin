@@ -124,10 +124,12 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
         Route::post('staff-bulk-upload', [ReportController::class, 'StaffUpdate'])->name('staff-bulk-upload.update');
         Route::post('book-bulk-upload', [ReportController::class, 'BookUpdate'])->name('book-bulk-upload.update');
         Route::get('book-view-history/get-item-dropdown', [BookWiseViewHistoryController::class, 'getItemDropdown'])->name('book-view-history.get-item-dropdown');
-    
+        Route::post('book-view-history/export', [BookWiseViewHistoryController::class, 'export'])->name('book-view-history.export');
+
         Route::get('memebr-view-history', [MemberViewHistoryController::class, 'index'])->name('member-history.index');
         Route::get('memebr-view-history/get-member-dropdown', [MemberViewHistoryController::class, 'getMemberDropdown'])->name('member-history.get-member-dropdown');
-    
+        Route::post('member-history/export', [MemberViewHistoryController::class, 'export'])->name('member-history.export');
+
         Route::get('overdue-history', [OverdueHistoryController::class, 'index'])->name('overdue-history.index');
         Route::get('overdue-history/datatable', [OverdueHistoryController::class, 'datatable'])->name('overdue-history.datatable');
         Route::post('overdue-history/export', [OverdueHistoryController::class, 'export'])->name('overdue-history.export');

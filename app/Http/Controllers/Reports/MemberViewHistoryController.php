@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Exports\MemberViewHistoryExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 class MemberViewHistoryController extends Controller
@@ -32,6 +34,11 @@ class MemberViewHistoryController extends Controller
         $member_id = $request->member ?? null;
         $user = User::find($member_id);
         return view('admin.reports.member-view-history.index', compact('members','start_date','end_date','user'));
+    }
+
+    public function export(Request $request) 
+    {
+        return Excel::download(new MemberViewHistoryExport($request), 'member-view-history.xlsx');
     }
 
     public function getMemberDropdown(Request $request)

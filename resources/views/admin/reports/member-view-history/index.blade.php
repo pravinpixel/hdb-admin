@@ -22,8 +22,8 @@
    </div>        
 
    <div class="card">
-          {!!  Form::open(['route' => 'member-history.index', 'method' => 'GET']) !!}
-        <div class="row">
+   {!!  Form::open(['route' => 'member-history.export', 'method' => 'post']) !!}
+   <div class="row">
             <div class="col-sm-12 col-md-12">
 
                 <div class="col-md-3">
@@ -60,8 +60,8 @@
                     <div class="form-group">
                         <label style="width:100%;">&nbsp;</label>
                         <button class="btn btn-success" id="search-item"> Search </button>
-                        <a href="{{ route('member-history.index') }}" class="btn btn-danger" > Reset </a>
-                         <!--<button class="btn btn-warning" id="export-item"> Export </button>-->
+                        <button class="btn btn-danger" id="reset-item"> Reset </button>
+                        <button class="btn btn-warning" id="export-item"> Export </button>
                     </div>
                 </div>
             </div>

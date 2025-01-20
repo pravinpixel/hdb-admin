@@ -6,6 +6,9 @@ use App\Models\Checkout;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use App\Models\Item;
+use Carbon\Carbon;
 
 class BookViewHistoryExport implements FromCollection, WithMapping, WithHeadings
 {
@@ -23,35 +26,43 @@ class BookViewHistoryExport implements FromCollection, WithMapping, WithHeadings
     public function collection()
     {
         
-        $dataDb = Checkout::query();
+        $start_date = $this->start_date ?? Carbon::now()->subDays(6);
+        $end_date = $this->end_date ?? now();
+        $start_date = Carbon::parse($start_date)->format('Y-m-d');
+        $end_date = Carbon::parse($end_date)->format('Y-m-d');
+        $item_id = $this->item_id ?? null;
+        $items = Item::with(['language','checkouts'])
+                ->when($this->item_id , function($q) use($item_id) {
+                    $q->where('id', $this->item_id );
+                })
+                ->whereHas('checkouts', function($q) use ($start_date, $end_date) {
+                    $q->when(!Sentinel::inRole('admin'), function($q) {
+                        $q->where('checkout_by', Sentinel::getUser()->id);
+                    })->whereBetween('date', [$start_date, $end_date]);
+                })->paginate(10);
+        $item_id = $this->item_id ?? null;
+        $item = Item::find($item_id);
 
-        if($this->member_id) {
-            $dataDb->where('checkout_by', $this->member_id);
-        } 
-
-        if($this->item_id) {
-            $dataDb->where('item_id', $this->item_id);
-        }
-
-        return $dataDb->with(['user','item'])
-                ->get();
+        return $items;
     }
 
-    public function map($checkout) : array {
+    public function map($items) : array {
         return [
-            $checkout->item->item_id,
-            $checkout->item->item_name,
-            $checkout->user->first_name,
-            $checkout->date_of_return
+            $items->title,
+            $items->call_number,
+            $items->isbn,
+            $items->checkouts ? $items->checkouts->count() : 0,
+            Carbon::parse($items->created_at)->format('Y-m-d'),
         ];
     }
 
     public function headings() : array {
         return [
-           'Item ID',
-           'Item Name',
-           'Member Name',
-           'Date of Return'
+           'Book Title',
+           'Call Number	',
+           'ISBN',
+           'Total Member Taken',
+           'Created At'
         ];
     }
 }

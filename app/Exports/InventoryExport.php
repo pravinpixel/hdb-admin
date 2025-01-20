@@ -21,50 +21,66 @@ class InventoryExport implements FromCollection, WithMapping, WithHeadings
         $this->item_id = $request->search_item_name;
     }
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         $dataDb = Item::query();
-        if($this->item_id) {
-            $dataDb->where('item_id',$this->item_id);
-            $dataDb->orWhere('item_name',$this->item_id);
-        } 
-        if($this->category) {
-            $dataDb->where('category_id',$this->category);
+        if ($this->item_id) {
+            $dataDb->where('item_id', $this->item_id);
+            $dataDb->orWhere('item_name', $this->item_id);
         }
-        if($this->subcategory) {
-            $dataDb->where('subcategory_id',$this->subcategory);
+        if ($this->category) {
+            $dataDb->where('category_id', $this->category);
         }
-        return $dataDb->with('category','subcategory','type','genre','user')->get();
+        if ($this->subcategory) {
+            $dataDb->where('subcategory_id', $this->subcategory);
+        }
+        return $dataDb->with('checkout')->get();
     }
- 
-    public function map($item) : array {
+
+    public function map($item): array
+    {
+        if ($item->is_active == 1 && isset($item->checkout) && isset($item->checkout->user) && !empty($item->checkout->user->first_name)) {
+            $status = "Taken";
+        } else if ($item->status == 1) {
+            $status = "Available";
+        } else {
+            $status = "Un-Available";
+        }
+        if ($item->is_active == 1 && isset($item->checkout) && isset($item->checkout->user) && !empty($item->checkout->user->first_name)) {
+            $issued_to = $item->checkout->user->first_name;
+        } else {
+            $issued_to = "Nil";
+        }
+
         return [
-            $item->item_id,
-            $item->item_name,
-            $item->category->category_name,
-            $item->subcategory->subcategory_name,
-            $item->type->type_name,
-            $item->genre->genre_name,
-            ($item->is_need_approval == 1)? 'Yes' : 'No',
-            ($item->is_issued == 1)? 'N/A' : 'Available',
-            $item->user->full_name ?? 'Nill',
+            $item->title,
+            $item->author,
+            $item->isbn,
+            $item->call_number,
+            $item->barcode,
+            $item->subject,
+            $item->rfid,
+            $item->location,
+            $issued_to,
+            $status
         ];
-
     }
 
-    public function headings() : array {
+    public function headings(): array
+    {
         return [
-           'Item ID',
-           'Item Name',
-           'Category',
-           'Subcategory',
-           'Type',
-           'Genre',
-           'Is Need Approval',
-           'Is Issued',
-           'Issued To'
-        ] ;
+            'Book Name',
+            'Author',
+            'ISBN',
+            'Call Number',
+            'Accession / Barcode Number',
+            'Subject',
+            'RFID',
+            'Location',
+            'Issued To',
+            'Status'
+        ];
     }
 }

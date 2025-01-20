@@ -2,15 +2,15 @@
 @extends('layouts.default')
 @section('content')
    <div class="row">
-      <div class="col-sm-12 col-md-6">         
+      <div class="col-sm-12 col-md-6">
          <h2 class="text-dark"> Inventory Report </h2>
       </div>
-      <div class="col-sm-12 col-md-6">         
+      <div class="col-sm-12 col-md-6">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                @if(Sentinel::inRole('admin'))
                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-               @elseif(Sentinel::inRole('manager')) 
+               @elseif(Sentinel::inRole('manager'))
                <li class="breadcrumb-item"><a href="{{route('manager.dashboard')}}">Dashboard</a></li>
                @elseif(Sentinel::inRole('employee'))
                <li class="breadcrumb-item"><a href="{{route('employee.dashboard')}}">Dashboard</a></li>
@@ -20,7 +20,7 @@
          </nav>
       </div>
    </div>
-   
+
     <div class="row">
         <div class="col-sm-12 col-md-3 col-xl-3">
             <div class="card bg-blue">
@@ -32,13 +32,13 @@
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <h5 class="m-b-20 text-white text-center">&nbsp;</h5>
-                            <h1 class="text-right text-white" id="total_item"><span> 0 </span></h1>       
+                            <h1 class="text-right text-white" id="total_item"><span> 0 </span></h1>
                         </div>
-                    </div>            
+                    </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-sm-12 col-md-3 col-xl-3">
             <div class="card bg-green">
                 <div class="card-block dashboard">
@@ -49,9 +49,9 @@
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <h5 class="m-b-20 text-white text-center">&nbsp;</h5>
-                            <h1 class="text-right text-white" id="total_issued_item"><span> 0 </span></h1> 
+                            <h1 class="text-right text-white" id="total_issued_item"><span> 0 </span></h1>
                         </div>
-                    </div>                  
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,9 +66,9 @@
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <h5 class="m-b-20 text-white text-center">&nbsp;</h5>
-                            <h1 class="text-right text-white" id="total_active_item"><span>  0 </span></h1> 
+                            <h1 class="text-right text-white" id="total_active_item"><span>  0 </span></h1>
                         </div>
-                    </div>                  
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,47 +83,47 @@
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <h5 class="m-b-20 text-white text-center">&nbsp;</h5>
-                            <h1 class="text-right text-white" id="total_inactive_item"><span> 0 </span></h1> 
+                            <h1 class="text-right text-white" id="total_inactive_item"><span> 0 </span></h1>
                         </div>
-                    </div>                  
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-        
+
 
    <div class="card">
     {!!  Form::open(['route' => 'inventory.export', 'method' => 'post']) !!}
         <div class="row">
-            <div class="col-sm-12 col-md-12"> 
+            <div class="col-sm-12 col-md-12">
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="type">Book Name / RFID:</label>
                         {!! Form::text('search_item_name', null, ['class' => 'form-control', 'id' => 'search_item_name']) !!}
                     </div>
                 </div>
-              
+
                 <div class="col-md-3">
                     <div class="form-group">
                         <label style="width:100%;">&nbsp;</label>
                         <button class="btn btn-success" id="search-item"> Search </button>
                         <button class="btn btn-danger" id="reset-item"> Reset </button>
-                         <!--<button class="btn btn-warning" id="export-item"> Export </button>-->
+                        <button class="btn btn-warning" id="export-item"> Export </button>
                     </div>
                 </div>
             </div>
         </div>
     {!!  Form::close() !!}
         <div class="row">
-            <div class="col-sm-12 col-md-12" style="overflow-x: auto;"> 
+            <div class="col-sm-12 col-md-12" style="overflow-x: auto;">
             @include('admin.reports.inventory.table')
-            </div>    
+            </div>
         </div>
    </div>
 @stop
 
 @push('page_css')
-    
+
    <link rel="stylesheet" href="{{ asset('dark/assets/plugins/jquery-datatables-editable/datatables.css') }}">
    <link rel="stylesheet" href="{{ asset('assets/pagec/employee.css') }}">
    <link href="{{ asset('dark/assets/plugins/select2/dist/css/select2.css')}}" rel="stylesheet" type="text/css">
@@ -141,11 +141,11 @@ $(function () {
    var table = $('#inventoryTable').DataTable({
          aaSorting     : [[0, 'desc']],
          responsive: true,
-         processing: true,    
+         processing: true,
          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
          serverSide: true,
          pageLength: 50,
-        searching: false, paging: true, info: true,    
+        searching: false, paging: true, info: true,
         bSort: false,
          ajax          : {
             url     : '{!! route('inventory.datatable') !!}',
@@ -189,6 +189,6 @@ $(function () {
         $("#subcategory").val('').trigger('change');
         $('#inventoryTable').DataTable().clear().draw();
    });
-}); 
+});
 </script>
 @endpush
