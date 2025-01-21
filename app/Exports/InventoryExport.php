@@ -11,14 +11,10 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 class InventoryExport implements FromCollection, WithMapping, WithHeadings
 {
 
-    public $category;
-    public $subcategory;
-    public $item_id;
+    public $search_item_name;
     public function __construct($request)
     {
-        $this->category = $request->category;
-        $this->subcategory = $request->subcategory;
-        $this->item_id = $request->search_item_name;
+        $this->search_item_name = $request->search_item_name;
     }
     /**
      * @return \Illuminate\Support\Collection
@@ -26,15 +22,13 @@ class InventoryExport implements FromCollection, WithMapping, WithHeadings
     public function collection()
     {
         $dataDb = Item::query();
-        if ($this->item_id) {
-            $dataDb->where('item_id', $this->item_id);
-            $dataDb->orWhere('item_name', $this->item_id);
-        }
-        if ($this->category) {
-            $dataDb->where('category_id', $this->category);
-        }
-        if ($this->subcategory) {
-            $dataDb->where('subcategory_id', $this->subcategory);
+        if ($this->search_item_name) {
+            $dataDb->where('title', 'like', '%' . $this->search_item_name . '%');
+            $dataDb->orWhere('item_ref', 'like', '%' . $this->search_item_name . '%');
+            $dataDb->orWhere('isbn', 'like', '%' . $this->search_item_name . '%');
+            $dataDb->orWhere('author', 'like', '%' . $this->search_item_name . '%');
+            $dataDb->orWhere('call_number', 'like', '%' . $this->search_item_name . '%');
+            $dataDb->orWhere('location', 'like', '%' . $this->search_item_name . '%');
         }
         return $dataDb->with('checkout')->get();
     }
