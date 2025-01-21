@@ -38,15 +38,7 @@
          @enderror
         </div>
         
-          <div class="form-group">
-            <label for="Langugae">Langugae:<span style="color: red">*</span></label>
-              {!! Form::select('language_id', ['' => '--select Langugae--'], null, ['class' => 'form-control', 'id' => 'language_id']) !!}
-               @error('language_id')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-         @enderror
-        </div>
+       
            <div class="form-group">
             <label class="mr-4" for="status">Status : </label>
 
@@ -89,6 +81,15 @@
             </div>
          @enderror
     
+        </div>
+           <div class="form-group">
+            <label for="Langugae">Langugae:<span style="color: red">*</span></label>
+              {!! Form::select('language_id', ['' => '--select Langugae--'], null, ['class' => 'form-control', 'id' => 'language_id']) !!}
+               @error('language_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
         </div>
       
   <!-- <div class="form-group">

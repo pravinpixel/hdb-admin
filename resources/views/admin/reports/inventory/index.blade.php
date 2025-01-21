@@ -144,7 +144,7 @@ $(function () {
          processing: true,
          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
          serverSide: true,
-         pageLength: 50,
+         pageLength: -1,
         searching: false, paging: true, info: true,
         bSort: false,
          ajax          : {
