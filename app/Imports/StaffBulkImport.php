@@ -56,14 +56,17 @@ class StaffBulkImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row) {
             // $error = $this->validateRow($row);
             $validationRules = [
-                'staff_no' => 'required|regex:/^[A-Za-z][0-9]{5}$/|unique:users,member_id',
+                'staff_no' => 'required|regex:/^[A-Za-z][0-9]{5}$/',
                 'name' => 'required|regex:/(^[A-Za-z ]+$)+/',
-                'email_address' => 'required|unique:users,email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+                'email_address' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
                 'designation' => 'required',
                 'orgngroup' => 'required',
             ];
     
-            $validator = Validator::make($row->toArray(), $validationRules);
+            $validator = Validator::make($row->toArray(), $validationRules, [
+                'staff_no.regex' => 'Staff No must be 1 alphabet followed by 5 numbers',
+                'name.regex' => 'Name should only contain alphabets and spaces.',
+            ]);
     
             if ($validator->fails()) {
                 $validatorError = $validator->errors()->messages();

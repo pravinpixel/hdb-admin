@@ -66,14 +66,14 @@ class BookBulkImport implements ToCollection, WithHeadingRow
             $row = $row->toArray();
             $row['barcode'] = $row['accession_barcode_number'];
             $validationRules = [
-                'rfid'         => 'required|unique:items',
-                'title'        => ['required',Rule::unique('items')->whereNull('deleted_at')],
+                'rfid'         => 'required',
+                'title'        => 'required',
                 'author'         => 'required',
-                'isbn' => 'required|min:1|max:13|unique:items',
+                'isbn' => 'required|min:1|max:13',
                 'subject'        => 'required',
                 'language'=>'required',
                 'call_number' => 'nullable|integer|digits:10',
-                'barcode' => ['nullable',Rule::unique('items')->whereNull('deleted_at')]
+                'barcode' => ['nullable']
             ];
     
             $validator = Validator::make($row, $validationRules);
