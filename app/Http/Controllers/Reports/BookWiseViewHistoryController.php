@@ -17,7 +17,6 @@ class BookWiseViewHistoryController extends Controller
 {
     public function index(Request $request)
     {
-        
         $start_date = $request->start_date ?? Carbon::now()->subDays(6);
         $end_date = $request->end_date ?? now();
         $start_date = Carbon::parse($start_date)->format('Y-m-d');

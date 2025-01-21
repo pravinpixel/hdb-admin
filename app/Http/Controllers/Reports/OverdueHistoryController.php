@@ -17,7 +17,11 @@ class OverdueHistoryController extends Controller
 {
     public function index()
     {
-        return view('admin.reports.overdue-history.index');
+        $start_date = $request->start_date ?? Carbon::now()->subDays(6);
+        $end_date = $request->end_date ?? now();
+        $start_date = Carbon::parse($start_date)->format('Y-m-d');
+        $end_date = Carbon::parse($end_date)->format('Y-m-d');
+        return view('admin.reports.overdue-history.index', compact('start_date','end_date'));
     }
 
     public function datatable(Request $request)
@@ -29,7 +33,7 @@ class OverdueHistoryController extends Controller
             if($request->member_id) {
                 $dataDb->where('checkout_by', $request->member_id);
             }
-            $start_date = $request->start_date ?? now();
+            $start_date = $request->start_date ?? Carbon::now()->subDays(6);
             $end_date = $request->end_date ?? now();
             $start_date = Carbon::parse($start_date)->format('Y-m-d');
             $end_date = Carbon::parse($end_date)->format('Y-m-d');

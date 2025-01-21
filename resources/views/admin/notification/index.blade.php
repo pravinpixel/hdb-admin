@@ -77,6 +77,13 @@
 <script>
 
 $(function () {
+
+   var start_date = '{!! Date("d-m-Y", strtotime($start_date) )!!}';
+    var end_date = '{!! Date("d-m-Y", strtotime($end_date) )!!}';
+
+    $("#start_date").val(start_date);
+    $("#end_date").val(end_date);
+
    var table = $('#notificationTable').DataTable({
          aaSorting     : [[0, 'desc']],
          responsive: true,

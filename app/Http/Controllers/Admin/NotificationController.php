@@ -31,7 +31,11 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return view('admin.notification.index');
+        $start_date = $request->start_date ?? Carbon::now()->subDays(6);
+        $end_date = $request->end_date ?? now();
+        $start_date = Carbon::parse($start_date)->format('Y-m-d');
+        $end_date = Carbon::parse($end_date)->format('Y-m-d');
+        return view('admin.notification.index', compact('start_date','end_date'));
     }
 
     /**
