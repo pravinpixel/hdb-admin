@@ -52,7 +52,7 @@
                             @endif
                             @if(Sentinel::inRole('admin') || Sentinel::hasAccess('notification.index'))
                                 <li>
-                                    <a href="{{ route('notification.index') }}" class="waves-effect waves-light {{request()->is('admin/notification*') ? 'active' : ''}}"><i class="fa fa-bell"></i><span> Notifications </span></a>
+                                    <a href="{{ route('notification.index') }}" class="waves-effect waves-light {{request()->is('admin/notification*') ? 'active' : ''}}"><i class="fa fa-bell"></i><span> Notifications <span class="badge badge-light">1</span></span></a>
                                 </li>
                             @endif
                             @if(Sentinel::hasAccess('inventory.index') || Sentinel::hasAccess('approve-request.index') || Sentinel::hasAccess('member-view-history.index') ||  Sentinel::hasAccess('book-view-history.index') ||  Sentinel::hasAccess('overdue-history.index') || 
