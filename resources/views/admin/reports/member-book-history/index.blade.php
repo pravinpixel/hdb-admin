@@ -106,7 +106,7 @@
                         <label style="width:100%;">&nbsp;</label>
                         <button class="btn btn-success" id="search-item"> Search </button>
                         <button class="btn btn-danger" id="reset-item"> Reset </button>
-                         <!--<button class="btn btn-warning" id="export-item"> Export </button>-->
+                         <button class="btn btn-warning" id="export-item"> Export </button>
                     </div>
                 </div>
             </div>

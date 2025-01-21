@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Exports\MemberViewHistoryExport;
+use App\Exports\StaffWiseViewHistoryExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
@@ -38,7 +39,7 @@ class MemberViewHistoryController extends Controller
 
     public function export(Request $request) 
     {
-        return Excel::download(new MemberViewHistoryExport($request), 'member-view-history.xlsx');
+        return Excel::download(new StaffWiseViewHistoryExport($request), 'staff-wise-view-history.xlsx');
     }
 
     public function getMemberDropdown(Request $request)
