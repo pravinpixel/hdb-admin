@@ -156,7 +156,13 @@
                     d.member = $("#member").val();
                     d.start_date = $("#start_date").val();
                     d.end_date = $("#end_date").val();
-                },
+                }, error: function(xhr, error, code) {
+            if (xhr.status === 404) {
+             $("#error-message").html(xhr.responseJSON.msg);
+             $("#error-modal").modal('show');
+             $("#reset-item").click();
+            }
+            }
             },
             columns: [{
                     data: 'member_id',

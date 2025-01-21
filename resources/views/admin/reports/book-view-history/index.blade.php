@@ -48,13 +48,14 @@
                         </div>
                     </div>
                 </div>
+                 
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="type">Book:</label>
                         {!! Form::select('item', [], null, ['placeholder' => 'select book', 'class' => 'form-control', 'id' => 'item']) !!}
                     </div>
                 </div>
-
+                    
                 <div class="col-md-3">
                     <div class="form-group">
                         <label style="width:100%;">&nbsp;</label>
@@ -151,7 +152,13 @@
                     d.item_id = $("#item").val(); // Filters by item ID
                     d.start_date = $("#start_date").val(); // Filters by start date
                     d.end_date = $("#end_date").val(); // Filters by end date
-                },
+                }, error: function(xhr, error, code) {
+            if (xhr.status === 404) {
+             $("#error-message").html(xhr.responseJSON.msg);
+             $("#error-modal").modal('show');
+             $("#reset-item").click();
+            }
+            }
             },
             columns: [{
                     data: 'title',

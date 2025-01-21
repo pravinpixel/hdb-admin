@@ -12,7 +12,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-
+use Laracasts\Flash\Flash;
 class BookWiseViewHistoryController extends Controller
 {
     public function index(Request $request)
@@ -43,6 +43,14 @@ class BookWiseViewHistoryController extends Controller
         if ($request->ajax()) {
             $start_date = $request->start_date ?? null;
             $end_date = $request->end_date ?? null;
+            if (isset($start_date) && isset($end_date)) {
+                $start_date_obj = \Carbon\Carbon::createFromFormat('d-m-Y', $start_date);
+                $end_date_obj = \Carbon\Carbon::createFromFormat('d-m-Y', $end_date);
+                if ($end_date_obj->lt($start_date_obj)) {
+                    return response(['status' => false, 'msg' => trans('global.date_invalid')], 404);
+                }
+              
+            }
             if (isset($start_date)) {
                 $start_date = Carbon::parse($start_date)->startOfDay();
                 $end_date = Carbon::parse($end_date)->endOfDay();

@@ -144,7 +144,13 @@ $(function () {
                 d.member_id = $("#member").val();
                 d.start_date = $("#start_date").val();
                 d.end_date = $("#end_date").val();
-            },
+            }, error: function(xhr, error, code) {
+            if (xhr.status === 404) {
+             $("#error-message").html(xhr.responseJSON.msg);
+             $("#error-modal").modal('show');
+             $("#reset-item").click();
+            }
+            }
          },
          columns       : [
             {data: 'id', name: 'id', visible: false},
@@ -167,11 +173,26 @@ $(function () {
         $('#overdueHistoryTable').DataTable().clear().draw();
    });
 
-   $("#reset-item").click( function(e){
-        e.preventDefault();
-        $("#member").val('').trigger('change');
-        $('#overdueHistoryTable').DataTable().clear().draw();
-   });
+   $("#reset-item").click(function(e) {
+    e.preventDefault();
+
+    // Clear the member select dropdown
+    $("#member").val('').trigger('change');
+
+    // Set start date to 5 days ago
+    var start_date = new Date();
+    start_date.setDate(start_date.getDate() - 5);
+    $("#start_date").datepicker("setDate", start_date);
+
+    // Set end date to today + 1 day
+    var end_date = new Date();
+    end_date.setDate(end_date.getDate() + 1);
+    $("#end_date").datepicker("setDate", end_date);
+
+    // Clear and redraw the DataTable
+    $('#overdueHistoryTable').DataTable().clear().draw();
+});
+
 }); 
 </script>
 @endpush

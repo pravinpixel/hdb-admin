@@ -31,6 +31,14 @@ class MemberBookHistoryController extends Controller
             $member_id = $request->member_id ?? null;
             $start_date = $request->start_date ?? now();
             $end_date = $request->end_date ?? now();
+            if (isset($start_date) && isset($end_date)) {
+                $start_date_obj = \Carbon\Carbon::createFromFormat('d-m-Y', $start_date);
+                $end_date_obj = \Carbon\Carbon::createFromFormat('d-m-Y', $end_date);
+                if ($end_date_obj->lt($start_date_obj)) {
+                    return response(['status' => false, 'msg' => trans('global.date_invalid')], 404);
+                }
+              
+            }
             $start_date = Carbon::parse($start_date)->format('Y-m-d');
             $end_date = Carbon::parse($end_date)->format('Y-m-d');
             $data['total_taken_item'] = Checkout::when($item_id, function($q) use ($item_id){

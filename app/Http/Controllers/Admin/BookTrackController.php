@@ -54,7 +54,7 @@ class BookTrackController extends Controller
                  $count =$dataDb->due->count();
                 }
                if($dataDb->status=='taken'){
-                return '<span class="label label-warning label-sm">Taken  '.(isset($count)?$count:'').'</span>';
+                return '<span class="label label-warning label-sm">Taken  <span class="badge badge-light">'.(isset($count)?$count:'').'</span></span>';
                }elseif($dataDb->status=='returned'){
                 return '<span class="label label-success label-sm">Returned</span>';
                }else{
@@ -91,7 +91,6 @@ class BookTrackController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'checkin_date'  => ['required', 'date'],
             'due_date'  => ['required','date','after_or_equal:checkout_date'],

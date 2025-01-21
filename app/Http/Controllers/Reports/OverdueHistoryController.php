@@ -35,9 +35,17 @@ class OverdueHistoryController extends Controller
             }
             $start_date = $request->start_date ?? Carbon::now()->subDays(6);
             $end_date = $request->end_date ?? now();
+            if (isset($start_date) && isset($end_date)) {
+                $start_date_obj = \Carbon\Carbon::createFromFormat('d-m-Y', $start_date);
+                $end_date_obj = \Carbon\Carbon::createFromFormat('d-m-Y', $end_date);
+                if ($end_date_obj->lt($start_date_obj)) {
+                    return response(['status' => false, 'msg' => trans('global.date_invalid')], 404);
+                }
+              
+            }
             $start_date = Carbon::parse($start_date)->format('Y-m-d');
             $end_date = Carbon::parse($end_date)->format('Y-m-d');
-
+            
             $dataDb->where('return_status',false)
                     ->whereBetween('date_of_return', [$start_date, $end_date])
                     ->with(['user','item']);
