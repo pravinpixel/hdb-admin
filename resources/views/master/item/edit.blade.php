@@ -51,7 +51,6 @@ $(document).ready(function(){
       }
    });
 let status = {!!  $result->status !!};
-console.log('123 : ',status);
 let statusStr = status ? 'active' : 'inactive';
 $("input[name='status'][value='" + statusStr + "']").prop('checked', true);
 // $("#inactive").prop('checked', false);

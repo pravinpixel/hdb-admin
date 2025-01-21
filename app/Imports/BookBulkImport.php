@@ -48,12 +48,12 @@ class BookBulkImport implements ToCollection, WithHeadingRow
             $ins['rfid'] = $row['rfid'];
             $ins['language_id'] = $language_id;
             $ins['author'] = $row['author'];
-            $ins['location'] = $row['location'];
+            // $ins['location'] = $row['location'];
             $ins['isbn'] = $row['isbn'];
             $ins['call_number'] = $row['call_number'];
-            $ins['status'] = $row['status'] ?? 1;
+            $ins['status'] = $row['status'] == 'active' ? 1 : 0;
             $ins['created_by'] = Auth::id();
-            $ins['due_period']= $row['due_period'];
+            // $ins['due_period']= $row['due_period'];
                 Item::updateOrCreate(['item_ref' => $row['rfid']], $ins);
             }
         }
@@ -61,24 +61,22 @@ class BookBulkImport implements ToCollection, WithHeadingRow
 
     private function validateRow($rows)
     {
-        // dd($rows);
         foreach ($rows as $row) {
             // $error = $this->validateRow($row);
+            $row = $row->toArray();
+            $row['barcode'] = $row['accession_barcode_number'];
             $validationRules = [
                 'rfid'         => 'required|unique:items',
                 'title'        => ['required',Rule::unique('items')->whereNull('deleted_at')],
                 'author'         => 'required',
-                'location'            => 'required',
-                'isbn' => 'required|min:1|max:13|unique:isbn',
+                'isbn' => 'required|min:1|max:13|unique:items',
                 'subject'        => 'required',
-                'location'       => 'required',
                 'language'=>'required',
-                'due_period'=>'nullable|integer',
                 'call_number' => 'nullable|integer|digits:10',
-                'accession_barcode_number' => ['nullable',Rule::unique('items')->whereNull('deleted_at')]
+                'barcode' => ['nullable',Rule::unique('items')->whereNull('deleted_at')]
             ];
     
-            $validator = Validator::make($row->toArray(), $validationRules);
+            $validator = Validator::make($row, $validationRules);
     
             if ($validator->fails()) {
                 $validatorError = $validator->errors()->messages();
@@ -88,22 +86,16 @@ class BookBulkImport implements ToCollection, WithHeadingRow
                     $this->errors[] = $row['title'].' '.$validatorError['title'][0];
                 if (isset($validatorError['author'])) 
                     $this->errors[] = $row['author'].' '.$validatorError['author'][0];
-                if (isset($validatorError['location'])) 
-                    $this->errors[] = $row['location'].' '.$validatorError['location'][0];
                 if (isset($validatorError['isbn'])) 
                     $this->errors[] = $row['isbn'].' '.$validatorError['isbn'][0];
                 if (isset($validatorError['subject'])) 
                     $this->errors[] = $row['subject'].' '.$validatorError['subject'][0];
-                if (isset($validatorError['location'])) 
-                    $this->errors[] = $row['location'].' '.$validatorError['location'][0];
                 if (isset($validatorError['language'])) 
                     $this->errors[] = $row['language'].' '.$validatorError['language'][0];
-                if (isset($validatorError['due_period'])) 
-                    $this->errors[] = $row['due_period'].' '.$validatorError['due_period'][0];
                 if (isset($validatorError['call_number'])) 
                     $this->errors[] = $row['call_number'].' '.$validatorError['call_number'][0];
-                if (isset($validatorError['accession_barcode_number'])) 
-                    $this->errors[] = $row['accession_barcode_number'].' '.$validatorError['accession_barcode_number'][0];
+                if (isset($validatorError['barcode'])) 
+                    $this->errors[] = $row['barcode'].' '.$validatorError['barcode'][0];
             }
         }
     }

@@ -75,10 +75,10 @@
     
         </div>
       
-  <div class="form-group">
+  <!-- <div class="form-group">
             <label for="location">Location:</label>
            {!! Form::text('location', null, ['class' => 'form-control','readonly' => 'readonly']) !!}
-        </div>
+        </div> -->
          <!-- <div class="form-group">
             <label for="location">Due Period:</label>
            {!! Form::text('due_period', null, ['class' => 'form-control','readonly' => 'readonly']) !!}
@@ -112,11 +112,13 @@ $(document).ready(function(){
       }
    });
 let status = {!!  $result->status !!};
-if(status) {
-   $("#status").prop('checked', true);
-} else {
-   $("#status").prop('checked', false);
-}
+let statusStr = status ? 'active' : 'inactive';
+$("input[name='status'][value='" + statusStr + "']").prop('checked', true);
+// if(status) {
+//    $("#status").prop('checked', true);
+// } else {
+//    $("#status").prop('checked', false);
+// }
 let type = {!! json_encode($result->language->toArray()) !!}
 var typeOption = new Option(type.language, type.id, true, true);
 $('#language_id').append(typeOption).trigger('change'); 
