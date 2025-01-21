@@ -11,14 +11,14 @@ use Carbon\Carbon;
 
 class StaffWiseViewHistoryExport implements FromCollection, WithMapping, WithHeadings
 {
-    public $member_id;
+    public $member;
     public $item_id;
     public $start_date;
     public $end_date;
 
     public function __construct($request)
     {
-        $this->member_id = $request->member_id;
+        $this->member = $request->member;
         $this->item_id = $request->item_id;
         $this->start_date = $request->start_date;
         $this->end_date = $request->end_date;
@@ -29,15 +29,15 @@ class StaffWiseViewHistoryExport implements FromCollection, WithMapping, WithHea
     public function collection()
     {
 
-        $dataDb = User::with(['checkouts', 'roles'])->where('role',7);
+        $dataDb = User::with(['checkouts', 'roles'])->where('role', 7);
 
-        if ($this->member_id) {
-            $dataDb->where('id', $this->member_id);
+        if ($this->member) {
+            $dataDb->where('id', $this->member);
         }
         $starts_date = $this->start_date ?? now();
         $ends_date = $this->end_date ?? now();
-        $start_date = Carbon::parse($starts_date)->format('Y-m-d');
-        $end_date = Carbon::parse($ends_date)->format('Y-m-d');
+        $start_date = Carbon::parse($starts_date)->startOfDay();
+        $end_date = Carbon::parse($ends_date)->endOfDay();
         $dataDb->whereBetween('created_at', [$start_date, $end_date]);
         return $dataDb->with(['checkouts', 'roles'])
             ->get();

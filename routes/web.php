@@ -60,7 +60,7 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
     Route::put('item/{id}/status', [ItemController::class,'status'] )->name('item.status');
     Route::get('item/dropdown', [ItemController::class, 'getDropdown'])->name('item.get-dropdown');
     Route::get('item/get-item', [ItemController::class, 'getItem'])->name('item.get-item');
-    
+
     Route::get('return/get-all-taken-item', [ReturnController::class, 'getAllTakenItem'])->name('return.get-all-taken-item');
     Route::get('return/get-taken-item', [ReturnController::class, 'getTakenItem'])->name('return.get-taken-item');
     Route::post('return/checkin', [ReturnController::class, 'checkin'])->name('return.checkin');
@@ -81,8 +81,8 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
     Route::get('issue/{id}/datatable', [IssueController::class,'datatable'])->name('issue.datatable');
     Route::post('issue/checkout', [CheckoutController::class,'checkout'])->name('issue.checkout');
     Route::post('issue/send-approval-request', [CheckoutController::class,'sendApprovalRequest'])->name('issue.send-approval-request');
-   
-    Route::group(['prefix' => 'setting', 'middleware'=> 'admin'], function(){ 
+
+    Route::group(['prefix' => 'setting', 'middleware'=> 'admin'], function(){
         Route::get('staff/datatable', [StaffController::class,'datatable'] )->name('staff.datatable');
         Route::get('role/datatable', [RoleController::class,'datatable'] )->name('role.datatable');
         Route::put('role/{id}/status', [RoleController::class,'status'])->name('role.status');
@@ -103,23 +103,24 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
         Route::get('inventory', [InventoryReportController::class,'index'])->name('inventory.index');
         Route::get('inventory/datatable', [InventoryReportController::class,'datatable'])->name('inventory.datatable');
         Route::post('inventory/export', [InventoryReportController::class,'export'])->name('inventory.export');
-    
-        
+
+
         Route::get('approve-request-history', [ApproveRequestHistoryController::class,'index'])->name('approve-request.index');
         Route::get('approve-request-history/datatable', [ApproveRequestHistoryController::class,'datatable'])->name('approve-request.datatable');
         Route::post('approve-request-history/export', [ApproveRequestHistoryController::class,'export'])->name('approve-request.export');
         Route::get('approve-request-history/get-member-dropdown', [ApproveRequestHistoryController::class,'getMemberDropdown'])->name('approve-request.get-member-dropdown');
         Route::get('approve-request-history/get-item-dropdown', [ApproveRequestHistoryController::class,'getItemDropdown'])->name('approve-request.get-item-dropdown');
-        
-    
+
+
         Route::get('member-book-history', [MemberBookHistoryController::class, 'index'])->name('member-view-history.index');
         Route::get('member-book-history/datatable', [MemberBookHistoryController::class, 'datatable'])->name('member-view-history.datatable');
         Route::post('member-book-history/export', [MemberBookHistoryController::class, 'export'])->name('member-view-history.export');
         Route::get('member-book-history/get-member-dropdown', [MemberBookHistoryController::class, 'getMemberDropdown'])->name('member-view-history.get-member-dropdown');
         Route::get('member-book-history/get-item-dropdown', [MemberBookHistoryController::class, 'getItemDropdown'])->name('member-view-history.get-item-dropdown');
-    
-    
+
+
         Route::get('book-view-history', [BookWiseViewHistoryController::class, 'index'])->name('book-view-history.index');
+        Route::get('book-view-history/datatable', [BookWiseViewHistoryController::class, 'datatable'])->name('book-view-history.datatable');
         Route::get('bulk-upload', [ReportController::class, 'index'])->name('bulk-upload.index');
         Route::post('staff-bulk-upload', [ReportController::class, 'StaffUpdate'])->name('staff-bulk-upload.update');
         Route::post('book-bulk-upload', [ReportController::class, 'BookUpdate'])->name('book-bulk-upload.update');
@@ -129,6 +130,7 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
         Route::get('memebr-view-history', [MemberViewHistoryController::class, 'index'])->name('member-history.index');
         Route::get('memebr-view-history/get-member-dropdown', [MemberViewHistoryController::class, 'getMemberDropdown'])->name('member-history.get-member-dropdown');
         Route::post('member-history/export', [MemberViewHistoryController::class, 'export'])->name('member-history.export');
+        Route::get('member-view-history/datatable', [MemberViewHistoryController::class, 'datatable'])->name('member-history.datatable');
 
         Route::get('overdue-history', [OverdueHistoryController::class, 'index'])->name('overdue-history.index');
         Route::get('overdue-history/datatable', [OverdueHistoryController::class, 'datatable'])->name('overdue-history.datatable');

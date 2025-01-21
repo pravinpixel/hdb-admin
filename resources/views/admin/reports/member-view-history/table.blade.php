@@ -1,60 +1,14 @@
 <table id="memberViewHistoryTable" class="table table-bordered table-hover" style="width:100%">
+    <thead>
          <tr>
-            <th>Staff ID</th>
-            <th>Staff Name</th>
-            <th>Designation</th>
-            <th>Total Item Taken</th>
-            <th>Created At</th>
+            <th style="text-align: left">Staff ID</th>
+            <th style="text-align: left">Staff Name</th>
+            <th style="text-align: left">Designation</th>
+            <th style="text-align: left">Total Item Taken</th>
+            <th style="text-align: left">Created At</th>
          </tr>
-      @forelse($members as $member)
-         <tr>
-              <!-- <td id="collapseButton" onclick="collapse(this)"><span class="btn shadow btn-primary"  >+</span></td>            -->
+    </thead>
+    <tbody>
 
-              <td>{{$member->member_id}}</td>
-              <td>{{$member->first_name}}</td>
-              <td>{{$member->designation ?? ''}}</td>
-              <td>{{$member->checkouts()->count()}}</td>
-              <td>{{$member->created_at->format('d-m-Y')}}</td>
-         </tr>
-         <!-- @if($member->has('checkouts'))
-            <div class="hidden">
-               <tr style="display:none">
-                  <td></td>
-                  <td colspan=5> 
-                     <table class="table table-bordered table-hover">
-                        <thead>
-                           <tr>
-                              <th>#</th>
-                              <th>Created At</th>
-                              <th>Item Name</th>
-                              <th>Date of Return (check in)</th>
-                              <th>Date of Return</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           @foreach($member->checkouts as $checkout)
-                              <tr>           
-                                    <td>{{ $loop->iteration }}</td>               
-                                    <td>{{ date('d-m-Y', strtotime($checkout->date)) }} </td>
-                                    <td>{{  $checkout->item->title ?? '' }} </td>
-                                    @if(isset($checkout->checkout_date))
-                                       <td>{{  date('d-m-Y', strtotime($checkout->checkout_date)) }}</td>
-                                    @else
-                                       <td> </td>
-                                    @endif
-                                    <td>{{ date('d-m-Y', strtotime($checkout->date_of_return)) }}</td>
-                              </tr>
-                           @endforeach
-                        </tbody>
-                     </table>
-                  </td>
-               </tr>
-            <div>
-         @endif -->
-      @empty
-      <tr> <td colspan=5>No data available in table</td> </tr>
-   @endforelse
-</table>
-<div class="pull-right">
-{{ $members->onEachSide(5)->links() }}
-</div>
+    </tbody>
+ </table>

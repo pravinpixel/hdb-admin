@@ -17,11 +17,7 @@ class MemberBookHistoryController extends Controller
 {
     public function index()
     {
-        $start_date = $request->start_date ?? Carbon::now()->subDays(6);
-        $end_date = $request->end_date ?? now();
-        $start_date = Carbon::parse($start_date)->format('Y-m-d');
-        $end_date = Carbon::parse($end_date)->format('Y-m-d');
-        return view('admin.reports.member-book-history.index', compact('start_date','end_date'));
+        return view('admin.reports.member-book-history.index');
     }
 
     public function datatable(Request $request)
@@ -57,13 +53,13 @@ class MemberBookHistoryController extends Controller
                         });
                         if($item_id != null) {
                             $dataDb->where('item_id', $request->item_id);
-                        } 
+                        }
                         if($member_id != null) {
                             $dataDb->where('checkout_by', $request->member_id);
                         }
                         $dataDb->whereBetween('date', [$start_date, $end_date]);
-                        $dataDb->orderBy('checkout_by');  
-                            
+                        $dataDb->orderBy('checkout_by');
+
             return DataTables::eloquent($dataDb)
                     ->editColumn('created_at', function($dataDb){
                         return Carbon::parse($dataDb->created_at)->format('d-m-Y');
@@ -79,7 +75,7 @@ class MemberBookHistoryController extends Controller
         }
     }
 
-    public function export(Request $request) 
+    public function export(Request $request)
     {
         return Excel::download(new MemberViewHistoryExport($request), 'member-wise-view-history-report-.xlsx');
     }
@@ -87,7 +83,7 @@ class MemberBookHistoryController extends Controller
     public function getMemberDropdown(Request $request)
     {
         $query = $request->input('q');
-        return User::where('first_name','like', '%' .  $query. '%') 
+        return User::where('first_name','like', '%' .  $query. '%')
         ->where('role',7)
                     ->limit(25)
                     ->get()
@@ -99,7 +95,7 @@ class MemberBookHistoryController extends Controller
     public function getItemDropdown(Request $request)
     {
         $query = $request->input('q');
-        return Item::where('title','like', '%' .  $query. '%') 
+        return Item::where('title','like', '%' .  $query. '%')
                         ->orWhere('item_ref', 'like', '%' .  $query. '%')
                         ->where('status', 1)
                         ->limit(25)
