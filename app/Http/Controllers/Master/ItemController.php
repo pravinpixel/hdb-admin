@@ -464,6 +464,10 @@ class ItemController extends Controller
     public function StockDetails(Request $request)
     {
         try {
+            $request->validate([
+                'type' => 'required',
+                'stockId' =>'required',
+            ]);
             $stockId = $request->input('stockId');
             $type = $request->input('type');
             $data = Stock::where('stock_id', $stockId)->first();
@@ -506,6 +510,12 @@ class ItemController extends Controller
                 ], 200);
             } else if ($type == 2) {
                 $data = Stock::where('stock_id', $stockId)->first();
+                if(!$data){
+                    return Response::json([
+                        'success' => false,
+                        'message' => 'StockId not available stock.',
+                    ], 400);
+                }
                 $missing_stock_data = json_decode($data->missing_stock_data, true);
                 return Response::json([
                     'success' => true,
@@ -515,6 +525,12 @@ class ItemController extends Controller
                 ], 200);
             } else if ($type == 3) {
                 $data = Stock::where('stock_id', $stockId)->first();
+                if(!$data){
+                    return Response::json([
+                        'success' => false,
+                        'message' => 'StockId not available stock.',
+                    ], 400);
+                }
                 if ($data->available_stock != 0) {
                     $request_scanned_rfids = json_decode($data->request_scanned_rfids, true);
                     $itemsQuery = Item::query();
@@ -549,6 +565,11 @@ class ItemController extends Controller
                         ],
                         'time' => date('Y-m-d h:i:s')
                     ], 200);
+                }else{
+                    return Response::json([
+                        'success' => false,
+                        'message' => 'No Available stock.',
+                    ], 400);
                 }
             }
         } catch (\Exception $e) {
