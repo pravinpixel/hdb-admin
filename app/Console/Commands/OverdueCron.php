@@ -10,7 +10,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Session;
 class OverdueCron extends Command
 {
     /**
@@ -45,7 +45,8 @@ class OverdueCron extends Command
     public function handle()
     {
         try {
-            $config = Config::find(1);
+            $count=0;
+            $config = Config::find(3);
             Log::info('overdue cron start');
             $checkouts = Checkout::with(['item','user'])
             ->where('status','taken')
@@ -63,9 +64,12 @@ class OverdueCron extends Command
                 $notify->item_id=$checkout->item_id;
                 $notify->type="overdue";
                 $notify->type_id=$checkout->id;
-                $notify->save();     
+                $notify->save();    
+                $count = $count+1; 
                 }
             }
+            $config->item_number=$config->item_number+$count;
+            $config->save();
             Log::info('overdue cron stop');
         } catch (Exception $ex) {
             Log::error($ex->getMessage());

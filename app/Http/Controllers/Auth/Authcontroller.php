@@ -16,7 +16,8 @@ use App\Mail\ForgotPassword;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use App\Models\Config as ModelConfig;
+use Illuminate\Support\Facades\Session;
 class Authcontroller extends Controller
 {
     public function getSignin()
@@ -36,6 +37,8 @@ class Authcontroller extends Controller
     {
         try {
             if($user = Sentinel::authenticate($request->only(['email','password']),$request->get('remember', false))) {
+                $config = ModelConfig::find(3);
+                Session::put('item_number', $config->item_number);
                 Flash::success( __('auth.login_successful'));
                 if(Sentinel::inRole('manager')) {
                     return redirect(route('manager.dashboard'));

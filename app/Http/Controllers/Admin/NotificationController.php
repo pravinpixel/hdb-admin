@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
-
+use Illuminate\Support\Facades\Session;
 class NotificationController extends Controller
 {
     /**
@@ -31,6 +31,12 @@ class NotificationController extends Controller
      */
     public function index()
     {
+        $config = ModelConfig::find(3);
+        if ($config) {
+            $config->item_number =0;
+            $config->save();
+            Session::forget('item_number');
+        }
         $start_date = $request->start_date ?? Carbon::now()->subDays(6);
         $end_date = $request->end_date ?? now();
         $start_date = Carbon::parse($start_date)->format('Y-m-d');
