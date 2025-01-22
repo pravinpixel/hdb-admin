@@ -508,7 +508,7 @@ class ItemController extends Controller
                     ],
                     'time' => date('Y-m-d h:i:s')
                 ], 200);
-            } else if ($type == 2) {
+            } else if ($type == 3) {
                 $data = Stock::where('stock_id', $stockId)->first();
                 if(!$data){
                     return Response::json([
@@ -523,7 +523,7 @@ class ItemController extends Controller
                     'data' => $missing_stock_data,
                     'time' => date('Y-m-d h:i:s')
                 ], 200);
-            } else if ($type == 3) {
+            } else if ($type == 2) {
                 $data = Stock::where('stock_id', $stockId)->first();
                 if(!$data){
                     return Response::json([
