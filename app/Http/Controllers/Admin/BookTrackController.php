@@ -123,7 +123,7 @@ class BookTrackController extends Controller
         $issue->save();
         }
         Flash::success( __('auth.update_book'));
-        return view('admin.book-track.index', compact('item'));
+        return redirect()->route('book-track.index');
     }
     public function destroy($id)
     {
