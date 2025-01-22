@@ -29,7 +29,7 @@ class UpdateItemRequest extends FormRequest
             'title'        => ['required',Rule::unique('items')->ignore($this->item, 'id')->whereNull('deleted_at')],
             'author'         => 'required',
             // 'location'            => 'required',
-            'isbn'        => 'required',
+            'isbn'        => 'required|regex:/^[0-9]+$/',
             'subject'        => 'required',
             // 'location'       => 'required',
             'language_id'=>'required',
@@ -43,6 +43,7 @@ class UpdateItemRequest extends FormRequest
         return [
             'item_ref.required' => 'The RFID field is required.',
             'item_ref.unique' => 'The RFID has already been taken.',
+            'isbn.regex' => 'The ISBN must not  be greater than 13 Numbers'
         ];
     }
 }
