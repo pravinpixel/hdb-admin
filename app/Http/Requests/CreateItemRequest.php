@@ -34,7 +34,7 @@ class CreateItemRequest extends FormRequest
             // 'location'       => 'required',
             'language_id'=>'required',
             'due_period'=>'nullable|integer',
-            'call_number' => 'nullable|integer|digits:10',
+            'call_number' => 'nullable|regex:/^[a-zA-Z0-9\s\-]+$/',
             'barcode' => ['nullable',Rule::unique('items')->whereNull('deleted_at')]
         ];
     }

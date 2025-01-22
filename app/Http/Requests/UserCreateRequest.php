@@ -25,7 +25,7 @@ class UserCreateRequest extends FormRequest
     {
         return [
             'member_id'  => 'required|unique:users',
-            'mobile'     => 'unique:users|digits:10',
+            'mobile'     => 'unique:users|regex:/^[a-zA-Z0-9\s\-]+$/',
             'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'email'      => 'required|unique:users|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
