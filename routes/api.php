@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'stock'], function(){
     Route::get('productSearch', [ItemController::class,'Stocksearch']);
     Route::post('poroductUpdate', [ItemController::class,'StockUpdate']);
+    Route::get('stockDetails', [ItemController::class,'StockDetails']);
 });
