@@ -31,7 +31,7 @@ return [
     'reject_request_successfully'       => 'Reject request successfully',
     'already_item_issued'               => 'Already item issued',
     'already_item_processed'            => 'Already item processed',
-    'date_invalid'=>'date is invalid format',
+    'date_invalid'=>'End date  must greater than Start date',
     'can_not_delete'                    => 'can not delete this items it is mapped with other several action',
 ];
 ?>
