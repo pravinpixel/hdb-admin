@@ -67,34 +67,36 @@ class BookBulkImport implements ToCollection, WithHeadingRow
             $validationRules = [
                 'rfid'         => 'required',
                 'title'        => 'required',
-                'author'         => 'required',
-                'isbn' => 'required|min:1|max:13',
-                'subject'        => 'required',
-                'language'=>'required',
-                'call_number' => 'nullable|integer|digits:10',
-                'barcode' => ['nullable']
+                'author'       => 'required',
+                'isbn'         => 'required|min:1|max:13|regex:/^[0-9]+$/',
+                'subject'      => 'required',
+                'language'     => 'required',
+                'call_number'  => 'nullable|integer|digits:10',
+                'barcode'      => 'nullable'
             ];
-    
-            $validator = Validator::make($row, $validationRules);
+
+            $validator = Validator::make($row, $validationRules, [
+                'isbn.regex' => 'The ISBN must not be greater than 13 numbers'
+            ]);
             
             if ($validator->fails()) {
                 $validatorError = $validator->errors()->messages();
                 if (isset($validatorError['rfid'])) 
-                    $this->errors[] = $row['rfid'] ?? ''.' '.$validatorError['rfid'][0];
+                    $this->errors[] = ($row['rfid'] ?? '').' '.$validatorError['rfid'][0];
                 if (isset($validatorError['title'])) 
-                    $this->errors[] = $row['title'] ?? ''.' '.$validatorError['title'][0];
+                    $this->errors[] = ($row['title'] ?? '').' '.$validatorError['title'][0];
                 if (isset($validatorError['author'])) 
-                    $this->errors[] = $row['author'] ?? ''.' '.$validatorError['author'][0];
+                    $this->errors[] = ($row['author'] ?? '').' '.$validatorError['author'][0];
                 if (isset($validatorError['isbn'])) 
-                    $this->errors[] = $row['isbn'] ?? ''.' '.$validatorError['isbn'][0];
+                    $this->errors[] = ($row['isbn'] ?? '').' '.$validatorError['isbn'][0];
                 if (isset($validatorError['subject'])) 
-                    $this->errors[] = $row['subject'] ?? ''.' '.$validatorError['subject'][0];
+                    $this->errors[] = ($row['subject'] ?? '').' '.$validatorError['subject'][0];
                 if (isset($validatorError['language'])) 
-                    $this->errors[] = $row['language'] ?? ''.' '.$validatorError['language'][0];
+                    $this->errors[] = ($row['language'] ?? '').' '.$validatorError['language'][0];
                 if (isset($validatorError['call_number'])) 
-                    $this->errors[] = $row['call_number'] ?? ''.' '.$validatorError['call_number'][0];
+                    $this->errors[] = ($row['call_number'] ?? '').' '.$validatorError['call_number'][0];
                 if (isset($validatorError['barcode'])) 
-                    $this->errors[] = $row['barcode'] ?? ''.' '.$validatorError['barcode'][0];
+                    $this->errors[] = ($row['barcode'] ?? '').' '.$validatorError['barcode'][0];
             }
         }
     }

@@ -29,7 +29,7 @@ class UpdateItemRequest extends FormRequest
             'title'        => ['required',Rule::unique('items')->ignore($this->item, 'id')->whereNull('deleted_at')],
             'author'         => 'required',
             // 'location'            => 'required',
-            'isbn'        => 'required|regex:/^[0-9]+$/',
+            'isbn'        => 'required|min:1|max:13|regex:/^[0-9]+$/',
             'subject'        => 'required',
             // 'location'       => 'required',
             'language_id'=>'required',
