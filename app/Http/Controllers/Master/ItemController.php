@@ -9,6 +9,7 @@ use App\Models\Config;
 use App\Models\Item;
 use App\Models\Stock;
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Validation\Rule;
@@ -474,56 +475,57 @@ class ItemController extends Controller
             $search = $request->input('searchKey');
             $perPage = $request->input('pageSize', 10);
 
-            if ($type == 1) {
-                $itemsQuery = Item::query();
-                if ($search) {
-                    $itemsQuery->where(function ($query) use ($search) {
-                        $query->where('title', 'like', '%' . $search . '%')
-                            ->orWhere('subject', 'like', '%' . $search . '%')
-                            ->orWhere('item_ref', 'like', '%' . $search . '%')
-                            ->orWhere('barcode', 'like', '%' . $search . '%')
-                            ->orWhere('rfid', 'like', '%' . $search . '%')
-                            ->orWhere('author', 'like', '%' . $search . '%')
-                            ->orWhere('location', 'like', '%' . $search . '%')
-                            ->orWhere('isbn', 'like', '%' . $search . '%')
-                            ->orWhere('call_number', 'like', '%' . $search . '%')
-                            ->orWhereHas('language', function ($query) use ($search) {
-                                $query->where('language', 'like', '%' . $search . '%');
-                            });
-                    });
-                }
-
-                $items = $itemsQuery->with('language')->where('status', 1)->paginate($perPage);
-                return Response::json([
-                    'success' => true,
-                    'message' => 'Stock fetched successfully.',
-                    'data' => $items->items(),
-                    'pagination' => [
-                        'pageNumber' => $items->currentPage() - 1,
-                        'pageSize' => $items->perPage(),
-                        'totalElements' => $items->total(),
-                        'totalPages' => $items->lastPage(),
-                        'numberOfElements' => count($items->items()),
-                        'offset' => $items->firstItem() - 1
-                    ],
-                    'time' => date('Y-m-d h:i:s')
-                ], 200);
-            } else if ($type == 3) {
+            if ($type == 3) {
                 $data = Stock::where('stock_id', $stockId)->first();
-                if(!$data){
-                    return Response::json([
+                
+                // Check if stock data is found
+                if (!$data) {
+                    return response()->json([
                         'success' => false,
                         'message' => 'StockId not available stock.',
                     ], 400);
                 }
-                $missing_stock_data = json_decode($data->missing_stock_data, true);
-                return Response::json([
+            
+                // Decode the missing stock data
+                $missingStockData = json_decode($data->missing_stock_data, true);
+                
+                // Check if missing stock data is an array
+                if (!is_array($missingStockData)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Invalid data format.',
+                    ], 400);
+                }
+            
+                // Paginate the missing stock data
+                $perPage = 10; // Set this according to your requirements
+                $currentPage = LengthAwarePaginator::resolveCurrentPage();
+                $currentResults = array_slice($missingStockData, ($currentPage - 1) * $perPage, $perPage);
+                
+                $missingStockDataPaginated = new LengthAwarePaginator(
+                    $currentResults,
+                    count($missingStockData),
+                    $perPage,
+                    $currentPage,
+                    ['path' => LengthAwarePaginator::resolveCurrentPath()]
+                );
+            
+                return response()->json([
                     'success' => true,
                     'message' => 'Missing stock fetched successfully.',
-                    'data' => $missing_stock_data,
-                    'time' => date('Y-m-d h:i:s')
+                    'data' => $currentResults,
+                    'pagination' => [
+                        'pageNumber' => $missingStockDataPaginated->currentPage() - 1,
+                        'pageSize' => $missingStockDataPaginated->perPage(),
+                        'totalElements' => $missingStockDataPaginated->total(),
+                        'totalPages' => $missingStockDataPaginated->lastPage(),
+                        'numberOfElements' => count($missingStockDataPaginated->items()),
+                        'offset' => $missingStockDataPaginated->firstItem() - 1
+                    ],
+                    'time' => now()->format('Y-m-d H:i:s') // Use Laravel's now() for current time
                 ], 200);
-            } else if ($type == 2) {
+            }
+            else if ($type == 2 ||  $type == 1) {
                 $data = Stock::where('stock_id', $stockId)->first();
                 if(!$data){
                     return Response::json([
@@ -551,9 +553,15 @@ class ItemController extends Controller
                         });
                     }
                     $items = $itemsQuery->with('language')->whereIn('rfid', $request_scanned_rfids)->paginate($perPage);
+                if($type == 1){
+                    $message='Total stock fetched successfully';
+                }else{
+                    $message='Available stock fetched successfully';
+                }
+                
                     return Response::json([
                         'success' => true,
-                        'message' => 'Available stock fetched successfully.',
+                        'message' => $message,
                         'data' => $items->items(),
                         'pagination' => [
                             'pageNumber' => $items->currentPage() - 1,
