@@ -64,7 +64,7 @@ class BookBulkImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row) {
             // $error = $this->validateRow($row);
             $row = $row->toArray();
-            $row['barcode'] = $row['accession_barcode_number'];
+            $row['barcode'] = $row['accession_barcode_number'] ?? null;
             $validationRules = [
                 'rfid'         => 'required',
                 'title'        => 'required',
