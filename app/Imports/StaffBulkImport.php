@@ -71,15 +71,15 @@ class StaffBulkImport implements ToCollection, WithHeadingRow
             if ($validator->fails()) {
                 $validatorError = $validator->errors()->messages();
                 if (isset($validatorError['staff_no'])) 
-                    $this->errors[] = $row['staff_no'].' '.$validatorError['staff_no'][0];
+                    $this->errors[] = $row['staff_no'] ?? ''.' '.$validatorError['staff_no'][0];
                 if (isset($validatorError['name'])) 
-                    $this->errors[] = $row['name'].' '.$validatorError['name'][0];
+                    $this->errors[] = $row['name'] ?? ''.' '.$validatorError['name'][0];
                 if (isset($validatorError['email_address'])) 
-                    $this->errors[] = $row['email_address'].' '.$validatorError['email_address'][0];
+                    $this->errors[] = $row['email_address'] ?? ''.' '.$validatorError['email_address'][0];
                 if (isset($validatorError['designation'])) 
-                    $this->errors[] = $row['designation'].' '.$validatorError['designation'][0];
+                    $this->errors[] = $row['designation'] ?? ''.' '.$validatorError['designation'][0];
                 if (isset($validatorError['orgngroup'])) 
-                    $this->errors[] = $row['orgngroup'].' '.$validatorError['orgngroup'][0];
+                    $this->errors[] = $row['orgngroup'] ?? ''.' '.$validatorError['orgngroup'][0];
             }
         }
     }
