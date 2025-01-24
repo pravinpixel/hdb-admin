@@ -75,27 +75,36 @@
 </div>
 <div class="form-group">
     {!! Form::label('password', 'Password', ['class' => 'control-label col-lg-2']) !!}
-    <div class="col-lg-10">
+    <div class="col-lg-10 input-group">
         {!! Form::password('password', ['class' => 'form-control', 'id' => 'password']) !!}
-         @error('password')
+        <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#password">
+                <i class="fa fa-eye"></i>
+            </button>
+        </div>
+        @error('password')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
-         @enderror 
+        @enderror
     </div>
 </div>
 <div class="form-group">
     {!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label col-lg-2']) !!}
-    <div class="col-lg-10">
-        {!! Form::password('password_confirmation',  ['class' => 'form-control', 'id' => 'password_confirmation']) !!}
-         @error('password_confirmation')
+    <div class="col-lg-10 input-group">
+        {!! Form::password('password_confirmation', ['class' => 'form-control', 'id' => 'password_confirmation']) !!}
+        <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#password_confirmation">
+                <i class="fa fa-eye"></i>
+            </button>
+        </div>
+        @error('password_confirmation')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
-         @enderror 
+        @enderror
     </div>
 </div>
-
 
 <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
