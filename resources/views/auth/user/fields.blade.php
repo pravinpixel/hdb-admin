@@ -73,12 +73,12 @@
          @enderror 
     </div>
 </div>
-<div class="form-group">
+<div class="form-group ">
     {!! Form::label('password', 'Password', ['class' => 'control-label col-lg-2']) !!}
-    <div class="col-lg-10 input-group">
+    <div class="col-lg-10 input-group " style="display: flex;">
         {!! Form::password('password', ['class' => 'form-control', 'id' => 'password']) !!}
         <div class="input-group-append">
-            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#password">
+            <button type="button" class="btn btn-outline-secondary toggle-password input-group-text" data-target="#password" style="border: 1px solid #d4d4d4 !important; border-radius: 0px !important;">
                 <i class="fa fa-eye"></i>
             </button>
         </div>
@@ -91,10 +91,10 @@
 </div>
 <div class="form-group">
     {!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label col-lg-2']) !!}
-    <div class="col-lg-10 input-group">
+    <div class="col-lg-10 input-group" style="display: flex;" >
         {!! Form::password('password_confirmation', ['class' => 'form-control', 'id' => 'password_confirmation']) !!}
-        <div class="input-group-append">
-            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#password_confirmation">
+        <div class="input-group-append ">
+            <button type="button" class="btn btn-outline-secondary toggle-password input-group-text" data-target="#password_confirmation" style="border: 1px solid #d4d4d4 !important; border-radius: 0px !important;">
                 <i class="fa fa-eye"></i>
             </button>
         </div>

@@ -467,67 +467,99 @@ class ItemController extends Controller
         try {
             $request->validate([
                 'type' => 'required',
-                'stockId' =>'required',
+                'stockId' => 'required',
             ]);
             $stockId = $request->input('stockId');
             $type = $request->input('type');
             $data = Stock::where('stock_id', $stockId)->first();
             $search = $request->input('searchKey');
             $perPage = $request->input('pageSize', 10);
+            if ($type == 1) {
+                $itemsQuery = Item::query();
+                if ($search) {
+                    $itemsQuery->where(function ($query) use ($search) {
+                        $query->where('title', 'like', '%' . $search . '%')
+                            ->orWhere('subject', 'like', '%' . $search . '%')
+                            ->orWhere('item_ref', 'like', '%' . $search . '%')
+                            ->orWhere('barcode', 'like', '%' . $search . '%')
+                            ->orWhere('rfid', 'like', '%' . $search . '%')
+                            ->orWhere('author', 'like', '%' . $search . '%')
+                            ->orWhere('location', 'like', '%' . $search . '%')
+                            ->orWhere('isbn', 'like', '%' . $search . '%')
+                            ->orWhere('call_number', 'like', '%' . $search . '%')
+                            ->orWhereHas('language', function ($query) use ($search) {
+                                $query->where('language', 'like', '%' . $search . '%');
+                            });
+                    });
+                }
 
-            if ($type == 3) {
+                $items = $itemsQuery->with('language')->paginate($perPage);
+                return Response::json([
+                    'success' => true,
+                    'message' => 'Stock fetched successfully.',
+                    'data' => $items->items(),
+                    'pagination' => [
+                        'pageNumber' => $items->currentPage() - 1,
+                        'pageSize' => $items->perPage(),
+                        'totalElements' => $items->total(),
+                        'totalPages' => $items->lastPage(),
+                        'numberOfElements' => count($items->items()),
+                        'offset' => $items->firstItem() - 1
+                    ],
+                    'time' => date('Y-m-d h:i:s')
+                ], 200);
+            } else if ($type == 3) {
                 $data = Stock::where('stock_id', $stockId)->first();
-                
-                // Check if stock data is found
                 if (!$data) {
                     return response()->json([
                         'success' => false,
                         'message' => 'StockId not available stock.',
                     ], 400);
                 }
-            
-                // Decode the missing stock data
                 $missingStockData = json_decode($data->missing_stock_data, true);
-                
-                // Check if missing stock data is an array
                 if (!is_array($missingStockData)) {
                     return response()->json([
                         'success' => false,
                         'message' => 'Invalid data format.',
                     ], 400);
                 }
-            
-                // Paginate the missing stock data
-                $perPage = 10; // Set this according to your requirements
-                $currentPage = LengthAwarePaginator::resolveCurrentPage();
-                $currentResults = array_slice($missingStockData, ($currentPage - 1) * $perPage, $perPage);
-                
-                $missingStockDataPaginated = new LengthAwarePaginator(
-                    $currentResults,
-                    count($missingStockData),
-                    $perPage,
-                    $currentPage,
-                    ['path' => LengthAwarePaginator::resolveCurrentPath()]
-                );
-            
+
+                $request_scanned_rfids = json_decode($data->request_scanned_rfids, true);
+                $itemsQuery = Item::query();
+                if ($search) {
+                    $itemsQuery->where(function ($query) use ($search) {
+                        $query->where('title', 'like', '%' . $search . '%')
+                            ->orWhere('subject', 'like', '%' . $search . '%')
+                            ->orWhere('item_ref', 'like', '%' . $search . '%')
+                            ->orWhere('barcode', 'like', '%' . $search . '%')
+                            ->orWhere('rfid', 'like', '%' . $search . '%')
+                            ->orWhere('author', 'like', '%' . $search . '%')
+                            ->orWhere('location', 'like', '%' . $search . '%')
+                            ->orWhere('isbn', 'like', '%' . $search . '%')
+                            ->orWhere('call_number', 'like', '%' . $search . '%')
+                            ->orWhereHas('language', function ($query) use ($search) {
+                                $query->where('language', 'like', '%' . $search . '%');
+                            });
+                    });
+                }
+                $items = $itemsQuery->with('language')->whereNotIn('rfid', $request_scanned_rfids)->paginate($perPage);
                 return response()->json([
                     'success' => true,
                     'message' => 'Missing stock fetched successfully.',
-                    'data' => $currentResults,
+                    'data' => $items->items(),
                     'pagination' => [
-                        'pageNumber' => $missingStockDataPaginated->currentPage() - 1,
-                        'pageSize' => $missingStockDataPaginated->perPage(),
-                        'totalElements' => $missingStockDataPaginated->total(),
-                        'totalPages' => $missingStockDataPaginated->lastPage(),
-                        'numberOfElements' => count($missingStockDataPaginated->items()),
-                        'offset' => $missingStockDataPaginated->firstItem() - 1
+                        'pageNumber' => $items->currentPage() - 1,
+                        'pageSize' => $items->perPage(),
+                        'totalElements' => $items->total(),
+                        'totalPages' => $items->lastPage(),
+                        'numberOfElements' => count($items->items()),
+                        'offset' => $items->firstItem() - 1
                     ],
-                    'time' => now()->format('Y-m-d H:i:s') // Use Laravel's now() for current time
+                    'time' => now()->format('Y-m-d H:i:s')
                 ], 200);
-            }
-            else if ($type == 2 ||  $type == 1) {
+            } else if ($type == 2) {
                 $data = Stock::where('stock_id', $stockId)->first();
-                if(!$data){
+                if (!$data) {
                     return Response::json([
                         'success' => false,
                         'message' => 'StockId not available stock.',
@@ -553,12 +585,7 @@ class ItemController extends Controller
                         });
                     }
                     $items = $itemsQuery->with('language')->whereIn('rfid', $request_scanned_rfids)->paginate($perPage);
-                if($type == 1){
-                    $message='Total stock fetched successfully';
-                }else{
-                    $message='Available stock fetched successfully';
-                }
-                
+                    $message = 'Available stock fetched successfully';
                     return Response::json([
                         'success' => true,
                         'message' => $message,
@@ -573,7 +600,7 @@ class ItemController extends Controller
                         ],
                         'time' => date('Y-m-d h:i:s')
                     ], 200);
-                }else{
+                } else {
                     return Response::json([
                         'success' => false,
                         'message' => 'No Available stock.',
