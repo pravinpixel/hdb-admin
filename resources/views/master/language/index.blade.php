@@ -57,11 +57,11 @@
                     {data: 'language', name: 'language'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'},
-                    {
+                     {
                         data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                            $("a", nTd).tooltip({container: 'body'});
+                              $("a", nTd).tooltip({container: 'body'});
                         }
-                    },
+                     },
                     {
                         data         : 'action', name: 'action', orderable: false, searchable: false,
                         fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
