@@ -58,7 +58,7 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'},
                      {
-                        data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        data: 'status', name: 'status',orderable: false, searchable: false, fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                               $("a", nTd).tooltip({container: 'body'});
                         }
                      },

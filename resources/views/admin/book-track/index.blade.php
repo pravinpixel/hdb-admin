@@ -108,7 +108,7 @@ $(function () {
              {data: 'checkout_date', name: 'checkout_date'},
             {data: 'date_of_return', name: 'date_of_return'},
             {
-               data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+               data: 'status', name: 'status', orderable: false, searchable: false,fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                      $("a", nTd).tooltip({container: 'body'});
                }
             },

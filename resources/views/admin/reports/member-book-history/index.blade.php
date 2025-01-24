@@ -224,8 +224,8 @@
                         name: 'date'
                     },
                     {
-                        data: 'date_of_return',
-                        name: 'date_of_return'
+                        data: 'checkout_date',
+                        name: 'checkout_date'
                     }
                 ],
             });

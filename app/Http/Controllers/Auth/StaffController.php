@@ -201,6 +201,14 @@ class StaffController extends Controller {
             Sentinel::update($user, $credentials);
 
             $user->member_id = $request->member_id;
+            if($user->member_id != $request->member_id){
+            $hasTakenCheckouts = $user->checkouts()->where('status', 'taken')->exists();
+            if ($hasTakenCheckouts) {
+                Flash::error( __('auth.checkouts'));
+
+                return redirect()->route('staff.index');
+            } 
+            }
             $user->designation = $request->designation;
             $user->group = $request->group;
             $user->save();
