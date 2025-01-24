@@ -427,7 +427,8 @@ class ItemController extends Controller
                 ], 400);
             }
             $items = Item::whereIn('rfid', $scannedRfids)->get();
-            $totalStock = count($scannedRfids);
+            $datas = Item::all();
+            $totalStock = count($datas);
             $availableStock = $items->count();
             $missingStock = $totalStock - $availableStock;
             $availableItemIds = $items->pluck('rfid')->toArray();

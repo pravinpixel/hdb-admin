@@ -1,5 +1,5 @@
 <table id="itemTable" class="table table-bordered table-hover " style="width:100%" >
-   <thead>
+   <thead class="table-item">
          <tr>
             <th>#</th>
             <th>@lang('master.rfid')</th>
