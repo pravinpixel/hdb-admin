@@ -71,7 +71,7 @@ class BookBulkImport implements ToCollection, WithHeadingRow
                 'isbn'         => 'required|min:13|max:13|regex:/^[0-9]+$/',
                 'subject'      => 'required',
                 'language'     => 'required',
-                'call_number'  => 'nullable|integer|digits:10',
+                'call_number'  => 'nullable|regex:/^[a-zA-Z0-9\s\-]+$/',
                 'barcode'      => 'nullable'
             ];
 
