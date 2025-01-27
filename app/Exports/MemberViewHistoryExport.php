@@ -45,7 +45,7 @@ class MemberViewHistoryExport implements FromCollection, WithMapping, WithHeadin
 
     public function map($dataDb) : array {
         $checkout_date = Carbon::parse($dataDb->date)->format('d-m-Y');
-        $checkin_date = Carbon::parse($dataDb->date_of_return)->format('d-m-Y');
+        $checkin_date = $dataDb->checkout_date ? Carbon::parse($dataDb->checkout_date)->format('d-m-Y') : null;
         return [
             $dataDb->user->member_id,
             $dataDb->user->first_name,

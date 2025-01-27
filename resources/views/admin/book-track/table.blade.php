@@ -5,8 +5,8 @@
             <th>RFID</th>
             <th>Book Name</th>
             <th>Staff Name</th>
-            <th>CheckIn Date</th>
             <th>CheckOut Date</th>
+            <th>CheckIn Date</th>
             <th>Due Date</th>
              <th>Status</th>
             <th  class="text-left">Action</th>

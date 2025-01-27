@@ -151,7 +151,7 @@ class ItemController extends Controller
             'isbn' => [
                 'required',
                 Rule::unique('items')->ignore($id)->whereNull('deleted_at'),
-                'min:1',
+                'min:13',
                 'max:13'
             ],
         ]);

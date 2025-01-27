@@ -52,7 +52,7 @@ $(function () {
          aaSorting     : [[0, 'desc']],
          responsive: true,
          processing: true,
-         pageLength: 50,    
+         pageLength: 10,
          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
          serverSide: true,
          ajax          : {
@@ -77,7 +77,7 @@ $(function () {
                }
             },
             {
-               data         : 'action', name: 'action', orderable: false, searchable: false,
+               data: 'action', name: 'action', orderable: false, searchable: false,
                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('min-width', '100px');
                      $("a", nTd).tooltip({container: 'body'});

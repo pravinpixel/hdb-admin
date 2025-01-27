@@ -132,7 +132,7 @@
             }
         }
 
-        var table = $('#memberViewHistoryTable').DataTable({
+        var table = $('#memberViewHistoryTable1').DataTable({
             aaSorting: [
                 [0, 'desc']
             ],
@@ -191,7 +191,7 @@
 
         $("#search-item").click(function(e) {
             e.preventDefault();
-            $('#memberViewHistoryTable').DataTable().clear().draw();
+            $('#memberViewHistoryTable1').DataTable().clear().draw();
         });
 
         $("#reset-item").click(function(e) {
@@ -202,7 +202,7 @@
             $("#start_date").datepicker("setDate", start_date);
             var end_date = new Date();
             $("#end_date").datepicker("setDate", end_date);
-            $('#memberViewHistoryTable').DataTable().clear().draw();
+            $('#memberViewHistoryTable1').DataTable().clear().draw();
         });
     </script>
 @endpush

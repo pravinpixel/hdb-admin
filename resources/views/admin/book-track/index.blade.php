@@ -7,7 +7,7 @@
       <div class="col-sm-12 col-md-6">         
          <h2 class="text-dark">Book Track List </h2>
       </div>
-      <div class="col-sm-12 col-md-6">         
+      <div class="col-sm-12 col-md-6">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                @if(Sentinel::inRole('admin'))

@@ -1,4 +1,4 @@
-<table id="memberViewHistoryTable" class="table table-bordered table-hover" style="width:100%">
+<table id="memberViewHistoryTable1" class="table table-bordered table-hover" style="width:100%">
     <thead>
          <tr>
             <th>#</th>
