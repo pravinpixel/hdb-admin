@@ -68,7 +68,7 @@ class BookBulkImport implements ToCollection, WithHeadingRow
                 'rfid'         => 'required',
                 'title'        => 'required',
                 'author'       => 'required',
-                'isbn'         => 'required|min:1|max:13|regex:/^[0-9]+$/',
+                'isbn'         => 'required|min:13|max:13|regex:/^[0-9]+$/',
                 'subject'      => 'required',
                 'language'     => 'required',
                 'call_number'  => 'nullable|integer|digits:10',
@@ -76,7 +76,8 @@ class BookBulkImport implements ToCollection, WithHeadingRow
             ];
 
             $validator = Validator::make($row, $validationRules, [
-                'isbn.regex' => 'The ISBN must not be greater than 13 numbers'
+                'isbn.regex' => 'The ISBN must not be greater than 13 numbers',
+                'isbn.min' => 'The ISBN must be at least 13 Numbers'
             ]);
             
             if ($validator->fails()) {
