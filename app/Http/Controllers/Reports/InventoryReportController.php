@@ -33,9 +33,9 @@ class InventoryReportController extends Controller
                 $dataDb->where('language',$request->language);
             }
             $data['total_item'] = Item::get()->count();
-            $data['total_active_item'] = Item::where('is_active','0')->where('status','1')->get()->count();
+            $data['total_active_item'] = Item::where('is_active',0)->where('status',1)->get()->count();
             $data['total_inactive_item'] =  $data['total_item'] -  $data['total_active_item'];
-            $data['total_issued_item'] = Item::where('is_active',1)->where('status','1')->get()->count();
+            $data['total_issued_item'] = Item::where('is_active',1)->where('status',0)->get()->count();
             $dataDb->with('language','user');
             return DataTables::eloquent($dataDb)
                     // ->addColumn('status', function($dataDb) {

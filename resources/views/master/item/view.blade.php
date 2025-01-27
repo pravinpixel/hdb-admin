@@ -4,7 +4,7 @@
    @include('flash')
     <div class="row">
       <div class="col-sm-12 col-md-6">         
-         <h2 class="text-dark"> View Item </h2>
+         <h2 class="text-dark"> View Book </h2>
       </div>
       <div class="col-sm-12 col-md-6">         
          <nav aria-label="breadcrumb">
