@@ -68,7 +68,7 @@
                     {data: 'group', name: 'group'},
                     {data: 'email', name: 'email'},
                     {
-                        data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        data: 'status', name: 'status', orderable: false, searchable: false, fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                             //  console.log( 'checl',nTd );
                             $("a", nTd).tooltip({container: 'body'});
                         }

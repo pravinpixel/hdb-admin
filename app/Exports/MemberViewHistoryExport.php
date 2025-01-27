@@ -17,8 +17,8 @@ class MemberViewHistoryExport implements FromCollection, WithMapping, WithHeadin
 
     public function __construct($request)
     {
-        $this->member_id = $request->member_id;
-        $this->item_id = $request->item_id;
+        $this->member_id = $request->member;
+        $this->item_id = $request->item;
         $this->start_date = $request->start_date;
         $this->end_date = $request->end_date;
     }
@@ -27,11 +27,12 @@ class MemberViewHistoryExport implements FromCollection, WithMapping, WithHeadin
     */
     public function collection()
     {
-
         $dataDb = Checkout::with(['user','item']);
-
         if($this->member_id) {
-            $dataDb->where('id', $this->member_id);
+            $dataDb->where('checkout_by', $this->member_id);
+        }
+        if($this->item_id) {
+            $dataDb->where('item_id', $this->item_id);
         }
         $starts_date = $this->start_date ?? now();
         $ends_date = $this->end_date ?? now();

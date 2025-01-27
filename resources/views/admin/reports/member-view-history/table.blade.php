@@ -1,6 +1,7 @@
 <table id="memberViewHistoryTable" class="table table-bordered table-hover" style="width:100%">
     <thead>
          <tr>
+            <th>#</th>
             <th style="text-align: left">Staff ID</th>
             <th style="text-align: left">Staff Name</th>
             <th style="text-align: left">Designation</th>

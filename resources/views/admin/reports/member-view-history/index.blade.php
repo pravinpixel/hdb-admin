@@ -164,7 +164,9 @@
             }
             }
             },
-            columns: [{
+            columns: [
+                {data: 'id', name: 'id', visible: false},
+                {
                     data: 'member_id',
                     name: 'member_id'
                 },

@@ -68,7 +68,7 @@
                     {data: 'role', name: 'roles.name', defaultContent: ''},
                     {data: 'last_login', name: 'last_login'},
                     {
-                        data: 'status', name: 'status', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        data: 'status', name: 'status', orderable: false, searchable: false, fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                             //  console.log( nTd );
                             $("a", nTd).tooltip({container: 'body'});
                         }
