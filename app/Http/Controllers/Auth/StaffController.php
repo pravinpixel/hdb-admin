@@ -19,6 +19,7 @@ use App\Mail\UserRegistration;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Config;
+use App\Models\Checkout;
 use Illuminate\Validation\Rule;
 class StaffController extends Controller {
 
