@@ -19,6 +19,7 @@ use App\Mail\UserRegistration;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Config;
+use App\Models\Checkout;
 use Illuminate\Validation\Rule;
 class StaffController extends Controller {
 
@@ -168,7 +169,7 @@ class StaffController extends Controller {
             return redirect()->route('staff.index');
         }
         if($user->member_id != $request->member_id){
-            $hasTakenCheckouts = $user->checkouts()->where('status', 'taken')->exists();
+            $hasTakenCheckouts = Checkout::where('checkout_by', $id)->where('status', 'taken')->first();
             if ($hasTakenCheckouts) {
                 Flash::error( __('auth.checkouts'));
 
@@ -240,11 +241,13 @@ class StaffController extends Controller {
 
             return redirect()->route('staff.index');
         }
-        $hasTakenCheckouts = $data->checkouts()->where('status', 'taken')->exists();
-        if ($hasTakenCheckouts) {
-            Flash::error( __('auth.checkouts'));
+        if($user->member_id != $request->member_id){
+            $hasTakenCheckouts = Checkout::where('checkout_by', $id)->where('status', 'taken')->first();
+            if ($hasTakenCheckouts) {
+                Flash::error( __('auth.checkouts'));
 
-            return redirect()->route('staff.index');
+                return redirect()->route('staff.index');
+            } 
         }
         $data->delete();
 

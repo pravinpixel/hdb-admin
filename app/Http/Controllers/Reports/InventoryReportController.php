@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports;
 use App\Exports\InventoryExport;
 use App\Http\Controllers\Controller;
 use App\Models\Item;
+use App\Models\Checkout;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
@@ -35,7 +36,7 @@ class InventoryReportController extends Controller
             $data['total_item'] = Item::get()->count();
             $data['total_active_item'] = Item::where('is_active',0)->get()->count();
             $data['total_inactive_item'] =  $data['total_item'] -  $data['total_active_item'];
-            $data['total_issued_item'] = Item::where('is_active',1)->get()->count();
+            $data['total_issued_item'] = Checkout::where('status','taken')->get()->count();
             $dataDb->with('language','user');
             return DataTables::eloquent($dataDb)
                     // ->addColumn('status', function($dataDb) {
