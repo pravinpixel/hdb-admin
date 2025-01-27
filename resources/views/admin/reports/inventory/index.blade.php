@@ -162,7 +162,6 @@ $(function () {
             {data: 'barcode', name: 'barcode'},
             {data: 'subject', name: 'subject'},
             {data: 'item_ref', name: 'rfid'},
-             {data: 'location', name: 'location'},
             {data: 'issued_to', name: 'issued_to'},
             {data: 'status', name: 'status'}
          ],

@@ -8,7 +8,7 @@
             <th>Accession / Barcode Number</th>
             <th>Subject</th>
             <th>RFID</th>
-            <th>Location</th>
+            <!-- <th>Location</th> -->
              <th>Issued To</th>
             <th>Status</th>
          </tr>
