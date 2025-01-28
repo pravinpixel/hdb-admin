@@ -41,7 +41,7 @@ class DashboardController extends Controller
                 $dataDb->orWhere('item_ref', 'like', '%'.$request->search_item_name.'%');
                 
             }
-            $dataDb->with('user','checkout');
+            $dataDb->with('user','checkout')->orderby('id','desc');
             return DataTables::eloquent($dataDb) 
                 ->addColumn('status', function ($dataDb) {
                     $status = '';

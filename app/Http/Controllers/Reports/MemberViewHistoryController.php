@@ -85,7 +85,7 @@ class MemberViewHistoryController extends Controller
                 ->when(isset($start_date) && isset($end_date), function ($q) use ($start_date, $end_date) {
                     $q->whereBetween('created_at', [$start_date, $end_date]);
                 });
-
+                $query->orderby('id','desc');
             return DataTables::eloquent($query)
                 ->addColumn('member_id', function ($member) {
                     return $member->member_id ?? 'N/A';

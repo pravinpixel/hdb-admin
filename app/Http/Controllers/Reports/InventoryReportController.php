@@ -37,7 +37,7 @@ class InventoryReportController extends Controller
             $data['total_active_item'] = Item::where('is_active',0)->get()->count();
             $data['total_inactive_item'] =  $data['total_item'] -  $data['total_active_item'];
             $data['total_issued_item'] = Checkout::where('status','taken')->get()->count();
-            $dataDb->with('language','user');
+            $dataDb->with('language','user')->orderby('id','desc');
             return DataTables::eloquent($dataDb)
                     // ->addColumn('status', function($dataDb) {
                     //     return ($dataDb->status == 1) ? '<div class="text-left"><div class="badge badge-warning"> Taken </div></div>' : '<div class="text-left"><div class="badge badge-success"> Available </div></div>';
