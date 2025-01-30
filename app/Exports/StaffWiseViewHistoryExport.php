@@ -29,7 +29,7 @@ class StaffWiseViewHistoryExport implements FromCollection, WithMapping, WithHea
     public function collection()
     {
 
-        $dataDb = User::with(['checkouts', 'roles'])->where('role', 7);
+        $dataDb = User::with(['checkouts', 'roles'])->where('role', 7)->orderby('id','desc');
 
         if ($this->member) {
             $dataDb->where('id', $this->member);
@@ -45,11 +45,12 @@ class StaffWiseViewHistoryExport implements FromCollection, WithMapping, WithHea
 
     public function map($dataDb): array
     {
+        $count = $dataDb->checkouts()->count() ?? 0;
         return [
             $dataDb->member_id,
             $dataDb->first_name,
             $dataDb->designation ?? '',
-            $dataDb->checkouts()->count(),
+            ($count === 0) ? '0' : $count,
             $dataDb->created_at->format('d-m-Y'),
         ];
     }
@@ -60,7 +61,7 @@ class StaffWiseViewHistoryExport implements FromCollection, WithMapping, WithHea
             'Staff ID',
             'Staff Name',
             'Designation',
-            'Total Item Taken',
+            'Total Book Taken',
             'Created At'
         ];
     }

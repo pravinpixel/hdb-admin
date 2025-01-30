@@ -34,7 +34,7 @@ class InventoryReportController extends Controller
                 $dataDb->where('language',$request->language);
             }
             $data['total_item'] = Item::get()->count();
-            $data['total_active_item'] = Item::where('is_active',0)->get()->count();
+            $data['total_active_item'] = Item::where('is_active', 1)->get()->count();
             $data['total_inactive_item'] =  $data['total_item'] -  $data['total_active_item'];
             $data['total_issued_item'] = Checkout::where('status','taken')->get()->count();
             $dataDb->with('language','user')->orderby('id','desc');
