@@ -241,14 +241,12 @@ class StaffController extends Controller {
 
             return redirect()->route('staff.index');
         }
-        if($data->member_id != $request->member_id){
-            $hasTakenCheckouts = Checkout::where('checkout_by', $id)->where('status', 'taken')->first();
-            if ($hasTakenCheckouts) {
-                Flash::error( __('auth.checkouts'));
+        $hasTakenCheckouts = Checkout::where('checkout_by', $id)->where('status', 'taken')->first();
+        if (isset($hasTakenCheckouts)){
+            Flash::error( __('auth.checkouts'));
 
-                return redirect()->route('staff.index');
-            } 
-        }
+            return redirect()->route('staff.index');
+        } 
         $data->delete();
 
        Flash::success( __('auth.delete_account'));
