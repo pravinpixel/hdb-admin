@@ -103,7 +103,11 @@ class BookTrackController extends Controller
         }
         if(isset($request->checkout_date) && !empty($request->checkout_date)){
             $item->checkout_date = $request->checkout_date;
-            $item->is_active = 0;
+            $book=Item::find($item->item_id);
+            if(isset($book)){
+                $book->is_active = 0;
+                $book->update();
+            }
             $item->status ='returned';
         }
         if(isset($request->due_date)){
