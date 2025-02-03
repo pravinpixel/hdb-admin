@@ -241,7 +241,7 @@ class StaffController extends Controller {
 
             return redirect()->route('staff.index');
         }
-        if($user->member_id != $request->member_id){
+        if($data->member_id != $request->member_id){
             $hasTakenCheckouts = Checkout::where('checkout_by', $id)->where('status', 'taken')->first();
             if ($hasTakenCheckouts) {
                 Flash::error( __('auth.checkouts'));
