@@ -44,7 +44,6 @@ class CreateItemRequest extends FormRequest
         return [
             'item_ref.required' => 'The RFID field is required.',
             'item_ref.unique' => 'The RFID has already been taken.',
-            'isbn.regex' => 'The ISBN must not  be greater than 13 Numbers',
             'isbn.min' => 'The ISBN must be at least 2 Characters '
         ];
     }
