@@ -29,12 +29,12 @@ class CreateItemRequest extends FormRequest
             'title'        => ['required',Rule::unique('items')->whereNull('deleted_at')],
             'author'         => 'required',
             // 'location'            => 'required',
-            'isbn' => ['required','regex:/^[0-9]+$/','min:13','max:13',Rule::unique('items')->whereNull('deleted_at')],
+            'isbn' => ['required','min:2',Rule::unique('items')->whereNull('deleted_at')],
             'subject'        => 'required',
             // 'location'       => 'required',
             'language_id'=>'required',
             'due_period'=>'nullable|integer',
-            'call_number' => 'nullable|regex:/^[a-zA-Z0-9\s\-]+$/',
+            'call_number' => 'nullable',
             'barcode' => ['nullable',Rule::unique('items')->whereNull('deleted_at')]
         ];
     }
@@ -45,7 +45,7 @@ class CreateItemRequest extends FormRequest
             'item_ref.required' => 'The RFID field is required.',
             'item_ref.unique' => 'The RFID has already been taken.',
             'isbn.regex' => 'The ISBN must not  be greater than 13 Numbers',
-            'isbn.min' => 'The ISBN must be at least 13 Numbers'
+            'isbn.min' => 'The ISBN must be at least 2 Characters '
         ];
     }
 }
