@@ -64,7 +64,10 @@ class StaffController extends Controller {
                 'role'   => $request->role,
                 'created_by' => $user,
                 'updated_by' => $user,
-                'is_active' => 1
+                'is_active' => 1,
+                'location' => $request->location,
+                'collection' => $request->collection,
+                'imprint' => $request->imprint,
             ];
            
             //Create a new user
@@ -148,6 +151,7 @@ class StaffController extends Controller {
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'member_id'  => ['required', 'regex:/^[A-Za-z][0-9]{5}$/', Rule::unique('users')->ignore($id)],
             'email'      => ['required', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', Rule::unique('users')->ignore($id)],
@@ -156,6 +160,9 @@ class StaffController extends Controller {
             'role'       => 'required',
             'designation'       => 'required',
             'group'       => 'required',
+            'location'       => 'required',
+            'collection'       => 'required',
+            'imprint'       => 'required',
         ], [
             'member_id.regex' => 'Staff No must be 1 alphabet followed by 5 numbers',
             'first_name.regex' => 'Name should only contain alphabets and spaces.',
@@ -189,6 +196,9 @@ class StaffController extends Controller {
                 'designation'   => $request->designation,
                 'role'   => 7,
                 'member_id'  => $request->member_id,
+                'location' => $request->location,
+                'collection' => $request->collection,
+                'imprint' => $request->imprint,
             ];
 
 
@@ -212,6 +222,9 @@ class StaffController extends Controller {
            
             $user->designation = $request->designation;
             $user->group = $request->group;
+            $user->location = $request->location;
+            $user->collection =$request->collection;
+            $user->imprint = $request->imprint;
             $user->save();
 
             Flash::success( __('auth.update_successful'));
@@ -274,7 +287,10 @@ class StaffController extends Controller {
                     'designation',
                     'users.created_at',
                     'users.updated_at',
-                    'is_active'
+                    'is_active',
+                    'location',
+                    'collection',
+                    'imprint'
                 ])
                 ->with('roles')
                 ->whereHas('roles', function ($q) {

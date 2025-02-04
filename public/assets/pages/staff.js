@@ -13,6 +13,9 @@ $(function(){
             },
             designation: "required",
             group: "required",
+            location: "required",
+            collection: "required",
+            imprint: "required",
         },
     });
 
@@ -30,6 +33,9 @@ $(function(){
             },
             designation: "required",
             group: "required",
+            location: "required",
+            collection: "required",
+            imprint: "required",
         },
     });
 });

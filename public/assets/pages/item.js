@@ -11,7 +11,9 @@ $(function(){
             author: "required",
             isbn: "required",
             subject: "required",
-            // location: "required",
+            location: "required",
+            collection: "required",
+            imprint: "required",
             language_id: {
                 required: true,
             },
@@ -25,7 +27,9 @@ $(function(){
             author: "required",
             isbn: "required",
             subject: "required",
-            // location: "required",
+            location: "required",
+            collection: "required",
+            imprint: "required",
             language_id: {
                 required: true,
             },

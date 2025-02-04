@@ -30,7 +30,7 @@
          <div class="col-sm-12 col-md-12 pb-20 text-right">               
           <a href="{{ route('staff.create') }}" class="btn btn-info"> Add Staff</a>        
          </div>  
-         <div class="col-sm-12 col-md-12"> 
+         <div class="col-sm-12 col-md-12" style="overflow-x: scroll"> 
                @include('auth.staff.table')
          </div>    
       </div>
@@ -67,6 +67,9 @@
                     {data: 'designation', name: 'designation'},
                     {data: 'group', name: 'group'},
                     {data: 'email', name: 'email'},
+                    {data: 'location', name: 'location',defaultContent:''},
+                    {data: 'collection', name: 'collection',defaultContent:''},
+                    {data: 'imprint', name: 'imprint',defaultContent:''},
                     {
                         data: 'status', name: 'status', orderable: false, searchable: false, fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                             //  console.log( 'checl',nTd );
@@ -78,7 +81,7 @@
                     {
                         data         : 'action', name: 'action', orderable: false, searchable: false,
                         fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                            //  console.log( nTd );
+                            $(nTd).css('min-width', '100px');
                             $("a", nTd).tooltip({container: 'body'});
                         }
                     }

@@ -65,6 +65,39 @@
          @enderror
     </div>
 </div>
+<div class="form-group">
+    {!! Form::label('location', 'Location<span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
+    <div class="col-lg-10">
+        {!! Form::text('location', null, ['class' => 'form-control', 'id' => 'location']) !!}
+         @error('location')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('collection', 'Collection <span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
+    <div class="col-lg-10">
+        {!! Form::text('collection', null, ['class' => 'form-control', 'id' => 'collection']) !!}
+         @error('collection')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('imprint', 'Imprint <span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
+    <div class="col-lg-10">
+        {!! Form::text('imprint', null, ['class' => 'form-control', 'id' => 'imprint']) !!}
+         @error('imprint')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
+    </div>
+</div>
 
 <input type="hidden" name="role" value="7">
 <div class="form-group">

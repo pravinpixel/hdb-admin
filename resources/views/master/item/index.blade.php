@@ -69,6 +69,9 @@ $(function () {
             {data: 'barcode', name: 'barcode'},
             {data: 'subject', name: 'subject'},
             {data: 'language.language', name: 'language.language'},
+            {data: 'location', name: 'location',defaultContent:''},
+            {data: 'collection', name: 'collection',defaultContent:''},
+            {data: 'imprint', name: 'imprint',defaultContent:''},
             {data: 'created_at', name: 'created_at'},
             {data: 'updated_at', name: 'updated_at'},
             {

@@ -48,7 +48,9 @@ class BookBulkImport implements ToCollection, WithHeadingRow
             $ins['rfid'] = $row['rfid'];
             $ins['language_id'] = $language_id;
             $ins['author'] = $row['author'];
-            // $ins['location'] = $row['location'];
+            $ins['location'] = $row['location'];
+            $ins['collection'] = $row['collection'];
+            $ins['imprint'] = $row['imprint'];
             $ins['isbn'] = $row['isbn'];
             $ins['call_number'] = $row['call_number'] ?? null;
             $ins['status'] = $row['status'] == 'active' ? 1 : 0;
@@ -72,7 +74,10 @@ class BookBulkImport implements ToCollection, WithHeadingRow
                 'subject'      => 'required',
                 'language'     => 'required',
                 'call_number'  => 'nullable',
-                'barcode'      => 'nullable'
+                'barcode'      => 'nullable',
+                'location'       => 'required',
+                'collection'       => 'required',
+                'imprint'       => 'required',
             ];
 
             $validator = Validator::make($row, $validationRules, [
@@ -97,6 +102,12 @@ class BookBulkImport implements ToCollection, WithHeadingRow
                     $this->errors[] = ($row['call_number'] ?? '').' '.$validatorError['call_number'][0];
                 if (isset($validatorError['barcode'])) 
                     $this->errors[] = ($row['barcode'] ?? '').' '.$validatorError['barcode'][0];
+                if (isset($validatorError['location'])) 
+                $this->errors[] = ($row['location'] ?? '').' '.$validatorError['location'][0];
+                if (isset($validatorError['collection'])) 
+                $this->errors[] = ($row['collection'] ?? '').' '.$validatorError['collection'][0];
+                if (isset($validatorError['imprint'])) 
+                $this->errors[] = ($row['imprint'] ?? '').' '.$validatorError['imprint'][0];
             }
         }
     }

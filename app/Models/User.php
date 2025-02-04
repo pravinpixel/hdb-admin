@@ -24,7 +24,10 @@ class User extends EloquentUser
         'role',
         'designation',
         'group',
-        'is_active'
+        'is_active',
+        'location',
+        'collection',
+        'imprint'
     ];
 
     /**

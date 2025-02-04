@@ -31,6 +31,9 @@ class StaffCreateRequest extends FormRequest
             'role'       => 'required',
             'designation'       => 'required',
             'group'       => 'required',
+            'location'       => 'required',
+            'collection'       => 'required',
+            'imprint'       => 'required',
         ];
     }
 

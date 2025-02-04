@@ -39,6 +39,9 @@ class StaffBulkImport implements ToCollection, WithHeadingRow
                 $ins['is_active']=1;
                 $ins['role']=7;
                 $ins['created_by']='admin';
+                $ins['location'] = $row['location'];
+                $ins['collection'] = $row['collection'];
+                $ins['imprint'] = $row['imprint'];
                 $exitUser=User::where('member_id' ,$row['staff_no'])->first();
                 $user=User::updateOrCreate(['member_id' => $row['staff_no']], $ins);
                 $role = Role::find(7);
@@ -61,6 +64,9 @@ class StaffBulkImport implements ToCollection, WithHeadingRow
                 'email_address' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
                 'designation' => 'required',
                 'orgngroup' => 'required',
+                'location'       => 'required',
+                'collection'       => 'required',
+                'imprint'       => 'required',
             ];
     
             $validator = Validator::make($row->toArray(), $validationRules, [
@@ -80,6 +86,12 @@ class StaffBulkImport implements ToCollection, WithHeadingRow
                     $this->errors[] = ($row['designation'] ?? '').' '.$validatorError['designation'][0];
                 if (isset($validatorError['orgngroup'])) 
                     $this->errors[] = ($row['orgngroup'] ?? '').' '.$validatorError['orgngroup'][0];
+                if (isset($validatorError['location'])) 
+                $this->errors[] = ($row['location'] ?? '').' '.$validatorError['location'][0];
+                if (isset($validatorError['collection'])) 
+                $this->errors[] = ($row['collection'] ?? '').' '.$validatorError['collection'][0];
+                if (isset($validatorError['imprint'])) 
+                $this->errors[] = ($row['imprint'] ?? '').' '.$validatorError['imprint'][0];
             }
         }
     }

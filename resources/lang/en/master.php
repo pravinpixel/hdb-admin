@@ -13,5 +13,7 @@ return [
     'subject'         => 'Subject',
     'call_number'         => 'Call Number',
     'location'         => 'Location',
+    'collection'         => 'Collection',
+    'imprint'         => 'Imprint',
 ];
 ?>

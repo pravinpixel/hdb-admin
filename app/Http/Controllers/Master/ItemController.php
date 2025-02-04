@@ -70,6 +70,8 @@ class ItemController extends Controller
         $item->language_id = $request->language_id;
         $item->author = $request->author;
         $item->location = $request->location;
+        $item->collection = $request->collection;
+        $item->imprint = $request->imprint;
         $item->isbn = $request->isbn;
         $item->call_number = $request->call_number;
         // if($request->active == 'on') {
@@ -152,6 +154,9 @@ class ItemController extends Controller
                 'required',
                 Rule::unique('items')->ignore($id)->whereNull('deleted_at'),
                 'min:2',
+            'location'       => 'required',
+            'collection'       => 'required',
+            'imprint'       => 'required',
             ],
         ]);
         $item = Item::find($id);
@@ -174,6 +179,8 @@ class ItemController extends Controller
         $item->language_id = $request->language_id;
         $item->subject = $request->subject;
         $item->location = $request->location;
+        $item->collection = $request->collection;
+        $item->imprint = $request->imprint;
         $item->isbn = $request->isbn;
         $item->call_number = $request->call_number;
         $item->author = $request->author;

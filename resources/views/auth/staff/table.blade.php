@@ -8,6 +8,9 @@
         <th>@lang('auth.index_designation')</th>
         <th>@lang('auth.index_org_group')</th>
         <th>@lang('auth.index_email_th')</th>
+        <th>@lang('master.location')</th>
+        <th>@lang('master.collection')</th>
+        <th>@lang('master.imprint')</th>
         <th>@lang('auth.index_status_th')</th>
         <th>@lang('auth.index_created_at')</th>
         <th>@lang('auth.index_updated_at')</th>
