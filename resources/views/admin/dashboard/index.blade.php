@@ -51,7 +51,7 @@
                             <i class="fa fa-refresh f-left"></i>                        
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
-                                    <h4 class="m-b-20 text-white">Total Booksto be Returned</h4>
+                                    <h4 class="m-b-20 text-white">Total Books to be Returned</h4>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <h5 class="m-b-20 text-white text-center">Today</h5>
