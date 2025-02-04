@@ -47,6 +47,15 @@
             <label for="Langugae">Langugae:</label>
              {!! Form::text('language',$result->language['language'] ??'', ['class' => 'form-control','readonly' => 'readonly']) !!}
         </div>
+        <div class="form-group">
+            <label for="rfid">Location:<span style="color: red">*</span></label>
+             {!! Form::text('location', null , ['class' => 'form-control','readonly' => 'readonly']) !!}
+              @error('location')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
+        </div>
          <div class="form-group">
             <label for="status">Status</label>
         <!-- {!! Form::checkbox('status', null, false, ['class' => '', 'id' => 'status','readonly' => 'readonly'])  !!} -->
@@ -75,14 +84,24 @@
     
         </div>
       
-  <!-- <div class="form-group">
-            <label for="location">Location:</label>
-           {!! Form::text('location', null, ['class' => 'form-control','readonly' => 'readonly']) !!}
-        </div> -->
-         <!-- <div class="form-group">
-            <label for="location">Due Period:</label>
-           {!! Form::text('due_period', null, ['class' => 'form-control','readonly' => 'readonly']) !!}
-        </div> -->
+ <div class="form-group">
+            <label for="rfid">Collection:<span style="color: red">*</span></label>
+             {!! Form::text('collection', null , ['class' => 'form-control','readonly' => 'readonly']) !!}
+              @error('collection')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
+        </div>
+        <div class="form-group">
+            <label for="rfid">Imprint:<span style="color: red">*</span></label>
+             {!! Form::text('imprint', null , ['class' => 'form-control','readonly' => 'readonly']) !!}
+              @error('imprint')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
+        </div>
         
     </div>
 </div>

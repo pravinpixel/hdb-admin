@@ -108,7 +108,6 @@ class ItemController extends Controller
     {
         $result = Item::with(['user', 'language'])
             ->where('id', $id)
-            ->where('status', 1)
             ->first();
         if (empty($result)) {
             return response(['status' => false, 'msg' => trans('global.not_found')], 404);

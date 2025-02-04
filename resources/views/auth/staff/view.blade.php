@@ -69,7 +69,39 @@
     </div>
 </div>
 
-
+<div class="form-group">
+    {!! Form::label('location', 'Location<span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
+    <div class="col-lg-10">
+        {!! Form::text('location', null, ['class' => 'form-control', 'id' => 'location','readonly' => 'readonly']) !!}
+         @error('location')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('collection', 'Collection <span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
+    <div class="col-lg-10">
+        {!! Form::text('collection', null, ['class' => 'form-control', 'id' => 'collection','readonly' => 'readonly']) !!}
+         @error('collection')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('imprint', 'Imprint <span style="color: red">*</span>', ['class' => 'control-label col-lg-2'], false) !!}
+    <div class="col-lg-10">
+        {!! Form::text('imprint', null, ['class' => 'form-control', 'id' => 'imprint','readonly' => 'readonly']) !!}
+         @error('imprint')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+         @enderror
+    </div>
+</div>
                     {!! Form::close() !!}
                 </div> <!-- .form -->
          </div>    
