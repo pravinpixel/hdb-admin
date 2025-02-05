@@ -59,7 +59,7 @@ class StaffBulkImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row) {
             // $error = $this->validateRow($row);
             $validationRules = [
-                'staff_no' => 'required|regex:/^[A-Za-z][0-9]{5}$/',
+                'staff_no' => 'required|regex:/^[0-9]{5}[A-Za-z]$/',
                 'name' => 'required|regex:/(^[A-Za-z ]+$)+/',
                 'email_address' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
                 'designation' => 'required',

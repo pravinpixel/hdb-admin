@@ -24,7 +24,7 @@ class StaffCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'member_id'  => 'required|regex:/^[A-Za-z][0-9]{5}$/|unique:users',
+            'member_id'  => 'required|regex:/^[0-9]{5}[A-Za-z]$/|unique:users',
             'first_name' => 'required|regex:/(^[A-Za-z ]+$)+/',
             // 'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             'email'      => 'required|unique:users|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',

@@ -26,7 +26,7 @@ class StaffUpdateRequest extends FormRequest
     {
         // dd($this->user);
         $rules = [
-            'member_id'  => ['required', Rule::unique('users')->ignore($this->user, 'id')],
+            'member_id'  => ['required','regex:/^[0-9]{5}[A-Za-z]$/', Rule::unique('users')->ignore($this->user, 'id')],
             'email'      => ['required', Rule::unique('users')->ignore($this->user, 'id')],
             'first_name' => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
             // 'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',

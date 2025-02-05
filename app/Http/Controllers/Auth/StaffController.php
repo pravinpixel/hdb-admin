@@ -153,7 +153,7 @@ class StaffController extends Controller {
     {
 
         $request->validate([
-            'member_id'  => ['required', 'regex:/^[A-Za-z][0-9]{5}$/', Rule::unique('users')->ignore($id)],
+            'member_id'  => ['required', 'regex:/^[0-9]{5}[A-Za-z]$/', Rule::unique('users')->ignore($id)],
             'email'      => ['required', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', Rule::unique('users')->ignore($id)],
             'first_name' => 'required|regex:/(^[A-Za-z ]+$)+/',
             // 'last_name'  => 'required|regex:/(^[A-Za-z0-9_-_ ]+$)+/',
